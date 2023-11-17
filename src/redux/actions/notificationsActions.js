@@ -5,7 +5,7 @@ import { logoutAction } from "./auth";
 
 const API = axios.create({
   baseURL: `${apiRoot}/notification`,
-  withCredentials:true
+  withCredentials: true,
 });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("auth")) {
@@ -43,82 +43,6 @@ export const getNotificationsAdminAction = () => async (dispatch) => {
         );
 
         const { data } = await API.get("/admin");
-        dispatch({
-          type: NOTIFICATION_ACTION_TYPE.GET_NOTIFICATION,
-          payload: data,
-        });
-      } catch (error) {
-        console.log(error);
-        if (error?.response?.status === 401) {
-          return dispatch(logoutAction());
-        }
-      }
-    }
-  } finally {
-    dispatch(setLoadingNotificationAction(false));
-  }
-};
-
-export const getNotificationsTeacherAction = () => async (dispatch) => {
-  dispatch(setLoadingNotificationAction(true));
-  try {
-    const { data } = await API.get("/teacher");
-    dispatch({
-      type: NOTIFICATION_ACTION_TYPE.GET_NOTIFICATION,
-      payload: data,
-    });
-  } catch (error) {
-    const originalRequest = error.config;
-    if (error?.response?.status === 403 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      try {
-        const token = await refreshApi.get("/");
-        localStorage.setItem(
-          "auth",
-          JSON.stringify({
-            AccessToken: token.data.accesstoken,
-          })
-        );
-
-        const { data } = await API.get("/teacher");
-        dispatch({
-          type: NOTIFICATION_ACTION_TYPE.GET_NOTIFICATION,
-          payload: data,
-        });
-      } catch (error) {
-        console.log(error);
-        if (error?.response?.status === 401) {
-          return dispatch(logoutAction());
-        }
-      }
-    }
-  } finally {
-    dispatch(setLoadingNotificationAction(false));
-  }
-};
-
-export const getNotificationsStudentAction = () => async (dispatch) => {
-  dispatch(setLoadingNotificationAction(true));
-  try {
-    const { data } = await API.get("/student");
-    dispatch({
-      type: NOTIFICATION_ACTION_TYPE.GET_NOTIFICATION,
-      payload: data,
-    });
-  } catch (error) {
-    const originalRequest = error.config;
-    if (error?.response?.status === 403 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      try {
-        const token = await refreshApi.get("/");
-        localStorage.setItem(
-          "auth",
-          JSON.stringify({
-            AccessToken: token.data.accesstoken,
-          })
-        );
-
-        const { data } = await API.get("/student");
         dispatch({
           type: NOTIFICATION_ACTION_TYPE.GET_NOTIFICATION,
           payload: data,

@@ -41,12 +41,6 @@ export const Routing = () => {
         } else {
           return () => {};
         }
-      } else if (user.role === "teacher"  && !notFound) {
-        if (location.pathname.startsWith("/login")) {
-          navigate("/teacher-panel/home");
-        }
-      } else if (user.role === "student" && !notFound) {
-        navigate("/student-panel");
       }
     } else if (forgetPassword.login) {
       navigate("/login");

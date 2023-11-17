@@ -120,9 +120,16 @@ export const createExpensesAction = (expensesData) => async (dispatch) => {
   dispatch(expensesModalLoading(true));
   try {
     const { data } = await API.post("/", expensesData);
-    dispatch(
-      getExpensesPaginationAction(data.lastPage, "", "", 1, "", "oldest")
-    );
+    if (window.location.pathname ===  "/finance/food-ration") {
+      dispatch(
+        getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
+      );
+    } else {
+      dispatch(
+        getExpensesPaginationAction(data.lastPage, "", "", 1, "", "oldest")
+      );
+    }
+   
 
     // console.log(data);
     dispatch({
@@ -145,9 +152,15 @@ export const createExpensesAction = (expensesData) => async (dispatch) => {
 
         const { data } = await API.post("/", expensesData);
         console.log(data, "xeeeerc");
-        dispatch(
-          getExpensesPaginationAction(data.lastPage, "", "", 1, "", "oldest")
-        );
+        if (window.location.pathname ===  "/finance/food-ration") {
+          dispatch(
+            getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
+          );
+        } else {
+          dispatch(
+            getExpensesPaginationAction(data.lastPage, "", "", 1, "", "oldest")
+          );
+        }
         dispatch({
           type: EXPENSES_MODAL_ACTION_TYPE.EXPENSES_OPEN_MODAL,
           payload: false,
@@ -210,7 +223,15 @@ export const deleteExpensesAction = (_id) => async (dispatch) => {
   try {
     await API.delete(`/${_id}`);
     dispatch({ type: EXPENSES_ACTION_TYPE.DELETE_EXPENSES, payload: _id });
-    dispatch(getExpensesPaginationAction(1, "", "", 1, "", "oldest"));
+    if (window.location.pathname ===  "/finance/food-ration") {
+      dispatch(
+        getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
+      );
+    } else {
+      dispatch(
+        getExpensesPaginationAction(1, "", "", 1, "", "oldest")
+      );
+    }
     toastSuccess("Məhsul silindi");
   } catch (error) {
     const originalRequest = error.config;
@@ -227,7 +248,15 @@ export const deleteExpensesAction = (_id) => async (dispatch) => {
 
         await API.delete(`/${_id}`);
         dispatch({ type: EXPENSES_ACTION_TYPE.DELETE_EXPENSES, payload: _id });
-        dispatch(getExpensesPaginationAction(1, "", "", 1, "", "oldest"));
+        if (window.location.pathname ===  "/finance/food-ration") {
+          dispatch(
+            getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
+          );
+        } else {
+          dispatch(
+            getExpensesPaginationAction(1, "", "", 1, "", "oldest")
+          );
+        }
         toastSuccess("Məhsul silindi");
       } catch (error) {
         console.log(error);

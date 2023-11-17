@@ -30,6 +30,8 @@ const FinanceDataHead = () => {
       openIncomesModal();
     } else if (location.pathname === "/finance/expenses") {
       openExpensesModal();
+    } else if (location.pathname === "/finance/food-ration") {
+      openExpensesModal();
     } 
   };
   return (
@@ -63,8 +65,8 @@ const FinanceDataHead = () => {
 
       <div className="bottom">
         <div className="left">
-          <FinanceDropdown type='category'  />
-          <FinanceDropdown type='sorting' />
+        {location.pathname !== "/finance/food-ration" && <FinanceDropdown type='category'  /> }
+        {location.pathname !== "/finance/food-ration" && <FinanceDropdown type='sorting'  /> }
         </div>
 
         <div className="right">

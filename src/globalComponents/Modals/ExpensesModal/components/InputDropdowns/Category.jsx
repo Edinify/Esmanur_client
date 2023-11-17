@@ -7,7 +7,8 @@ const Category = ({
     categoryDropdown,
     categoryOpen,
     selectedCategoryList,
-    categoryAddData
+    categoryAddData,
+    location
 }) => {
     
   return (
@@ -33,6 +34,7 @@ const Category = ({
                 value={selectedCategory ? selectedCategory.name : ""}
                 onClick={categoryDropdown}
             />
+            {location.pathname !== "/finance/food-ration" &&
             <div className="dropdown-icon" onClick={categoryDropdown}>
                 <svg
                 className={!categoryOpen ? "down" : "up"}
@@ -52,6 +54,7 @@ const Category = ({
                 />
                 </svg>
             </div>
+                }
             </div>
 
             <ul className={`create-update-modal-dropdown where-coming ${categoryOpen ? "active" : ""}`}>

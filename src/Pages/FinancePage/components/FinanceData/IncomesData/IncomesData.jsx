@@ -1,10 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import IncomesCard from "./IncomesCard";
 import { Pagination } from "antd";
 import Loading from "../../../../../globalComponents/Loading/Loading";
+import { getIncomePaginationAction } from "../../../../../redux/actions/incomeActions";
 
 const IncomesData = ({ getPageNumber, page, dataHead = [] }) => {
+  const dispatch = useDispatch();
   const { incomes, totalPages } = useSelector((state) => state.incomes);
   const { loading, lastPage: incomesPageNum  } = useSelector((state) => state.incomes);
   const incomesHead = page !== 'finance' ? [
@@ -21,6 +24,10 @@ const IncomesData = ({ getPageNumber, page, dataHead = [] }) => {
     { id: 11, label: "" },
   ] : [...dataHead];
 
+  useEffect(() => {
+    dispatch(getIncomePaginationAction(1, "", "", 1, "", "oldest"));
+  }, []);
+  
   return (
     <>
       {loading ? (

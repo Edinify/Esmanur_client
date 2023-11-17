@@ -1,10 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ExpensesCard from "./ExpensesCard";
 import { Pagination } from "antd";
 import Loading from "../../../../../globalComponents/Loading/Loading";
+import { getExpensesPaginationAction } from "../../../../../redux/actions/expensesAction";
 
 const ExpensesData = ({  getPageNumber,  page, dataHead = [] }) => {
+  const dispatch = useDispatch();
   const expensesData = useSelector((state) => state?.expensesData.expensesData);
   const { totalPages, loading, lastPage: expensesPageNum } = useSelector((state) => state.expensesData);
   const expensesHead = page !== 'finance' ? [
@@ -16,7 +19,9 @@ const ExpensesData = ({  getPageNumber,  page, dataHead = [] }) => {
 
 // console.log(expensesPageNum);
 // console.log(lastPage);
-  
+useEffect(() => {
+  dispatch(getExpensesPaginationAction(1, "", "", 1, "", "oldest"));
+}, []);
 
   return (
     <>

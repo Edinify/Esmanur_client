@@ -50,6 +50,12 @@ const FinanceDropdown = ({ type }) => {
         type: FINANCE_FILTER_ACTION_TYPE.GET_EXPENSE_SORTING_FILTER,
         payload: {financeExpenseSorting: sortType.key},
       })
+    } else if(location.pathname === "/finance/food-ration") {
+      setSelectedExpenseSort(sortType);
+      dispatch({
+        type: FINANCE_FILTER_ACTION_TYPE.GET_EXPENSE_SORTING_FILTER,
+        payload: {financeExpenseSorting: sortType.key},
+      })
     }
     setOpenDropdown(false)
   };
@@ -61,6 +67,12 @@ const FinanceDropdown = ({ type }) => {
         payload: {financeIncomeCategory: categoryType.key},
       })
     } else if(location.pathname === "/finance/expenses") {
+      setSelectedExpenseCategory(categoryType);
+      dispatch({
+        type: FINANCE_FILTER_ACTION_TYPE.GET_EXPENSE_CATEGORY_FILTER,
+        payload: {financeExpenseCategory: categoryType.key},
+      })
+    } else if(location.pathname === "/finance/food-ration") {
       setSelectedExpenseCategory(categoryType);
       dispatch({
         type: FINANCE_FILTER_ACTION_TYPE.GET_EXPENSE_CATEGORY_FILTER,
@@ -103,6 +115,10 @@ const FinanceDropdown = ({ type }) => {
 
         {type === "category" && location.pathname === "/finance/expenses" && <h2>{selectedExpenseCategory ? selectedExpenseCategory.name :'Bütün kateqoriyalar'}</h2>}
         {type === "sorting" && location.pathname === "/finance/expenses" && <h2> {selectedExpenseSort ? selectedExpenseSort.name :'Köhnədən yeniyə'}</h2>}
+
+        {type === "category" && location.pathname === "/finance/food-ration" && <h2>{selectedExpenseCategory ? selectedExpenseCategory.name :'Bütün kateqoriyalar'}</h2>}
+        {type === "sorting" && location.pathname === "/finance/food-ration" && <h2> {selectedExpenseSort ? selectedExpenseSort.name :'Köhnədən yeniyə'}</h2>}
+        
         
         <div
           

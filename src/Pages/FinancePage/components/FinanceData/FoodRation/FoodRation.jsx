@@ -1,10 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import FoodRationCard from "./FoodRationCard";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import FoodRationCard from "./FooadRationCard";
 import { Pagination } from "antd";
 import Loading from "../../../../../globalComponents/Loading/Loading";
+import { getExpensesPaginationAction } from "../../../../../redux/actions/expensesAction";
 
 const FoodRationData = ({  getPageNumber,  page, dataHead = [] }) => {
+  const dispatch = useDispatch();
   const expensesData = useSelector((state) => state?.expensesData.expensesData);
   const { totalPages, loading, lastPage: expensesPageNum } = useSelector((state) => state.expensesData);
   const expensesHead = page !== 'finance' ? [
@@ -16,7 +19,10 @@ const FoodRationData = ({  getPageNumber,  page, dataHead = [] }) => {
 
 // console.log(expensesPageNum);
 // console.log(lastPage);
-  
+useEffect(() => {
+  dispatch(getExpensesPaginationAction(1, "", "", 1, "food", "oldest"));
+}, []);
+
 
   return (
     <>

@@ -4,9 +4,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getIncomePaginationAction } from "../../../../redux/actions/incomeActions";
 import { getExpensesPaginationAction } from "../../../../redux/actions/expensesAction";
-import { EXPENSES_ACTION_TYPE, INCOME_ACTION_TYPE } from "../../../../redux/actions-type";
+import {
+  EXPENSES_ACTION_TYPE,
+  INCOME_ACTION_TYPE,
+} from "../../../../redux/actions-type";
 import IncomesData from "./IncomesData/IncomesData";
 import ExpensesData from "./ExpensesData/ExpensesData";
+import FoodRationData from "./FoodRation/FoodRation";
 
 const FinanceData = () => {
   const dispatch = useDispatch();
@@ -210,7 +214,7 @@ const FinanceData = () => {
   }, [financeMonthsFilter]);
 
   useEffect(() => {
-    if(financeIncomeCategory || financeIncomeSorting) {
+    if (financeIncomeCategory || financeIncomeSorting) {
       getPageNumberIncomes(incomesLastPage);
     }
   }, [financeIncomeCategory, financeIncomeSorting]);
@@ -221,30 +225,39 @@ const FinanceData = () => {
     }
   }, [financeExpenseCategory, financeExpenseSorting]);
 
-  useEffect(() => {
-    // page,
-    // startDate,
-    // endDate,
-    // monthCount,
-    // category
-
-    dispatch(getIncomePaginationAction(1, "", "", 1, "", "oldest"));
-    dispatch(getExpensesPaginationAction(1, "", "", 1, "", "oldest"));
-  }, []);
+  // useEffect(() => {
+  //   // page,
+  //   // startDate,
+  //   // endDate,
+  //   // monthCount,
+  //   // category
+  //   dispatch(getIncomePaginationAction(1, "", "", 1, "", "oldest"));
+  //   dispatch(getExpensesPaginationAction(1, "", "", 1, "", "oldest"));
+  // }, []);
 
   // console.log('months: ', financeMonthsFilter);
   // console.log('date: ', financeChooseDate);
 
   return (
     <div>
-      {location.pathname === "/finance/incomes" ? (
+      {location.pathname === "/finance/incomes" && (
         <IncomesData
           getPageNumber={getPageNumberIncomes}
           page={"finance"}
           dataHead={dataHead}
         />
-      ) : (
+      )}
+      {location.pathname === "/finance/expenses" && (
         <ExpensesData
+          // expensesPageNum={expensesPageNum}
+          getPageNumber={getPageNumberExpenses}
+          page={"finance"}
+          dataHead={dataHead}
+        />
+      )}
+
+      {location.pathname === "/finance/food-ration" && (
+        <FoodRationData
           // expensesPageNum={expensesPageNum}
           getPageNumber={getPageNumberExpenses}
           page={"finance"}

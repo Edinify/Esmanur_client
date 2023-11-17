@@ -53,7 +53,7 @@ export const FoodRationModal = () => {
     setSelectedCategory(item);
   };
 
- 
+//  console.log('food');
 
   useEffect(() => {
     if (expensesModalData?._id) {

@@ -22,10 +22,7 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
   const isActiveStimulationsRoute = (route) => {
     return stimulationNav.includes(route);
   };
-  const feedbackNav = ["/feedback/teacher", "/feedback/student"];
-  const isfeedbackRoute = (route) => {
-    return feedbackNav.includes(route);
-  };
+
 
   const financeNav = ["/finance/incomes", "/finance/expenses"];
 

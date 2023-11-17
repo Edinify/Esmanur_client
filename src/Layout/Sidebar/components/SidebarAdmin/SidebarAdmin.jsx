@@ -13,10 +13,6 @@ const SidebarAdmin = ({ closeSidebar }) => {
     return nav.includes(route);
   };
 
-  const feedbackNav = ["/feedback/teacher", "/feedback/student"];
-  const isfeedbackRoute = (route) => {
-    return feedbackNav.includes(route);
-  };
 
   return (
     <ul className="sidebar-nav-list">

@@ -41,13 +41,10 @@ import { sidebarOpenReducer } from "./reducers/sidebarOpenReducer";
 import { stimulationTypeReducer } from "./reducers/stimulationTypeReducer";
 import { bonusPaginationReducer } from "./reducers/bonusPagionationReducer";
 import { bonusModalReducer } from "./reducers/bonusModalReducer";
-import { feedbackModalReducer } from "./reducers/feedbackModalReducer";
 import { finePaginationReducer } from "./reducers/finePaginationReducer";
 import {fineModalReducer} from "./reducers/fineModalReducer"
-import { feedbackTypeReducer } from "./reducers/feedbackTypeReducer";
-import { feedbackPaginationReducer } from "./reducers/feedbackPaginationReducer";
+
 import { financeFilterReducer } from "./reducers/financeFilterReducer";
-import { feedbacksByTeacherReducer } from "./reducers/feedbacksByTeacherReducer";
 import { fineFilterReducer } from "./reducers/fineReducer";
 import { teacherBonusReducer } from "./reducers/teacherBonusReducer";
 import { lessonTableModalReducer } from "./reducers/lessonTableModalReducer";
@@ -96,15 +93,11 @@ adminsModal: adminsModalReducer,
 expensesModal:expensesModalReducer,
 incomesModal:incomesModalReducer,
 bonusModal:bonusModalReducer,
-feedbackModal:feedbackModalReducer,
 fineModal:fineModalReducer,
 openSidebar:sidebarOpenReducer,
 bonusData:bonusPaginationReducer,
 fineData:finePaginationReducer,
 stimulationType:stimulationTypeReducer,
-feedbackType:feedbackTypeReducer,
-feedbackData:feedbackPaginationReducer,
-feedbacksByTeacherData:feedbacksByTeacherReducer,
 financeDateFilter: financeFilterReducer,
 fineCategory:fineFilterReducer,
 teacherBonus:teacherBonusReducer,

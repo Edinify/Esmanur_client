@@ -8,7 +8,6 @@ import { StudentModal } from "./globalComponents/Modals/StudentModal/StudentModa
 import { ExpensesModal } from "./globalComponents/Modals/ExpensesModal/ExpensesModal";
 import { IncomesModal } from "./globalComponents/Modals/IncomesModal/IncomesModal";
 import {BonusModal} from "./globalComponents/Modals/BonusModal/BonusModal";
-import { FeedbackModal } from "./globalComponents/Modals/FeedbackModal/FeedbackModal";
 import { FineModal } from "./globalComponents/Modals/FineModal/FineModal";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,7 +21,6 @@ function App() {
   const { expensesOpenModal } = useSelector((state) => state.expensesModal);
   const { incomesOpenModal } = useSelector((state) => state.incomesModal);
   const { bonusOpenModal } = useSelector((state) => state.bonusModal);
-  const { feedbackOpenModal } = useSelector((state) => state.feedbackModal);
   const { fineOpenModal } = useSelector((state) => state.fineModal);
   const { openMainPageModal } = useSelector((state) => state.modalLesson);
 
@@ -50,13 +48,6 @@ function App() {
     }
   }, [expensesOpenModal]);
 
-  useEffect(() => {
-    if (feedbackOpenModal) {
-      document.body.style.overflowY = "hidden";
-    } else {
-      document.body.style.overflowY = "overlay";
-    }
-  }, [feedbackOpenModal]);
 
   useEffect(() => {
     if (fineOpenModal) {
@@ -110,7 +101,6 @@ function App() {
       {expensesOpenModal && <ExpensesModal />}
       {incomesOpenModal && <IncomesModal />}
       {bonusOpenModal && <BonusModal />}
-      {feedbackOpenModal && <FeedbackModal />}
       {fineOpenModal && <FineModal />}
       <ToastContainer />
     </div>

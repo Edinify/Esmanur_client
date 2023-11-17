@@ -15,9 +15,6 @@ import TeacherMoreModal from "./components/TeacherMoreModal/TeacherMoreModal";
 import StudentMoreModal from "./components/StudentMoreModal/StudentMoreModal";
 import BonusMoreModal from "./components/BonusMoreModal/BonusMoreModal";
 import FineMoreModal from "./components/FineMoreModal/FineMoreModal";
-import FeedbackTeacherMoreModal from "./components/FeedbackTeacherMoreModal/FeedbackTeacherMoreModal";
-import FeedbackStudentMoreModal from "./components/FeedbackStudentMoreModal/FeedbackStudentMoreModal";
-import DeleteFeedbackModal from "../FuncComponent/components/DeleteFeedbackModal/DeleteFeedbackModal";
 
 const MoreModal = ({ setOpenMoreModal, type, data }) => {
   const dispatch = useDispatch();
@@ -106,19 +103,6 @@ const MoreModal = ({ setOpenMoreModal, type, data }) => {
             ""
           )}
           <div className="more-modal-header-icons">
-            <div
-              className={
-                type === "feedback-teacher" || type === "feedback-student"
-                  ? "header-icon-delete"
-                  : "header-icon-edit"
-              }
-            >
-              {type === "feedback-teacher" || type === "feedback-student" ? (
-                <DeleteIcon onClick={handleDeleteModal} />
-              ) : (
-                <EditIcon onClick={() => openUpdateModal()} />
-              )}
-            </div>
             <div className="header-icon-close">
               <CloseIcon onClick={() => setOpenMoreModal(false)} />
             </div>
@@ -141,19 +125,7 @@ const MoreModal = ({ setOpenMoreModal, type, data }) => {
           <BonusMoreModal bonusModalData={bonusModalData} data={data} />
         )}
         {type === "fine" && <FineMoreModal data={data} />}
-        {type === "feedback-teacher" && (
-          <FeedbackTeacherMoreModal data={data} />
-        )}
-        {type === "feedback-student" && (
-          <FeedbackStudentMoreModal data={data} />
-        )}
-        {deleteModal && (
-          <DeleteFeedbackModal data={data} deleteMod={handleDeleteModal} />
-        )}
-
-        {deleteModal && (
-          <DeleteFeedbackModal data={data} deleteMod={handleDeleteModal} />
-        )}
+        
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import { ReactComponent as SearchIcon } from "../../../assets/icons/search-normal-20.svg";
-import { useLocation } from "react-router-dom";
 
 const Search = ({
   searchData,
@@ -8,11 +7,9 @@ const Search = ({
   searchValue,
   
 }) => {
-  const location = useLocation();
 
   return (
     <form onSubmit={(e) => searchData(e)} className="search-form">
-      {location.pathname === "/feedback/teacher" ? (
         <div className="input-box">
           <div className="search-icon" onClick={searchData}>
             <SearchIcon />
@@ -24,19 +21,7 @@ const Search = ({
             onChange={(e) => changeSearchValue(e)}
           />
         </div>
-      ) : (
-        <div className="input-box">
-          <div className="search-icon" onClick={searchData}>
-            <SearchIcon />
-          </div>
-          <input
-            type="text"
-            placeholder="Axtar"
-            value={searchValue ? searchValue : ""}
-            onChange={(e) => changeSearchValue(e)}
-          />
-        </div>
-      )}
+
     </form>
   );
 };

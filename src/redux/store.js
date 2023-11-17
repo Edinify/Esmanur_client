@@ -10,7 +10,6 @@ import { dropdownNameErrReducer } from "./reducers/dropdownNameErrReducer";
 import { userReducer } from "./reducers/userReducer";
 import { shownavReducer } from "./reducers/shownavReducer";
 import { paginationPageNumberReducer } from "./reducers/paginationPageNumberReducer";
-import { profileImageReducer } from "./reducers/profileImagesReducer";
 import { teacherPaginationReducer } from "./reducers/teachersPaginationReducer";
 import { adminPaginationReducer } from "./reducers/adminsPaginationReducer";
 import {  searchValuesReducer } from "./reducers/searchValuesReducer";
@@ -60,7 +59,6 @@ dropdownNameError:dropdownNameErrReducer,
 user:userReducer,
 show:shownavReducer,
 pageNumber:paginationPageNumberReducer,
-profileImg:profileImageReducer,
 searchValues:searchValuesReducer,
 dashboardData:dashBoardreducer,
 financeData: financeReducer,

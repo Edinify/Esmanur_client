@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./moreModal.css";
 import { ReactComponent as EditIcon } from "../../assets/icons/more-modal/edit-02.svg";
-import { ReactComponent as DeleteIcon } from "../../assets/icons/Delete button.svg";
 import { ReactComponent as CloseIcon } from "../../assets/icons/more-modal/x-close.svg";
 import {
   BONUS_MODAL_ACTION_TYPE,
@@ -21,7 +20,6 @@ const MoreModal = ({ setOpenMoreModal, type, data }) => {
   const { teachersModalData } = useSelector((state) => state.teachersModal);
   const { studentsModalData } = useSelector((state) => state.studentsModal);
   const { bonusModalData } = useSelector((state) => state.bonusModal);
-  const { adminsModalData } = useSelector((state) => state.adminsModal);
   const { fineModalData } = useSelector((state) => state.fineModal);
   const [deleteModal, setDeleteModal] = useState(false);
 
@@ -103,6 +101,16 @@ const MoreModal = ({ setOpenMoreModal, type, data }) => {
             ""
           )}
           <div className="more-modal-header-icons">
+            <div
+              className={
+                type === "feedback-teacher" || type === "feedback-student"
+                  ? "header-icon-delete"
+                  : "header-icon-edit"
+              }
+            >
+              
+                <EditIcon onClick={() => openUpdateModal()} />
+            </div>
             <div className="header-icon-close">
               <CloseIcon onClick={() => setOpenMoreModal(false)} />
             </div>
@@ -125,7 +133,6 @@ const MoreModal = ({ setOpenMoreModal, type, data }) => {
           <BonusMoreModal bonusModalData={bonusModalData} data={data} />
         )}
         {type === "fine" && <FineMoreModal data={data} />}
-        
       </div>
     </div>
   );

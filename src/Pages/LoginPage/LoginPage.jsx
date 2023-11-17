@@ -105,7 +105,7 @@ export const Login = () => {
                 fontWeight: 400,
               },
             }}
-            label="Mobil nömrəniz"
+            label="Email adresiniz"
             type="text"
             name="email"
             InputLabelProps={{

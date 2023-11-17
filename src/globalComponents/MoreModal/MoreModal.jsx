@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./moreModal.css";
 import { ReactComponent as EditIcon } from "../../assets/icons/more-modal/edit-02.svg";
-import { ReactComponent as DeleteIcon } from "../../assets/icons/Delete button.svg";
 import { ReactComponent as CloseIcon } from "../../assets/icons/more-modal/x-close.svg";
 import {
   BONUS_MODAL_ACTION_TYPE,

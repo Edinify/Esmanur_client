@@ -132,6 +132,7 @@
 
 .main-nav-icons .profile-img-con .user-func .logout-func {
   display: flex;
+  align-items: center;
   margin-top: 16px;
 }
 .main-nav-icons .profile-img-con .user-func .logout-func p {

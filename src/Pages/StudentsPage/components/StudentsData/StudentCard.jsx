@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FuncComponent from "../../../../globalComponents/FuncComponent/FuncComponent";
+import { useSelector } from "react-redux";
 
 const StudentCard = ({
   data,
@@ -10,6 +11,7 @@ const StudentCard = ({
 }) => {
   const [modal, setModal] = useState(false);
   const [deleteStudentModal, setDeleteStudentModal] = useState(false);
+  const {user} = useSelector(state=>state.user)
 
   // 
 
@@ -87,7 +89,8 @@ const StudentCard = ({
           {/* <td>{data.lessonAmount}</td>
           <td>{data.status ? "Aktiv" : "Deaktiv"}</td> */}
           <td>
-            {" "}
+            {user.role==="super-admin"?
+            
             <FuncComponent
               handleUpdate={handleUpdate}
               handleModal={handleModal}
@@ -95,6 +98,9 @@ const StudentCard = ({
               deleteStudentModal={deleteStudentModal}
               handleDeleteModal={handleDeleteModal}
             />
+            :
+            null
+        }
           </td>
         </tr>
       ) : (
@@ -117,12 +123,18 @@ const StudentCard = ({
               </ul>
             </div>
             <div className="right">
+              {user.role==="super-admin"
+              ?
               <FuncComponent
-                handleDeleteModal={handleDeleteModal}
-                handleUpdate={handleUpdate}
-                data={data}
-                deleteStudentModal={deleteStudentModal}
-              />
+              handleDeleteModal={handleDeleteModal}
+              handleUpdate={handleUpdate}
+              data={data}
+              deleteStudentModal={deleteStudentModal}
+            />
+            :
+            null
+              }
+             
               <span onClick={() => openMoreModal()}>Ətraflı</span>
             </div>
           </div>

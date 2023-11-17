@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
 import { viewedAllNotifications } from "../../../../redux/actions/notificationsActions";
 import { useState } from "react";
 import NotificationModal from "../../../../globalComponents/Modals/NotificationModal/NotificationModal";
@@ -9,10 +8,8 @@ import { ReactComponent as UserProfileIcon } from "../../../../assets/icons/head
 import { ReactComponent as UserProfileBlueIcon } from "../../../../assets/icons/header/change-user-icon.svg";
 import { ReactComponent as ChangePasswordIcon } from "../../../../assets/icons/password-check.svg";
 import { ReactComponent as LogoutIcon } from "../../../../assets/icons/log-out-03.svg";
-import { ReactComponent as StudentLessonIcon } from "../../../../assets/icons/student-home/book-open-01.svg";
-import { ReactComponent as StudentLessonBlueIcon } from "../../../../assets/icons/student-home/book-open-02.svg";
 import { logoutAction } from "../../../../redux/actions/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ChangePasswordModal } from "../../../../globalComponents/Header/ChangePasswordModal/ChangePasswordModal";
 
 const NavbarProfile = () => {
@@ -20,12 +17,9 @@ const NavbarProfile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openNotModal, setOpenNotModal] = useState(false);
-  const [openLessonModal, setOpenLessonModal] = useState(false);
   const [changeNoficitaionIcon, setChangeNotificationIcon] = useState(false);
-  const [changeLessonAmountIcon, setChangeLessonAmountIcon] = useState(false);
   const [changeUserIcon, setChangeUserIcon] = useState(false);
-  const inputRef = useRef(null);
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  const {user} = useSelector(state=>state.user)
 
   const navigateExit = () => {
     // window.location = "/login";
@@ -49,7 +43,6 @@ const NavbarProfile = () => {
     setOpenNotModal(false);
     setChangeUserIcon(!changeUserIcon);
     setChangeNotificationIcon(false);
-    setOpenLessonModal(false);
 
     e.stopPropagation();
   };
@@ -68,7 +61,6 @@ const NavbarProfile = () => {
     setChangeNotificationIcon(!changeNoficitaionIcon);
     setChangeUserIcon(false);
     e.stopPropagation();
-    setOpenLessonModal(false);
   };
 
   useEffect(() => {
@@ -82,25 +74,6 @@ const NavbarProfile = () => {
   return (
     <>
       <div className="main-nav-icons">
-        {userData?.role === "student" && (
-          <div
-            className="student-amount"
-            onClick={() => {
-              setChangeLessonAmountIcon(!changeLessonAmountIcon);
-              setOpenLessonModal(!openLessonModal);
-            }}
-          >
-            {changeLessonAmountIcon ? (
-              <div className="change-student-lesson-icon">
-                <StudentLessonBlueIcon />
-              </div>
-            ) : (
-              <div className="student-lesson-icon">
-                <StudentLessonIcon />
-              </div>
-            )}
-          </div>
-        )}
         <div className="notification-con">
           <div
             className="notification-icon"
@@ -142,10 +115,16 @@ const NavbarProfile = () => {
               className="user-modal"
             >
               <div className="user-func">
+                {user.role==="super-admin"
+                ?
                 <div className="password-change-func">
-                  <ChangePasswordIcon />
-                  <p onClick={handleOpenModal}>Şifrəni dəyiş</p>
-                </div>
+                <ChangePasswordIcon />
+                <p onClick={handleOpenModal}>Şifrəni dəyiş</p>
+              </div>
+              :null
+                }
+                
+              
                 <div className="logout-func" onClick={navigateExit}>
                   <LogoutIcon />
                   <p>Çıxış</p>

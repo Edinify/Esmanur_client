@@ -8,8 +8,6 @@ const initialState = {
   salariesSearchValues: "",
   bonusSearchValues: "",
   fineSearchValues: "",
-  feedbackSearchValues: "",
-  studentFeedbackSearchValues: "",
 };
 
 export const searchValuesReducer = (state = initialState, action) => {
@@ -45,16 +43,6 @@ export const searchValuesReducer = (state = initialState, action) => {
       return {
         ...state,
         fineSearchValues: action.payload,
-      };
-    case SEARCH_VALUES_ACTION_TYPES.FEEDBACK_SEARCH_VALUE:
-      return {
-        ...state,
-        feedbackSearchValues: action.payload,
-      };
-    case SEARCH_VALUES_ACTION_TYPES.STUDENT_FEEDBACK_SEARCH_VALUE:
-      return {
-        ...state,
-        studentFeedbackSearchValues: action.payload,
       };
     case SEARCH_VALUES_ACTION_TYPES.ADMINS_SEARCH_VALUE:
       return {

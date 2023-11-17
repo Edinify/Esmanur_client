@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as CheckIcon } from "../../../../assets/icons/dashboard/check.svg";
 import { ReactComponent as Xicon } from "../../../../assets/icons/dashboard/x-close.svg";
 import { ReactComponent as HelpCircle } from "../../../../assets/icons/dashboard/help-circle-dashboard.svg";
-import { ReactComponent as DotsIcon } from "../../../../assets/icons/dashboard/dots-horizontal-dashboard.svg";
 import {
   getDashboardCancelledLessonsAction,
   getDashboardConfirmedLessonsAction,
   getDashboardUnviewedLessonsAction
 } from "../../../../redux/actions/dashboardAction";
 import DateDropdown from "../../../../globalComponents/DateDropdown/DateDropdown"
-import UnviewedLessons from "../UnvlewdLessons/UnviewedLessons";
 import DateRangeModal from "../../../../globalComponents/Modals/DateRangeModal/DateRangeModal";
 
 const LessonsAmount = () => {
@@ -18,7 +16,6 @@ const LessonsAmount = () => {
   const { confirmedLessonsData, cancelledLessonsData, unviewedLessonsData } = useSelector(
     (state) => state.dashboardData
   );
-  const [openUnviewedLessons, setUnviewedLessons] = useState(false);
   const [openCalendar, setOpenCalendar] = useState(false);
   const [openDropdownCancelled, setOpenDropdownCancelled] = useState(false);
   const [openDropdownConfirmed, setOpenDropdownConfirmed] = useState(false);
@@ -60,13 +57,7 @@ const LessonsAmount = () => {
       setOpenDropdownCancelled(false);
     }
   }, [openDropdownConfirmed]);
-  useEffect(() => {
-    if (openUnviewedLessons) {
-      document.body.style.overflowY = "hidden";
-    } else {
-      document.body.style.overflowY = "overlay";
-    }
-  }, [openUnviewedLessons]);
+
 
   useEffect(() => {
     dispatch(getDashboardConfirmedLessonsAction("", "", 1));
@@ -133,9 +124,6 @@ const LessonsAmount = () => {
           <div className="right">
             <div className="top">
               <h2 className="title">Baxılmamış dərslər</h2>
-              <DotsIcon
-                onClick={() => setUnviewedLessons(!openUnviewedLessons)}
-              />
             </div>
             <p className="amount">{unvieweLessonsCount ? unvieweLessonsCount : 0}</p>
           </div>
@@ -147,9 +135,6 @@ const LessonsAmount = () => {
           applyFilter={applyFilter}
           setOpenCalendar={setOpenCalendar}
         />
-      )}
-      {openUnviewedLessons && (
-        <UnviewedLessons setUnviewedLessons={setUnviewedLessons} />
       )}
     </>
   );

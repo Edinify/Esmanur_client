@@ -4,21 +4,12 @@ import thunk from "redux-thunk";
 import authReducer from "./reducers/authReducer";
 import { changePasswordReducer } from "./reducers/changePasswordReducer";
 import datePickerReducer from "./reducers/datepickerReducer";
-import mainLessonsDataReducer from "./reducers/mainLessonsDataReducer"
 import notificationsReducer from "./reducers/notificationsReducer";
-import { modalLessonReducer } from "./reducers/modalLessonReducer";
 import { dropdownReducer } from "./reducers/dropdownReducer";
 import { dropdownNameErrReducer } from "./reducers/dropdownNameErrReducer";
-import { lessonStatusReducer } from "./reducers/lessonStatusReducer";
-import { TableTypeReducer } from "./reducers/TableTypeReducer";
-import { mainPageTypeReducer } from "./reducers/mainPageTypeReducer";
-import {currentLessonsDataReducer} from "./reducers/currentLessonsDataReducer"
 import { userReducer } from "./reducers/userReducer";
 import { shownavReducer } from "./reducers/shownavReducer";
-import { studentAttendanceTypeReducer } from "./reducers/studentAttendanceTypeReducer";
-import { weeksBetweenSelectedDatesReducer } from "./reducers/weeksBetweenSelectedDatesReducer";
 import { paginationPageNumberReducer } from "./reducers/paginationPageNumberReducer";
-import { profileImageReducer } from "./reducers/profileImagesReducer";
 import { teacherPaginationReducer } from "./reducers/teachersPaginationReducer";
 import { adminPaginationReducer } from "./reducers/adminsPaginationReducer";
 import {  searchValuesReducer } from "./reducers/searchValuesReducer";
@@ -44,11 +35,9 @@ import { bonusPaginationReducer } from "./reducers/bonusPagionationReducer";
 import { bonusModalReducer } from "./reducers/bonusModalReducer";
 import { finePaginationReducer } from "./reducers/finePaginationReducer";
 import {fineModalReducer} from "./reducers/fineModalReducer"
-
 import { financeFilterReducer } from "./reducers/financeFilterReducer";
 import { fineFilterReducer } from "./reducers/fineReducer";
 import { teacherBonusReducer } from "./reducers/teacherBonusReducer";
-import { lessonTableModalReducer } from "./reducers/lessonTableModalReducer";
 import { financeReducer } from "./reducers/financeReducer";
 import { teacherStatusReducer } from "./reducers/teacherStatusReducer";
 import { studentStatusReducer } from "./reducers/studentStatusReducer";
@@ -64,21 +53,12 @@ auth:authReducer,
 changePass:changePasswordReducer,
 salaryPagination:salaryPaginationReducer,
 datepicker:datePickerReducer,
-mainLessonsData:mainLessonsDataReducer,
 notifications:notificationsReducer,
-modalLesson: modalLessonReducer,
 dropdownName:dropdownReducer,
 dropdownNameError:dropdownNameErrReducer,
-lessonStatus:lessonStatusReducer,
-tableType:TableTypeReducer,
-mainpageType:mainPageTypeReducer,
-currentLessonsData:currentLessonsDataReducer,
 user:userReducer,
 show:shownavReducer,
-studentAttendance:studentAttendanceTypeReducer,
-weeksBetweenSelectedDates:weeksBetweenSelectedDatesReducer,
 pageNumber:paginationPageNumberReducer,
-profileImg:profileImageReducer,
 searchValues:searchValuesReducer,
 dashboardData:dashBoardreducer,
 financeData: financeReducer,
@@ -103,7 +83,6 @@ stimulationType:stimulationTypeReducer,
 financeDateFilter: financeFilterReducer,
 fineCategory:fineFilterReducer,
 teacherBonus:teacherBonusReducer,
-lessonTableModal: lessonTableModalReducer,
 teacherStatus:teacherStatusReducer,
 studentStatus:studentStatusReducer
 })

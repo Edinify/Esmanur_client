@@ -15,9 +15,9 @@ const PreviewImg = () => {
           </p>
           <div className="left-img-container">
             {/* <img src={ChartImg} alt="/" className="chart-img" /> */}
-            <img className="dashboard-img" src={DashboardImg} alt="/" />
-            <img src={DashboardTabletImg} alt="/" className="dashboard-img-tablet" />
-            <img src={DashboardMobileImg} alt="/" className="dashboard-img-mobile" />
+            {/* <img className="dashboard-img" src={DashboardImg} alt="/" /> */}
+            {/* <img src={DashboardTabletImg} alt="/" className="dashboard-img-tablet" /> */}
+            {/* <img src={DashboardMobileImg} alt="/" className="dashboard-img-mobile" /> */}
             {/* <img src={WhereHearImg} alt="/"  className="where-hear-img"/> */}
           </div>
         </div>

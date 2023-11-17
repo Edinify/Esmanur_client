@@ -1,10 +1,8 @@
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { ReactComponent as MainPanelIcon } from "../../../../assets/icons/mainPanelIcon.svg";
 import { ReactComponent as CoursesIcon } from "../../../../assets/icons/coursesIcon.svg";
 import { ReactComponent as TeachersIcon } from "../../../../assets/icons/teachersIcon.svg";
 import { ReactComponent as StudentsIcon } from "../../../../assets/icons/studentsIcon.svg";
-import { ReactComponent as TableIcon } from "../../../../assets/icons/tableIcon.svg";
 
 const SidebarAdmin = ({ closeSidebar }) => {
   const location = useLocation();
@@ -16,16 +14,6 @@ const SidebarAdmin = ({ closeSidebar }) => {
 
   return (
     <ul className="sidebar-nav-list">
-      <li>
-        <NavLink
-          to="/"
-          onClick={closeSidebar}
-          className={isActiveRoute(location.pathname) ? "active" : ""}
-        >
-          <MainPanelIcon />
-          Davamiyyət
-        </NavLink>
-      </li>
       <li>
         <NavLink to="/courses" onClick={closeSidebar}>
           <CoursesIcon />
@@ -42,12 +30,6 @@ const SidebarAdmin = ({ closeSidebar }) => {
         <NavLink to="/students" onClick={closeSidebar}>
           <StudentsIcon />
           Tələbələr
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/table" onClick={closeSidebar}>
-          <TableIcon />
-          Cədvəl
         </NavLink>
       </li>
     </ul>

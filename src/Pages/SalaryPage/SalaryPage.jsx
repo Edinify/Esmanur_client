@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { SEARCH_VALUES_ACTION_TYPES } from "../../redux/actions-type";
-import { clearLessonsFilter } from "../../redux/actions/clearLessonsFilterAction";
 import { getSalaryPaginationAction } from "../../redux/actions/salaryActions";
 import SalaryData from "./components/SalaryData/SalaryData";
 import SearchDateFilter from "../../globalComponents/SearchDateFilter/SearchDateFilter";
@@ -11,7 +10,7 @@ import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunc
 const SalaryPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { changeMainPageType, changeShowNav } = useCustomHook();
+  const { changeShowNav } = useCustomHook();
   const { startDate } = useSelector((state) => state.datepicker);
   const { endDate } = useSelector((state) => state.datepicker);
   const { salariesSearchValues } = useSelector((state) => state.searchValues);
@@ -45,12 +44,10 @@ const SalaryPage = () => {
   };
   const searchSalary = (e) => {
     e.preventDefault();
-    dispatch(clearLessonsFilter());
     dispatch(getSalaryPaginationAction("", "", "", 1, salariesSearchValues));
     setSalaryPageNum(1);
   };
   const clearAll = () => {
-    dispatch(clearLessonsFilter());
     dispatch(getSalaryPaginationAction("", "", "", 1, ""));
     setSalaryPageNum(1);
     dispatch({
@@ -84,10 +81,7 @@ const SalaryPage = () => {
   };
 
   useEffect(() => {
-    changeMainPageType("teacher");
-    dispatch(clearLessonsFilter());
     dispatch(getSalaryPaginationAction("", "", "", 1, ""));
-
     changeShowNav(false);
     return () => {
       changeShowNav(true);

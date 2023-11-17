@@ -5,7 +5,6 @@ import UserAvatar from "../../../../assets/images/user-avatar.jpg";
 
 const SidebarHead = ({ closeSidebar }) => {
   // const { user } = useSelector((state) => state.user);
-  const { profileImg } = useSelector((state) => state.profileImg);
   const userData = JSON.parse(localStorage.getItem("userData"));
   // const userProfileImg = JSON.parse(localStorage.getItem("userProfileImg"));
 
@@ -36,11 +35,6 @@ const SidebarHead = ({ closeSidebar }) => {
           </svg>
         </div>
       </div>
-      <img
-        src={ profileImg?.profileImage ? `data:image/jpeg;base64,${profileImg.profileImage}` : UserAvatar}
-        alt="user"
-        className="profile-img"
-      />
       <h3 className="name">{userData?.fullName}</h3>
       <p className="email">{userData?.email}</p>
     </div>

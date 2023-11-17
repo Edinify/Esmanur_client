@@ -18,7 +18,6 @@ import { shownavReducer } from "./reducers/shownavReducer";
 import { studentAttendanceTypeReducer } from "./reducers/studentAttendanceTypeReducer";
 import { weeksBetweenSelectedDatesReducer } from "./reducers/weeksBetweenSelectedDatesReducer";
 import { paginationPageNumberReducer } from "./reducers/paginationPageNumberReducer";
-import { profileImageReducer } from "./reducers/profileImagesReducer";
 import { teacherPaginationReducer } from "./reducers/teachersPaginationReducer";
 import { adminPaginationReducer } from "./reducers/adminsPaginationReducer";
 import {  searchValuesReducer } from "./reducers/searchValuesReducer";
@@ -77,7 +76,6 @@ show:shownavReducer,
 studentAttendance:studentAttendanceTypeReducer,
 weeksBetweenSelectedDates:weeksBetweenSelectedDatesReducer,
 pageNumber:paginationPageNumberReducer,
-profileImg:profileImageReducer,
 searchValues:searchValuesReducer,
 dashboardData:dashBoardreducer,
 financeData: financeReducer,

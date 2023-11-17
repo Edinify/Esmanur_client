@@ -1,6 +1,5 @@
 import React from "react";
 import { ReactComponent as SearchIcon } from "../../../assets/icons/search-normal-20.svg";
-import { useLocation } from "react-router-dom";
 
 const Search = ({
   searchData,
@@ -8,7 +7,6 @@ const Search = ({
   searchValue,
   
 }) => {
-  const location = useLocation();
 
   return (
     <form onSubmit={(e) => searchData(e)} className="search-form">

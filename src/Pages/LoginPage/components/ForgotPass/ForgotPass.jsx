@@ -15,7 +15,7 @@ export const ForgotPass = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { changeShowNav } = useCustomHook();
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [mail, setMail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const forgetPassword = useSelector((state) => state.forgetPassword);
   const { loading } = useSelector((state) => state.forgetPassword);
@@ -24,14 +24,14 @@ export const ForgotPass = () => {
     navigate("/login");
   };
   const resetNav = () => {
-    if (phoneNumber) {
+    if (mail) {
       setErrorMessage("");
 
-      dispatch(sendToEmailAction(phoneNumber));
+      dispatch(sendToEmailAction(mail));
     } else {
       dispatch({
         type: FORGET_PASSWORD_ACTIONS_TYPE.FORGET_ERROR,
-        payload: "Mobil nömrənizi daxil edin",
+        payload: "Email adresinizi daxil edin",
       });
     }
   };
@@ -84,13 +84,13 @@ export const ForgotPass = () => {
               //   width: "348px",
               // },
             }}
-            label="Mobil nömrəniz"
-            type="text"
-            name="phoneNumber"
+            label="Email adresiniz"
+            type="email"
+            name="mail"
             onChange={(e) => {
-              setPhoneNumber(e.target.value);
+              setMail(e.target.value);
             }}
-            value={phoneNumber}
+            value={mail}
             InputLabelProps={{
               style: {
                 fontSize: "16px",

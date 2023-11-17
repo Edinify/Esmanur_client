@@ -10,6 +10,8 @@ import SubmitBtn from "./components/SubmitBtn";
 import InputField from "./components/InputField";
 // import CategoryInput from "./components/CategoryInput";
 
+// 
+
 export const CourseModal = () => {
   const dispatch = useDispatch();
   const {coursesModalData, coursesOpenModal} = useSelector(state => state.coursesModal)

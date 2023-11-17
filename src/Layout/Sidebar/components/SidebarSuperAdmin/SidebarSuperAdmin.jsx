@@ -24,7 +24,7 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
   };
 
 
-  const financeNav = ["/finance/incomes", "/finance/expenses"];
+  const financeNav = ["/finance/incomes", "/finance/expenses","/finance/food-ration" ];
 
   const isFinanceRoute = (route) => {
     return financeNav.includes(route);

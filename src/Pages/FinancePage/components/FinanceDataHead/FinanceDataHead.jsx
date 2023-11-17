@@ -12,7 +12,6 @@ import FinanceDropdown from "./FinanceDropdown";
 const FinanceDataHead = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const [selectedType, setSelectedType] = useState("Mədaxil");
   const openIncomesModal = () => {
     dispatch({
       type: INCOMES_MODAL_ACTION_TYPE.GET_INCOMES_MODAL,
@@ -31,14 +30,13 @@ const FinanceDataHead = () => {
       openIncomesModal();
     } else if (location.pathname === "/finance/expenses") {
       openExpensesModal();
-    }
+    } 
   };
   return (
     <div className="finance-data-head">
       <div className="top">
         <Link
           to="/finance/incomes"
-          onClick={() => setSelectedType("Mədaxil")}
           className={`data-type ${
             location.pathname === "/finance/incomes" ? "active" : ""
           }`}
@@ -47,12 +45,19 @@ const FinanceDataHead = () => {
         </Link>
         <Link
           to="/finance/expenses"
-          onClick={() => setSelectedType("Xərc")}
           className={`data-type ${
             location.pathname === "/finance/expenses" ? "active" : ""
           }`}
         >
           Xərc
+        </Link>
+        <Link
+          to="/finance/food-ration"
+          className={`data-type ${
+            location.pathname === "/finance/food-ration" ? "active" : ""
+          }`}
+        >
+          Qida rasionu
         </Link>
       </div>
 

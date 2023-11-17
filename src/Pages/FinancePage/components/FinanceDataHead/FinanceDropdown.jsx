@@ -8,20 +8,13 @@ const FinanceDropdown = ({ type }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const {    
-    financeMonthsFilter,
-    financeChooseDate,
     financeIncomeCategory,
     financeIncomeSorting,
     financeExpenseCategory,
     financeExpenseSorting,} = useSelector((state) => state.financeDateFilter);
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [selectedSort, setSelectedSort] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
-
   const [selectedIncomeSort, setSelectedIncomeSort] = useState("");
   const [selectedIncomeCategory, setSelectedIncomeCategory] = useState("");
-
-
   const [selectedExpenseSort, setSelectedExpenseSort] = useState("");
   const [selectedExpenseCategory, setSelectedExpenseCategory] = useState("");
 

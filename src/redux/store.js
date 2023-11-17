@@ -36,6 +36,7 @@ import { studentsModalReducer } from "./reducers/studentsModalReducer";
 import { teachersModalReducer } from "./reducers/teachersModalReducer";
 import { adminsModalReducer } from "./reducers/adminsModalReducer";
 import {expensesModalReducer} from "./reducers/expensesModalReducer"
+import { foodRationModalReducer } from "./reducers/foodRationModalReducer";
 import { incomesModalReducer } from "./reducers/incomesModalReducer";
 import { sidebarOpenReducer } from "./reducers/sidebarOpenReducer";
 import { stimulationTypeReducer } from "./reducers/stimulationTypeReducer";
@@ -91,6 +92,7 @@ studentsModal: studentsModalReducer,
 teachersModal: teachersModalReducer,
 adminsModal: adminsModalReducer,
 expensesModal:expensesModalReducer,
+foodRationModal: foodRationModalReducer,
 incomesModal:incomesModalReducer,
 bonusModal:bonusModalReducer,
 fineModal:fineModalReducer,

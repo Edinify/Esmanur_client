@@ -19,7 +19,7 @@ const FinancePage = () => {
   }, [dispatch]);
   return (
     <div className="finance-page">
-      <div className="finance-top">
+      {/* <div className="finance-top">
         <div className="left">
           <FinanceDateFilter />
           <FinanceChart />
@@ -28,7 +28,7 @@ const FinancePage = () => {
         <div className="right">
           <FinanceStatistics />
         </div>
-      </div>
+      </div> */}
 
       <div className="finance-bottom">
         <FinanceDataHead />

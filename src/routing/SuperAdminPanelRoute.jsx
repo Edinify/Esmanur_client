@@ -28,6 +28,7 @@ const SuperAdminPanelRoute = () => {
       <Route path="/finance" element={<FinancePage />} />
       <Route path="/finance/expenses" element={<FinancePage />} />
       <Route path="/finance/incomes" element={<FinancePage />} />
+      <Route path="/finance/food-ration" element={<FinancePage />} />
       <Route path="/admins" element={<AdminsPage />} />
     </>
   );

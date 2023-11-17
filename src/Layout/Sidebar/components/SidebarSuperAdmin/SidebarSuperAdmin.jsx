@@ -43,9 +43,21 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/teachers" onClick={closeSidebar}>
+        <NavLink to="/course-teachers" onClick={closeSidebar}>
           <TeachersIcon />
-          Müəllimlər
+          Fənn Müəllimləri
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/kindergarten-teachers" onClick={closeSidebar}>
+          <TeachersIcon />
+          Bağça Müəllimləri
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/babysitters" onClick={closeSidebar}>
+          <TeachersIcon />
+          Dayələr
         </NavLink>
       </li>
       <li>

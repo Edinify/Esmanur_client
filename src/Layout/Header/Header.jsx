@@ -21,8 +21,12 @@ export const Header = () => {
         return "Davamiyyət";
       case "/courses":
         return "Fənlər";
-      case "/teachers":
-        return "Müəllimlər";
+      case "/course-teachers":
+        return "Fənn Müəllimləri";
+      case "/kindergarten-teachers":
+        return "Bağça Müəllimləri";
+        case "/babysitters":
+          return "Dayələr";
       case "/students":
         return "Tələbələr";
       case "/admins":

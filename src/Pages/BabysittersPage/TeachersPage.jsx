@@ -76,7 +76,7 @@ const TeachersPage = () => {
       openModal={openModal} 
       DATA_SEARCH_VALUE={'TEACHERS_SEARCH_VALUE'} 
       dataSearchValues={teachersSearchValues}
-      statusType='teacher'
+      statusType='course teacher'
       />
       <TeachersData teacherPageNum={teacherPageNum} getPageNumber={getPageNumber} />
     </div>

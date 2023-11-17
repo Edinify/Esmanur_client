@@ -28,8 +28,8 @@ const GlobalHead = ({
                   DATA_SEARCH_VALUE={DATA_SEARCH_VALUE}
                 />
               )}
-              {statusType === "teacher" && (
-                <StatusDropdown statusType="teacher" deviceType="desktop" />
+              {statusType === "course teacher" && (
+                <StatusDropdown statusType="course teacher" deviceType="desktop" />
               )}
               {statusType === "student" && (
                 <StatusDropdown statusType="student" deviceType="desktop" />
@@ -41,8 +41,8 @@ const GlobalHead = ({
               Əlavə et
             </button>
           </div>
-          {statusType === "teacher" && (
-            <StatusDropdown statusType="teacher" deviceType="mobile" />
+          {statusType === "course teacher" && (
+            <StatusDropdown statusType="course teacher" deviceType="mobile" />
           )}
           {statusType === "student" && (
             <StatusDropdown statusType="student" deviceType="mobile" />

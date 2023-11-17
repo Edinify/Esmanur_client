@@ -22,7 +22,6 @@ function App() {
   const { incomesOpenModal } = useSelector((state) => state.incomesModal);
   const { bonusOpenModal } = useSelector((state) => state.bonusModal);
   const { fineOpenModal } = useSelector((state) => state.fineModal);
-  const { openMainPageModal } = useSelector((state) => state.modalLesson);
 
   useEffect(() => {
     if (bonusOpenModal) {
@@ -81,14 +80,6 @@ function App() {
     }
   }, [teachersOpenModal]);
 
-  useEffect(() => {
-    if (openMainPageModal) {
-      document.body.style.overflowY = "hidden";
-    } else {
-      document.body.style.overflowY = "overlay";
-    }
-  }, [openMainPageModal]);
-  
 
   return (
     

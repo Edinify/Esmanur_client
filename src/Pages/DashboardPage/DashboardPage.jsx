@@ -15,7 +15,7 @@ export const Dashboard = () => {
   const location = useLocation();
   const { user } = useSelector((state) => state.user);
   const [dashboardKeys, setDashboardKeys] = useState({});
-  const { changeTableType, changeShowNav } = useCustomHook();
+  const { changeShowNav } = useCustomHook();
 
   useEffect(() => {
     changeShowNav(false)
@@ -26,7 +26,6 @@ export const Dashboard = () => {
 
   useEffect(() => {
     dispatch(getDashboardFinanceAction())
-    changeTableType("main page")
   }, []);
 
   return (

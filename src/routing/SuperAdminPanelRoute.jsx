@@ -1,8 +1,6 @@
 import React from "react";
 import { Route } from "react-router";
 import { Dashboard } from "../Pages/DashboardPage/DashboardPage";
-import MainPage from "../Pages/MainPage/MainPage";
-import TablePage from "../Pages/TablePage/TablePage";
 import SalaryPage from "../Pages/SalaryPage/SalaryPage";
 import TeachersPage from "../Pages/TeachersPage/TeachersPage";
 import StudentsPage from "../Pages/StudentsPage/StudentsPage";
@@ -14,10 +12,7 @@ import AdminsPage from "../Pages/AdminsPage/AdminsPage";
 const SuperAdminPanelRoute = () => {
   return (
     <>
-      <Route path="/" element={<MainPage />} />
-      <Route path="/student" element={<MainPage />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/table" element={<TablePage />} />
       <Route path="/salary" element={<SalaryPage />} />
       <Route path="/courses" element={<CoursesPage />} />
       <Route path="/students" element={<StudentsPage />} />

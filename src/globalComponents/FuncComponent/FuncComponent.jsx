@@ -9,10 +9,8 @@ import DeleteAdminModal from "./components/DeleteAdminModal/DeleteAdminModal";
 import DeleteStudentModal from "./components/DeleteStudentModal/DeleteStudentModal";
 import DeleteExpensesModal from "./components/DeleteExpensesModal/DeleteExpensesModal";
 import DeleteIncomesModal from "./components/DeleteIncomesModal/DeleteIncomesModal";
-import DeleteBonusModal from "./components/DeleteBonusModal/DeleteBonusModal"
+import DeleteBonusModal from "./components/DeleteBonusModal/DeleteBonusModal";
 import DeleteFineModal from "./components/DeleteFineModal/DeleteFineModal";
-import DeleteFeedbackModal from "./components/DeleteFeedbackModal/DeleteFeedbackModal";
-import DeleteTeacherFeedbackModal from "./components/DeleteTeacherFeedbackModal/DeleteTeacherFeedbackModal";
 const FuncComponent = ({
   handleDeleteModal,
   handleUpdate,
@@ -24,16 +22,12 @@ const FuncComponent = ({
   deleteExpensesModal,
   deleteIncomesModal,
   deleteFineModal,
-  deleteFeedbackModal,
   deleteBonusModal,
   dataType,
-  deleteTeacherFeedbackModal,
 }) => {
   const dispatch = useDispatch();
   const { funcComp } = useSelector((state) => state.funcComponent);
   const modalRef = useRef(null);
-
-
 
   const handleClickOutside = () => {
     dispatch({
@@ -74,24 +68,13 @@ const FuncComponent = ({
         ref={modalRef}
       >
         <>
-          {dataType === "feedback" ? (
-            <h4
-              className="delete-func delete-feed"
-              onClick={() => handleDeleteModal(data._id)}
-            >
-              Sil
-            </h4>
-          ) : (
-            <>
-              <h4 onClick={() => handleUpdate(data)}>Yenilə</h4>
-              <h4
-                className="delete-func"
-                onClick={() => handleDeleteModal(data._id)}
-              >
-                Sil
-              </h4>
-            </>
-          )}
+          <h4 onClick={() => handleUpdate(data)}>Yenilə</h4>
+          <h4
+            className="delete-func"
+            onClick={() => handleDeleteModal(data._id)}
+          >
+            Sil
+          </h4>
         </>
       </div>
       {deleteModal && (
@@ -117,12 +100,6 @@ const FuncComponent = ({
       )}
       {deleteFineModal && (
         <DeleteFineModal data={data} deleteMod={handleDeleteModal} />
-      )}
-      {deleteFeedbackModal && (
-        <DeleteFeedbackModal data={data} deleteMod={handleDeleteModal} />
-      )}
-      {deleteTeacherFeedbackModal && (
-        <DeleteTeacherFeedbackModal data={data} deleteMod={handleDeleteModal} />
       )}
     </div>
   );

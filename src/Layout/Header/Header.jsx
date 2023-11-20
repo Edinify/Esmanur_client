@@ -21,12 +21,8 @@ export const Header = () => {
         return "Davamiyyət";
       case "/courses":
         return "Fənlər";
-      case "/course-teachers":
-        return "Fənn Müəllimləri";
-      case "/kindergarten-teachers":
-        return "Bağça Müəllimləri";
-        case "/babysitters":
-          return "Dayələr";
+      case "/teachers":
+        return "Müəllimlər";
       case "/students":
         return "Tələbələr";
       case "/admins":
@@ -53,8 +49,6 @@ export const Header = () => {
         return "Həvəsləndirmə";
       case "/stimulations/bonus":
         return "Həvəsləndirmə";
-      case "/finance":
-        return "Maliyyə";
       case "/finance/expenses":
         return "Maliyyə";
       case "/finance/incomes":

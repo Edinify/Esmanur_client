@@ -14,7 +14,6 @@ import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunc
 
 export const Login = () => {
   const dispatch = useDispatch();
-  const { changeShowNav } = useCustomHook();
   const { loading } = useSelector((state) => state.auth);
   const [view, setView] = useState(true);
   const [title, setTitle] = useState({
@@ -61,12 +60,6 @@ export const Login = () => {
     }
   };
 
-  useEffect(() => {
-    changeShowNav(true)
-    return () => {
-      changeShowNav(false)
-    };
-  }, [dispatch]);
 
   return (
     <div className="login">

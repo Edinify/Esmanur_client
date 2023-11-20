@@ -6,10 +6,6 @@ import { deleteCoursesAction } from "../../../../redux/actions/coursesActions";
 const DeleteCourseModal = ({
   deleteMod,
   data,
-  modal,
-  setModal,
-  deletedItem,
-  dataId,
 }) => {
   const dispatch = useDispatch();
 

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, TextField } from "@mui/material";
 import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
-import { FOOD_RATİON_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
+import { FOOD_RATION_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
 import InputField from "./components/InputField/InputField";
 import SubmitBtn from "./components/SubmitBtn/SubmitBtn";
 import Category from "./components/InputDropdowns/Category";
@@ -29,7 +29,7 @@ export const FoodRationModal = () => {
 
   const updateModalState = (keyName, value) => {
     dispatch({
-      type: FOOD_RATİON_MODAL_ACTION_TYPE.GET_FOOD_RATİON_MODAL,
+      type: FOOD_RATION_MODAL_ACTION_TYPE.GET_FOOD_RATION_MODAL,
       payload: {
         data: { ...foodRationModalData, [keyName]: value },
         openModal: true,
@@ -42,7 +42,7 @@ export const FoodRationModal = () => {
 
   const closeModal = () => {
     dispatch({
-      type: FOOD_RATİON_MODAL_ACTION_TYPE.GET_FOOD_RATİON_MODAL,
+      type: FOOD_RATION_MODAL_ACTION_TYPE.GET_FOOD_RATION_MODAL,
       payload: { data: {}, openModal: false },
     });
   };
@@ -131,7 +131,7 @@ export const FoodRationModal = () => {
         )}
         {
           deleteModal &&(
-            <DeleteFoodRationModal type="expenses" foodRationModalData={foodRationModalData} deleteMod={handleDeleteModal} />
+            <DeleteFoodRationModal foodRationModalData={foodRationModalData} deleteMod={handleDeleteModal} />
           )
         }
       </div>

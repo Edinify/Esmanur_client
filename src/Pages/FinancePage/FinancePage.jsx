@@ -9,14 +9,7 @@ import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunc
 
 const FinancePage = () => {
   const dispatch = useDispatch();
-  const { changeShowNav } = useCustomHook();
 
-  useEffect(() => {
-    changeShowNav(false)
-    return () => {
-      changeShowNav(true)
-    };
-  }, [dispatch]);
   return (
     <div className="finance-page">
       <div className="finance-top">

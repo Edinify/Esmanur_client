@@ -10,7 +10,6 @@ import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunc
 const SalaryPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { changeShowNav } = useCustomHook();
   const { startDate } = useSelector((state) => state.datepicker);
   const { endDate } = useSelector((state) => state.datepicker);
   const { salariesSearchValues } = useSelector((state) => state.searchValues);
@@ -88,15 +87,6 @@ const clearFilter = () => {
       payload: e.target.value,
     });
   };
-
-  useEffect(() => {
-    clearFilter()
-    dispatch(getSalaryPaginationAction("", "", "", 1, ""));
-    changeShowNav(false);
-    return () => {
-      changeShowNav(true);
-    };
-  }, [dispatch]);
 
   useEffect(() => {
     if (filter) {

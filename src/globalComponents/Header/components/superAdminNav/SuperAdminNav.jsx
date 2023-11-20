@@ -44,24 +44,10 @@ const SuperAdminNav = ({ setOpenMenu }) => {
         onClick={(e) => {
           setOpenMenu(true);
         }}
-        to="/course-teachers"
+        to="/teachers"
         className={({ isActive }) => (isActive ? "active" : "")}
       >
-        Fənn Müəllimləri
-      </NavLink>
-      <NavLink
-        onClick={() => setOpenMenu(true)}
-        to="/kindergarten-teachers"
-        className={({ isActive }) => (isActive ? "active" : "")}
-      >
-        Bağça Müəllimləri
-      </NavLink>
-      <NavLink
-        onClick={() => setOpenMenu(true)}
-        to="/babysitters"
-        className={({ isActive }) => (isActive ? "active" : "")}
-      >
-        Dayələr
+        Müəllimlər
       </NavLink>
       <NavLink
         onClick={(e) => {

@@ -16,7 +16,6 @@ import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunc
 const StimulationPage = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { changeShowNav } = useCustomHook();
   const { lastPage: bonusLastPage } = useSelector((state) => state.bonusData);
   const { lastPage: fineLastPage } = useSelector((state) => state.fineData);
   const { startDate } = useSelector((state) => state.datepicker);
@@ -142,13 +141,6 @@ const StimulationPage = () => {
       payload: fineType.key,
     });
   };
-  useEffect(() => {
-    changeShowNav(false)
-    return () => {
-      changeShowNav(true)
-    };
-  }, [dispatch]);
-
   useEffect(() => {
     getPageNumberFine(1);
   }, [fineCategory]);

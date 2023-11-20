@@ -11,39 +11,26 @@ const SidebarAdmin = ({ closeSidebar }) => {
     return nav.includes(route);
   };
 
-
   return (
     <ul className="sidebar-nav-list">
-      <li>
-        <NavLink to="/courses" onClick={closeSidebar}>
-          <CoursesIcon />
-          Fənlər
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/course-teachers" onClick={closeSidebar}>
-          <TeachersIcon />
-          Fənn Müəllimləri
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/kindergarten-teachers" onClick={closeSidebar}>
-          <TeachersIcon />
-          Bağça Müəllimləri
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/babysitters" onClick={closeSidebar}>
-          <TeachersIcon />
-          Dayələr
-        </NavLink>
-      </li>
       <li>
         <NavLink to="/students" onClick={closeSidebar}>
           <StudentsIcon />
           Tələbələr
         </NavLink>
       </li>
+      <li>
+        <NavLink to="/teachers" onClick={closeSidebar}>
+          <TeachersIcon />
+          Müəllimlər
+        </NavLink>
+      </li>
+      {/* <li>
+        <NavLink to="/courses" onClick={closeSidebar}>
+          <CoursesIcon />
+          Fənlər
+        </NavLink>
+      </li>*/}
     </ul>
   );
 };

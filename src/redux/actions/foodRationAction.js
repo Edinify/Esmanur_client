@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
   FOOD_RATION_ACTION_TYPE,
-  FOOD_RATİON_MODAL_ACTION_TYPE,
+  FOOD_RATION_MODAL_ACTION_TYPE,
 } from "../actions-type";
 import { toast } from "react-toastify";
 import { logoutAction } from "./auth";
@@ -47,7 +47,7 @@ export const setLoadingFoodRationAction = (loadingValue) => ({
 });
 
 const foodRationModalLoading = (loadingValue) => ({
-  type: FOOD_RATİON_MODAL_ACTION_TYPE.FOOD_RATİON_MODAL_LOADING,
+  type: FOOD_RATION_MODAL_ACTION_TYPE.FOOD_RATION_MODAL_LOADING,
   payload: loadingValue,
 });
 
@@ -125,7 +125,7 @@ export const createFoodRationAction = (expensesData) => async (dispatch) => {
       );
     // console.log(data);
     dispatch({
-      type: FOOD_RATİON_MODAL_ACTION_TYPE.FOOD_RATİON_OPEN_MODAL,
+      type: FOOD_RATION_MODAL_ACTION_TYPE.FOOD_RATION_OPEN_MODAL,
       payload: false,
     });
     toastSuccess("Yeni məhsul əlavə edildi");
@@ -147,7 +147,7 @@ export const createFoodRationAction = (expensesData) => async (dispatch) => {
             getFoodRationPaginationAction(data.lastPage, "", "", 1, "food", "oldest")
           );
         dispatch({
-          type: FOOD_RATİON_MODAL_ACTION_TYPE.FOOD_RATİON_OPEN_MODAL,
+          type: FOOD_RATION_MODAL_ACTION_TYPE.FOOD_RATION_OPEN_MODAL,
           payload: false,
         });
         toastSuccess("Yeni məhsul əlavə edildi");
@@ -169,7 +169,7 @@ export const updateFoodRationAction = (_id, expensesData) => async (dispatch) =>
     const { data } = await API.patch(`/${_id}`, expensesData);
     dispatch({ type: FOOD_RATION_ACTION_TYPE.UPDATE_FOOD_RATION, payload: data });
     dispatch({
-      type: FOOD_RATİON_MODAL_ACTION_TYPE.FOOD_RATİON_OPEN_MODAL,
+      type: FOOD_RATION_MODAL_ACTION_TYPE.FOOD_RATION_OPEN_MODAL,
       payload: false,
     });
     toastSuccess("Məhsul yeniləndi");
@@ -188,7 +188,7 @@ export const updateFoodRationAction = (_id, expensesData) => async (dispatch) =>
         const { data } = await API.patch(`/${_id}`, expensesData);
         dispatch({ type: FOOD_RATION_ACTION_TYPE.UPDATE_FOOD_RATION, payload: data });
         dispatch({
-          type: FOOD_RATİON_MODAL_ACTION_TYPE.FOOD_RATİON_OPEN_MODAL,
+          type: FOOD_RATION_MODAL_ACTION_TYPE.FOOD_RATION_OPEN_MODAL,
           payload: false,
         });
         toastSuccess("Məhsul yeniləndi");

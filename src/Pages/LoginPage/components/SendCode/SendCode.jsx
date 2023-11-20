@@ -17,7 +17,6 @@ import { useCustomHook } from "../../../../globalComponents/GlobalFunctions/glob
 export const SendCode = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { changeShowNav } = useCustomHook();
   const [otp, setOtp] = useState("");
   const [seconds, setSeconds] = useState(120);
   const [errorMessage, setErrorMessage] = useState("");
@@ -76,12 +75,6 @@ export const SendCode = () => {
     }
   };
 
-  useEffect(() => {
-    changeShowNav(true)
-    return () => {
-      changeShowNav(false)
-    };
-  }, [dispatch]);
 
   useEffect(() => {
     if (seconds > 0) {

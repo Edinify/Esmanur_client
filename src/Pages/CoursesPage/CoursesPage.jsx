@@ -11,7 +11,6 @@ const CoursePage = () => {
   const { lastPage } = useSelector((state) => state.coursesPagination);
   const { coursesSearchValues } = useSelector((state) => state.searchValues);
   const [coursePageNum, setCoursePageNum] = useState(1);
-  const { changeShowNav } = useCustomHook();
 
 
   const openModal = () => {
@@ -40,11 +39,6 @@ const CoursePage = () => {
     } else {
       dispatch(getCoursesPaginationAction(1, ""));
     }
-
-    changeShowNav(false)
-    return () => {
-      changeShowNav(true)
-    };
   }, [dispatch]);
   useEffect(() => {
     if (lastPage) {

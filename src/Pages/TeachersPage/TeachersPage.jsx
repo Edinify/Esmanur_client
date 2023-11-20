@@ -4,16 +4,15 @@ import { getTeachersPaginationAction } from "../../redux/actions/teachersActions
 import { TEACHERS_MODAL_ACTION_TYPE} from "../../redux/actions-type";
 import TeachersData from "./components/TeachersData/TeachersData";
 import GlobalHead from "../../globalComponents/GlobalHead/GlobalHead";
-import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunctions";
 
 const TeachersPage = () => {
   const dispatch = useDispatch();
-  const { changeShowNav } = useCustomHook();
   const { lastPage } = useSelector((state) => state.teachersPagination);
   const { teachersSearchValues } = useSelector((state) => state.searchValues);
   const [teacherPageNum, setTeacherPageNum] = useState(1);
   const {teacherStatus} = useSelector(state=>state.teacherStatus);
-  
+  const { category } = useSelector((state) => state.teachersCategory);
+
 
   const getPageNumber = (pageNumber) => {
     setTeacherPageNum(pageNumber);
@@ -54,11 +53,6 @@ const TeachersPage = () => {
     } else {
       dispatch(getTeachersPaginationAction(1, "","all"));
     }
-    
-    changeShowNav(false)
-    return () => {
-      changeShowNav(true)
-    };
   }, [dispatch]);
   useEffect(() => {
     if (lastPage) {
@@ -69,6 +63,7 @@ const TeachersPage = () => {
     getPageNumber(1)
   },[teacherStatus])
 
+
   return (
     <div className="details-page teachers-page ">
       <GlobalHead 
@@ -76,7 +71,7 @@ const TeachersPage = () => {
       openModal={openModal} 
       DATA_SEARCH_VALUE={'TEACHERS_SEARCH_VALUE'} 
       dataSearchValues={teachersSearchValues}
-      statusType='course teacher'
+      statusType='teachers'
       />
       <TeachersData teacherPageNum={teacherPageNum} getPageNumber={getPageNumber} />
     </div>

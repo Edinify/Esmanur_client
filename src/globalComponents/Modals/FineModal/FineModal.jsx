@@ -159,7 +159,7 @@ export const FineModal = () => {
           />
         )}
       </div>
-      {deleteModal && <DeleteFineModal type="fine" fineModalData={fineModalData} deleteMod={handleDeleteModal} />}
+      {deleteModal && <DeleteFineModal fineModalData={fineModalData} deleteMod={handleDeleteModal} />}
     </div>
   );
 };

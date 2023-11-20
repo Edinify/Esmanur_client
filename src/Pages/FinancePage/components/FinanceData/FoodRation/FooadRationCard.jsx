@@ -2,7 +2,7 @@ import { useState, React } from "react";
 import FuncComponent from "../../../../../globalComponents/FuncComponent/FuncComponent";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { FOOD_RATİON_MODAL_ACTION_TYPE } from "../../../../../redux/actions-type";
+import { FOOD_RATION_MODAL_ACTION_TYPE } from "../../../../../redux/actions-type";
 
 const FoodRationCard = ({ data, mode, cellNumber, page }) => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const FoodRationCard = ({ data, mode, cellNumber, page }) => {
   const handleUpdate = (data) => {
     const { category, amount, _id, appointment, date } = data;
     dispatch({
-      type: FOOD_RATİON_MODAL_ACTION_TYPE.GET_FOOD_RATİON_MODAL,
+      type: FOOD_RATION_MODAL_ACTION_TYPE.GET_FOOD_RATION_MODAL,
       payload: {
         data: {
           category,

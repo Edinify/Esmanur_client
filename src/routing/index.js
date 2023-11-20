@@ -15,11 +15,10 @@ export const Routing = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-
+  const [notFound, setNotFound] = useState(false);
   const { auth } = useSelector((state) => state.auth);
   const { user } = useSelector((state) => state.user);
   const forgetPassword = useSelector((state) => state.forgetPassword);
-  const { show } = useSelector((state) => state.show);
   const userData = JSON.parse(localStorage.getItem("userData"));
   const token = localStorage.getItem("auth");
 
@@ -56,14 +55,13 @@ export const Routing = () => {
   }, [auth, user, forgetPassword]);
 
  
-  const [notFound, setNotFound] = useState(false);
 
 
   return (
-    <div className={show ? "" : "main-container"}>
-      {!show && <Sidebar />}
+    <div className={userData ? "main-container" : ""}>
+      {userData && <Sidebar />}
       <div className="left">
-        {!show && <Header />}
+        {userData && <Header />}
 
         <Routes>
           <Route path="/login" element={<Login />} />

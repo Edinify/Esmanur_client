@@ -4,6 +4,7 @@ import { ReactComponent as PlusIcon } from "../../assets/icons/Plus.svg";
 import { useDispatch } from "react-redux";
 import { StatusDropdown } from "./StatusDropdown/StatusDropdown";
 import Search from "./Search/Search";
+import { TeachersCategoryDropdown } from "./TeachersCategoryDropdown/TeachersCategoryDropdown";
 
 const GlobalHead = ({
   searchData,
@@ -28,8 +29,9 @@ const GlobalHead = ({
                   DATA_SEARCH_VALUE={DATA_SEARCH_VALUE}
                 />
               )}
-              {statusType === "course teacher" && (
-                <StatusDropdown statusType="course teacher" deviceType="desktop" />
+              {statusType === "teachers" && (
+                // <StatusDropdown statusType="teachers" deviceType="desktop" />
+                <TeachersCategoryDropdown statusType="student" deviceType="desktop"/>
               )}
               {statusType === "student" && (
                 <StatusDropdown statusType="student" deviceType="desktop" />
@@ -41,8 +43,8 @@ const GlobalHead = ({
               Əlavə et
             </button>
           </div>
-          {statusType === "course teacher" && (
-            <StatusDropdown statusType="course teacher" deviceType="mobile" />
+          {statusType === "teachers" && (
+            <TeachersCategoryDropdown statusType="teachers" deviceType="mobile" />
           )}
           {statusType === "student" && (
             <StatusDropdown statusType="student" deviceType="mobile" />

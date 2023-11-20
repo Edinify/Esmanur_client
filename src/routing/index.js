@@ -58,8 +58,9 @@ export const Routing = () => {
 
 
   return (
-    <div className={userData ? "main-container" : ""}>
-      {userData && <Sidebar />}
+    // <div className={userData ? "main-container" : ""}>
+          <div className={""}>
+      {/* {userData && <Sidebar />} */}
       <div className="left">
         {userData && <Header />}
 

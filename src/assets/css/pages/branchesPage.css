@@ -1,0 +1,33 @@
+.branches-page {
+}
+.branches-page .branches-con {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.branches-page .branches-con .add-branch {
+  background-color: white;
+  color: #462aff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 22px;
+  cursor: pointer;
+  transition: 0.3s;
+  height: 50.25px;
+  border-radius: 4px;
+  border: 1px solid var(--primary-500);
+  padding: 11px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.branches-page .branches-con .add-branch.active {
+    background-color: var(--primary-500);
+    color: #fff;
+}
+.branches-page .branches-con .add-branch svg {
+    margin-right: 6px;
+}
+.branches-page .branches-con .add-branch svg path {
+    stroke: var(--primary-500);
+}

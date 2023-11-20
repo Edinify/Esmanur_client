@@ -35,14 +35,6 @@ export const Header = () => {
         return "Əmək haqqı";
       case "/incomes":
         return "Mədaxil ";
-      case "/student-panel":
-        return "Cədvəl";
-      case "/teacher-panel":
-        return "Cədvəl";
-      case "/teacher-panel/home":
-        return "Ana səhifə";
-      case "/teacher-panel/salary":
-        return "Əmək haqqı";
       case "/stimulations":
         return "Həvəsləndirmə";
       case "/stimulations/fine":

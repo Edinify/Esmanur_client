@@ -5,7 +5,7 @@ import { logoutAction } from "./auth";
 
 const API = axios.create({
   baseURL: `${apiRoot}/notification`,
-  withCredentials: true,
+    withCredentials: true,
 });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("auth")) {

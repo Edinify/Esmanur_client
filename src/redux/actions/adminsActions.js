@@ -9,17 +9,17 @@ import { apiRoot } from "../../apiRoot";
 
 const API = axios.create({
   baseURL: `${apiRoot}/user/admin`,
-  withCredentials: true,
+    withCredentials: true,
 });
 
 const refreshApi = axios.create({
   baseURL: `${apiRoot}/user/auth/refresh_token`,
-  withCredentials: true,
+    withCredentials: true,
 });
 
 const REGISTERAPI = axios.create({
   baseURL: `${apiRoot}/user/auth`,
-  withCredentials: true,
+    withCredentials: true,
 });
 
 API.interceptors.request.use((req) => {

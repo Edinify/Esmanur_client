@@ -6,12 +6,12 @@ import { apiRoot } from "../../apiRoot";
 
 const refreshApi = axios.create({
   baseURL: `${apiRoot}/user/auth/refresh_token`,
-  withCredentials: true,
+    withCredentials: true,
 });
 
 const API = axios.create({
   baseURL: `${apiRoot}/salary`,
-  withCredentials: true,
+    withCredentials: true,
 });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("auth")) {

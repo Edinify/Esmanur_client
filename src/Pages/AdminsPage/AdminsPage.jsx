@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAdminsPaginationAction, getAdminsAction } from "../../redux/actions/adminsActions";
-import { SHOWNAV_ACTION_TYPE, ADMINS_MODAL_ACTION_TYPE} from "../../redux/actions-type";
+import { ADMINS_MODAL_ACTION_TYPE} from "../../redux/actions-type";
 import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunctions";
 
 import AdminsData from "./components/AdminsData/AdminsData";

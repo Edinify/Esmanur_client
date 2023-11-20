@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import "./notFoundPage.css";
 import {  useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { SHOWNAV_ACTION_TYPE } from '../../redux/actions-type';
 import NotFoundPageImg from "../../assets/images/notfound.svg";
 import { useCustomHook } from '../../globalComponents/GlobalFunctions/globalFunctions';
 

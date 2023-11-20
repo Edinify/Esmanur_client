@@ -8,6 +8,7 @@ import DeleteTeacherModal from "./components/DeleteTeacherModal/DeleteTeacherMod
 import DeleteAdminModal from "./components/DeleteAdminModal/DeleteAdminModal";
 import DeleteStudentModal from "./components/DeleteStudentModal/DeleteStudentModal";
 import DeleteExpensesModal from "./components/DeleteExpensesModal/DeleteExpensesModal";
+import DeleteFoodRationModal from "./components/DeleteFoodRationModal/DeleteFoodRationModal";
 import DeleteIncomesModal from "./components/DeleteIncomesModal/DeleteIncomesModal";
 import DeleteBonusModal from "./components/DeleteBonusModal/DeleteBonusModal";
 import DeleteFineModal from "./components/DeleteFineModal/DeleteFineModal";
@@ -20,6 +21,7 @@ const FuncComponent = ({
   deleteCourseModal,
   deleteStudentModal,
   deleteExpensesModal,
+  deleteFoodRationModal,
   deleteIncomesModal,
   deleteFineModal,
   deleteBonusModal,
@@ -91,6 +93,9 @@ const FuncComponent = ({
       )}
       {deleteExpensesModal && (
         <DeleteExpensesModal data={data} deleteMod={handleDeleteModal} />
+      )}
+      {deleteFoodRationModal && (
+        <DeleteFoodRationModal data={data} deleteMod={handleDeleteModal} />
       )}
       {deleteIncomesModal && (
         <DeleteIncomesModal data={data} deleteMod={handleDeleteModal} />

@@ -19,6 +19,7 @@ import { salaryPaginationReducer } from "./reducers/salaryPaginationReducer";
 import { dashBoardreducer } from "./reducers/dashboardReducer";
 import forgotPasswordReducer from "./reducers/forgetPasswordReducer";
 import { expensesReducer } from "./reducers/expensesPaginationReducer";
+import { foodRationReducer } from "./reducers/foodRationPaginationReducer";
 import { allCoursesReducer } from "./reducers/allCoursesReducer";
 import { incomeReducer } from "./reducers/incomeReducer";
 import { funcComponentReducer } from "./reducers/funcComponentReducer";
@@ -41,7 +42,7 @@ import { teacherBonusReducer } from "./reducers/teacherBonusReducer";
 import { financeReducer } from "./reducers/financeReducer";
 import { teacherStatusReducer } from "./reducers/teacherStatusReducer";
 import { studentStatusReducer } from "./reducers/studentStatusReducer";
-
+import { branchesReducer } from "./reducers/branchesReducer";
 
 const initialState={};
 const reducers = combineReducers({
@@ -64,6 +65,7 @@ dashboardData:dashBoardreducer,
 financeData: financeReducer,
 forgetPassword:forgotPasswordReducer,
 expensesData:expensesReducer,
+foodRationData: foodRationReducer,
 allCourses:allCoursesReducer,
 incomes:incomeReducer,
 funcComponent:funcComponentReducer,
@@ -84,7 +86,8 @@ financeDateFilter: financeFilterReducer,
 fineCategory:fineFilterReducer,
 teacherBonus:teacherBonusReducer,
 teacherStatus:teacherStatusReducer,
-studentStatus:studentStatusReducer
+studentStatus:studentStatusReducer,
+branchesData: branchesReducer,
 })
 // test
 

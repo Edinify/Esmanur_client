@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  SHOWNAV_ACTION_TYPE,
   SEARCH_VALUES_ACTION_TYPES,
   FINE_FILTER_ACTION_TYPE,
 } from "../../redux/actions-type";

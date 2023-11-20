@@ -4,23 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import FoodRationCard from "./FooadRationCard";
 import { Pagination } from "antd";
 import Loading from "../../../../../globalComponents/Loading/Loading";
-import { getExpensesPaginationAction } from "../../../../../redux/actions/expensesAction";
+import { getFoodRationPaginationAction } from "../../../../../redux/actions/foodRationAction";
 
 const FoodRationData = ({  getPageNumber,  page, dataHead = [] }) => {
   const dispatch = useDispatch();
-  const expensesData = useSelector((state) => state?.expensesData.expensesData);
-  const { totalPages, loading, lastPage: expensesPageNum } = useSelector((state) => state.expensesData);
-  const expensesHead = page !== 'finance' ? [
+  const foodRationData = useSelector((state) => state?.foodRationData.foodRationData);
+  const { totalPages, loading, lastPage: foodRationPageNum } = useSelector((state) => state.foodRationData);
+  const foodRationHead = page !== 'finance' ? [
     { id: 1, label: "Xərcin təyinatı" },
     { id: 2, label: "Xərcin dəyəri" },
     { id: 3, label: "Xərcin tarixi" },
     { id: 4, label: "" },
   ] : [...dataHead];
 
-// console.log(expensesPageNum);
+// console.log(foodRationPageNum);
 // console.log(lastPage);
 useEffect(() => {
-  dispatch(getExpensesPaginationAction(1, "", "", 1, "food", "oldest"));
+  dispatch(getFoodRationPaginationAction(1, "", "", 1, "food", "oldest"));
 }, []);
 
 
@@ -33,18 +33,18 @@ useEffect(() => {
           <table className="details-table expenses-table">
             <thead>
               <tr>
-                {expensesHead.map((head, i) => (
+                {foodRationHead.map((head, i) => (
                   <th key={i}>{head.label}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {expensesData?.map((expense, i) => (
+              {foodRationData?.map((expense, i) => (
                 <FoodRationCard
                   key={i}
                   data={expense}
                   mode="desktop"
-                  cellNumber={i + 1 + (expensesPageNum - 1) * 10}
+                  cellNumber={i + 1 + (foodRationPageNum - 1) * 10}
                   page={page}
                 />
               ))}
@@ -52,12 +52,12 @@ useEffect(() => {
           </table>
 
           <div className="details-list-tablet incomes-page ">
-          {expensesData?.map((expense, i) => (
+          {foodRationData?.map((expense, i) => (
             <FoodRationCard
               key={i}
               data={expense}
               mode="tablet"
-              cellNumber={i + 1 + (expensesPageNum - 1) * 10}
+              cellNumber={i + 1 + (foodRationPageNum - 1) * 10}
               page={page}
             />
           ))}
@@ -66,7 +66,7 @@ useEffect(() => {
           {totalPages > 1 && (
             <div className="pages-pagination">
               <Pagination
-                current={expensesPageNum}
+                current={foodRationPageNum}
                 defaultCurrent={1}
                 total={totalPages * 10}
                 onChange={getPageNumber}

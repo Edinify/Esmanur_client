@@ -22,6 +22,7 @@ const MoreModal = ({ setOpenMoreModal, type, data }) => {
   const { bonusModalData } = useSelector((state) => state.bonusModal);
   const { fineModalData } = useSelector((state) => state.fineModal);
   const [deleteModal, setDeleteModal] = useState(false);
+  const { user } = useSelector((state) => state.user);
 
   const handleDeleteModal = () => {
     setDeleteModal(!deleteModal);
@@ -85,7 +86,6 @@ const MoreModal = ({ setOpenMoreModal, type, data }) => {
           openModal: true,
         },
       });
-    
     }
 
     setOpenMoreModal(false);
@@ -101,16 +101,19 @@ const MoreModal = ({ setOpenMoreModal, type, data }) => {
             ""
           )}
           <div className="more-modal-header-icons">
-            <div
-              className={
-                type === "feedback-teacher" || type === "feedback-student"
-                  ? "header-icon-delete"
-                  : "header-icon-edit"
-              }
-            >
-              
-                <EditIcon onClick={() => openUpdateModal()} />
-            </div>
+          {user.role==="super-admin"?
+           <div
+           className={
+             type === "feedback-teacher" || type === "feedback-student"
+               ? "header-icon-delete"
+               : "header-icon-edit"
+           }
+         >
+           <EditIcon onClick={() => openUpdateModal()} />
+         </div>
+         :null
+           }
+           
             <div className="header-icon-close">
               <CloseIcon onClick={() => setOpenMoreModal(false)} />
             </div>

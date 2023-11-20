@@ -6,7 +6,7 @@ import { COURSES_MODAL_ACTION_TYPE } from "../../../../redux/actions-type";
 const CourseCard = ({ data, mode, cellNumber }) => {
   const dispatch = useDispatch();
   const [deleteCourseModal, setDeleteCourseModal] = useState(false);
-  const [arrowUp, setArrowUp] = useState(false);
+  const { user } = useSelector((state) => state.user);
 
   const handleDeleteModal = () => {
     setDeleteCourseModal(!deleteCourseModal);
@@ -30,20 +30,23 @@ const CourseCard = ({ data, mode, cellNumber }) => {
             </div>
           </td>
           <td>
-            <FuncComponent
-              handleUpdate={handleUpdate}
-              handleDeleteModal={handleDeleteModal}
-              data={data}
-              deleteCourseModal={deleteCourseModal}
-            />
+            {user.role === "super-admin" ? (
+              <FuncComponent
+                handleUpdate={handleUpdate}
+                handleDeleteModal={handleDeleteModal}
+                data={data}
+                deleteCourseModal={deleteCourseModal}
+              />
+            ) : null}
           </td>
         </tr>
       ) : (
         <div className="content-box">
-            <div className="left">
-              <h3 className="name">{data.name}</h3>
-            </div>
+          <div className="left">
+            <h3 className="name">{data.name}</h3>
+          </div>
 
+          {user.role === "super-admin" ? (
             <div className="right">
               <FuncComponent
                 handleUpdate={handleUpdate}
@@ -53,6 +56,7 @@ const CourseCard = ({ data, mode, cellNumber }) => {
                 dataType="courses"
               />
             </div>
+          ) : null}
         </div>
       )}
     </>

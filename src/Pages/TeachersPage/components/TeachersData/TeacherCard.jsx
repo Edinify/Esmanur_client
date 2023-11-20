@@ -1,16 +1,17 @@
 import { useState } from "react";
 import FuncComponent from "../../../../globalComponents/FuncComponent/FuncComponent";
+import { useSelector } from "react-redux";
 const TeacherCard = ({
   data,
   mode,
   cellNumber,
   setOpenMoreModal,
-  handleUpdate
+  handleUpdate,
 }) => {
-
   const [deleteModal, setDeleteModal] = useState(false);
-  const [arrowUp, setArrowUp] = useState(false);
-  let courses = Array.isArray(data.courses) && data.courses.length > 0
+  const { user } = useSelector((state) => state.user);
+  let courses =
+    Array.isArray(data.courses) && data.courses.length > 0
       ? data.courses
           .map((course) => {
             return course.name;
@@ -22,9 +23,9 @@ const TeacherCard = ({
     setDeleteModal(!deleteModal);
   };
   const openMoreModal = () => {
-    handleUpdate(data, 'more')
-    setOpenMoreModal(true)
-  }
+    handleUpdate(data, "more");
+    setOpenMoreModal(true);
+  };
 
   return (
     <>
@@ -55,52 +56,62 @@ const TeacherCard = ({
               <div className="right-fade"></div>
             </div>
           </td>
-          <td className="salary">{data.salary?.value } {data.salary.monthly===true ?"aylıq" :" saatlıq"}</td>
-          <td className="more" onClick={()=> openMoreModal()}>Ətraflı</td>
+          <td className="salary">
+            {data.salary?.value}{" "}
+            {data.salary.monthly === true ? "aylıq" : " saatlıq"}
+          </td>
+          <td className="more" onClick={() => openMoreModal()}>
+            Ətraflı
+          </td>
           <td>
-            <FuncComponent
-              handleDeleteModal={handleDeleteModal}
-              handleUpdate={handleUpdate}
-              data={data}
-              deleteModal={deleteModal}
-            />
+            {user.role === "super-admin" ? (
+              <FuncComponent
+                handleDeleteModal={handleDeleteModal}
+                handleUpdate={handleUpdate}
+                data={data}
+                deleteModal={deleteModal}
+              />
+            ) : null}
           </td>
         </tr>
       ) : (
-        <div className="content-box" >
-        <div className="left">
-        <h3>{data.fullName}</h3>
-        <ul>
-          <li>
-              <span className="type">Fənn:</span>
-              <p>{courses}</p>
-            </li>
-            <li>
-              <span className="type">Email:</span>
-              <p>{data.email ? data.email : "boş"}</p>
-           </li>
-            <li>
-              <span className="type">Telefon nömrəsi:</span>
-              <p>{data.phone ? data.phone : "boş"}</p>
-             </li>
-             <li>
-              <span className="type">Əmək haqqı:</span>
-              <p>{data.salary.value ? data.salary.value : "boş"} {data.salary.hourly === true ? "(saatlıq)" : "(aylıq)"}{" "}</p>
-             </li>
-          
-          </ul>
+        <div className="content-box">
+          <div className="left">
+            <h3>{data.fullName}</h3>
+            <ul>
+              <li>
+                <span className="type">Fənn:</span>
+                <p>{courses}</p>
+              </li>
+              <li>
+                <span className="type">Email:</span>
+                <p>{data.email ? data.email : "boş"}</p>
+              </li>
+              <li>
+                <span className="type">Telefon nömrəsi:</span>
+                <p>{data.phone ? data.phone : "boş"}</p>
+              </li>
+              <li>
+                <span className="type">Əmək haqqı:</span>
+                <p>
+                  {data.salary.value ? data.salary.value : "boş"}{" "}
+                  {data.salary.hourly === true ? "(saatlıq)" : "(aylıq)"}{" "}
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div className="right">
+            {user.role === "super-admin" ? (
+              <FuncComponent
+                handleDeleteModal={handleDeleteModal}
+                handleUpdate={handleUpdate}
+                data={data}
+                deleteModal={deleteModal}
+              />
+            ) : null}
+            <span onClick={() => openMoreModal()}>Ətraflı</span>
+          </div>
         </div>
-        <div className="right">
-            <FuncComponent
-            handleDeleteModal={handleDeleteModal}
-            handleUpdate={handleUpdate}
-             data={data}
-          deleteModal={deleteModal}
-            />
-         <span  onClick={()=> openMoreModal()}>Ətraflı</span>
-
-           </div>
-           </div>
       )}
     </>
   );

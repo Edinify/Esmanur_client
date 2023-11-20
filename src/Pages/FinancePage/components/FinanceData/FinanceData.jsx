@@ -4,9 +4,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getIncomePaginationAction } from "../../../../redux/actions/incomeActions";
 import { getExpensesPaginationAction } from "../../../../redux/actions/expensesAction";
-import { EXPENSES_ACTION_TYPE, INCOME_ACTION_TYPE } from "../../../../redux/actions-type";
+import { getFoodRationPaginationAction } from "../../../../redux/actions/foodRationAction";
+import {
+  EXPENSES_ACTION_TYPE,
+  INCOME_ACTION_TYPE,
+  FOOD_RATION_ACTION_TYPE
+} from "../../../../redux/actions-type";
 import IncomesData from "./IncomesData/IncomesData";
 import ExpensesData from "./ExpensesData/ExpensesData";
+import FoodRationData from "./FoodRation/FoodRation";
 
 const FinanceData = () => {
   const dispatch = useDispatch();
@@ -22,6 +28,9 @@ const FinanceData = () => {
   const { lastPage: incomesLastPage } = useSelector((state) => state.incomes);
   const { lastPage: expensesLastPage } = useSelector(
     (state) => state.expensesData
+  );
+  const { lastPage: foodRationLastPage } = useSelector(
+    (state) => state.foodRationData
   );
   const dataHead = [
     { id: 1, label: "Kateqoriya" },
@@ -195,10 +204,77 @@ const FinanceData = () => {
     );
   };
 
+  const getPageNumberFoodRation = (pageNumber) => {
+    if (financeChooseDate.startDate && financeChooseDate.endDate) {
+      dispatch({
+        type: FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_LAST_PAGE,
+        payload: pageNumber,
+      });
+      dispatch(
+        getFoodRationPaginationAction(
+          pageNumber,
+          financeChooseDate.startDate,
+          financeChooseDate.endDate,
+          "", //month
+          "food",
+          "oldest"
+        )
+      );
+    } else {
+      dispatch({
+        type: FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_LAST_PAGE,
+        payload: pageNumber,
+      });
+      dispatch(
+        getFoodRationPaginationAction(
+          pageNumber,
+          "",
+          "",
+          financeMonthsFilter ? financeMonthsFilter : 1, //month
+          "food",
+          "oldest"
+        )
+      );
+    }
+  };
+  const getDateFilteredFoodRation = (pageNumber) => {
+    dispatch({
+      type: FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_LAST_PAGE,
+      payload: pageNumber,
+    });
+    dispatch(
+      getFoodRationPaginationAction(
+        pageNumber,
+        financeChooseDate.startDate,
+        financeChooseDate.endDate,
+        "", //month
+        "food",
+        "oldest"
+      )
+    );
+  };
+  const getMonthFilteredFoodRation = (pageNumber) => {
+    dispatch({
+      type: FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_LAST_PAGE,
+      payload: pageNumber,
+    });
+    dispatch(
+      getFoodRationPaginationAction(
+        pageNumber,
+        "",
+        "",
+        financeMonthsFilter ? financeMonthsFilter : 1, //month
+        "food",
+        "oldest"
+      )
+    );
+  };
+
   useEffect(() => {
     if (financeChooseDate?.startDate && financeChooseDate?.endDate) {
       getDateFilteredIncomes(incomesLastPage);
       getDateFilteredExpenses(expensesLastPage);
+      getDateFilteredFoodRation(foodRationLastPage)
     }
   }, [financeChooseDate]);
 
@@ -206,11 +282,12 @@ const FinanceData = () => {
     if (financeMonthsFilter) {
       getMonthFilteredIncomes(incomesLastPage);
       getMonthFilteredExpenses(expensesLastPage);
+      getMonthFilteredFoodRation(foodRationLastPage)
     }
   }, [financeMonthsFilter]);
 
   useEffect(() => {
-    if(financeIncomeCategory || financeIncomeSorting) {
+    if (financeIncomeCategory || financeIncomeSorting) {
       getPageNumberIncomes(incomesLastPage);
     }
   }, [financeIncomeCategory, financeIncomeSorting]);
@@ -221,32 +298,39 @@ const FinanceData = () => {
     }
   }, [financeExpenseCategory, financeExpenseSorting]);
 
-  useEffect(() => {
-    // page,
-    // startDate,
-    // endDate,
-    // monthCount,
-    // category
-
-    dispatch(getIncomePaginationAction(1, "", "", 1, "", "oldest"));
-    dispatch(getExpensesPaginationAction(1, "", "", 1, "", "oldest"));
-  }, []);
+  // useEffect(() => {
+  //   // page,
+  //   // startDate,
+  //   // endDate,
+  //   // monthCount,
+  //   // category
+  //   dispatch(getIncomePaginationAction(1, "", "", 1, "", "oldest"));
+  //   dispatch(getExpensesPaginationAction(1, "", "", 1, "", "oldest"));
+  // }, []);
 
   // console.log('months: ', financeMonthsFilter);
   // console.log('date: ', financeChooseDate);
 
   return (
     <div>
-      {location.pathname === "/finance/incomes" ? (
+      {location.pathname === "/finance/incomes" && (
         <IncomesData
           getPageNumber={getPageNumberIncomes}
           page={"finance"}
           dataHead={dataHead}
         />
-      ) : (
+      )}
+      {location.pathname === "/finance/expenses" && (
         <ExpensesData
-          // expensesPageNum={expensesPageNum}
           getPageNumber={getPageNumberExpenses}
+          page={"finance"}
+          dataHead={dataHead}
+        />
+      )}
+
+      {location.pathname === "/finance/food-ration" && (
+        <FoodRationData
+          getPageNumber={getPageNumberFoodRation}
           page={"finance"}
           dataHead={dataHead}
         />

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, TextField } from "@mui/material";
 import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
-import { EXPENSES_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
+import { FOOD_RATİON_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
 import InputField from "./components/InputField/InputField";
 import SubmitBtn from "./components/SubmitBtn/SubmitBtn";
 import Category from "./components/InputDropdowns/Category";
-import DeleteExpensesModal from "../../FuncComponent/components/DeleteExpensesModal/DeleteExpensesModal";
+import DeleteFoodRationModal from "../../FuncComponent/components/DeleteFoodRationModal/DeleteFoodRationModal";
 export const FoodRationModal = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const inputNameArr = ["appointment", "amount","date"];
-  const { expensesModalData, expensesOpenModal } = useSelector(
-    (state) => state.expensesModal
+  const { foodRationModalData } = useSelector(
+    (state) => state.foodRationModal
   );
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -27,9 +29,9 @@ export const FoodRationModal = () => {
 
   const updateModalState = (keyName, value) => {
     dispatch({
-      type: EXPENSES_MODAL_ACTION_TYPE.GET_EXPENSES_MODAL,
+      type: FOOD_RATİON_MODAL_ACTION_TYPE.GET_FOOD_RATİON_MODAL,
       payload: {
-        data: { ...expensesModalData, [keyName]: value },
+        data: { ...foodRationModalData, [keyName]: value },
         openModal: true,
       },
     });
@@ -40,7 +42,7 @@ export const FoodRationModal = () => {
 
   const closeModal = () => {
     dispatch({
-      type: EXPENSES_MODAL_ACTION_TYPE.GET_EXPENSES_MODAL,
+      type: FOOD_RATİON_MODAL_ACTION_TYPE.GET_FOOD_RATİON_MODAL,
       payload: { data: {}, openModal: false },
     });
   };
@@ -56,14 +58,18 @@ export const FoodRationModal = () => {
 //  console.log('food');
 
   useEffect(() => {
-    if (expensesModalData?._id) {
-      if (expensesModalData.category) {
+    if (foodRationModalData?._id) {
+      if (foodRationModalData.category) {
         setSelectedCategory({
           name: selectedCategoryList.filter(
-            (item) => item.key === expensesModalData.category
+            (item) => item.key === foodRationModalData.category
           )[0]?.name,
         });
       }
+    }
+    else if (location.pathname === "/finance/food-ration") {
+      updateModalState("category", 'food');
+      setSelectedCategory({name:'Qida'})
     }
   }, []);
 
@@ -73,7 +79,7 @@ export const FoodRationModal = () => {
       <div className="create-update-modal">
         <div className="create-update-modal-head">
           <h2>
-            {expensesModalData?._id ? "Məhsulu yenilə" : "Məhsul yaradın"}
+            {foodRationModalData?._id ? "Məhsulu yenilə" : "Məhsul yaradın"}
           </h2>
           <CloseBtn onClick={closeModal} />
         </div>
@@ -100,24 +106,24 @@ export const FoodRationModal = () => {
               <InputField
                 key={index}
                 inputName={name}
-                expensesModalData={expensesModalData}
+                foodRationModalData={foodRationModalData}
                 updateModalState={updateModalState}
               />
             ))}
           </div>
         </Box>
 
-        {expensesModalData?._id ? (
+        {foodRationModalData?._id ? (
           <SubmitBtn
             funcType="update"
-            expensesModalData={expensesModalData}
+            foodRationModalData={foodRationModalData}
             closeModal={closeModal}
             setDeleteModal={setDeleteModal}
           />
         ) : (
           <SubmitBtn
             funcType="create"
-            expensesModalData={expensesModalData}
+            foodRationModalData={foodRationModalData}
             closeModal={closeModal}
             setDeleteModal={setDeleteModal}
 
@@ -125,7 +131,7 @@ export const FoodRationModal = () => {
         )}
         {
           deleteModal &&(
-            <DeleteExpensesModal type="expenses" expensesModalData={expensesModalData} deleteMod={handleDeleteModal} />
+            <DeleteFoodRationModal type="expenses" foodRationModalData={foodRationModalData} deleteMod={handleDeleteModal} />
           )
         }
       </div>

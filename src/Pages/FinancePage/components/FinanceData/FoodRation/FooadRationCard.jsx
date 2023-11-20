@@ -2,20 +2,20 @@ import { useState, React } from "react";
 import FuncComponent from "../../../../../globalComponents/FuncComponent/FuncComponent";
 import moment from "moment";
 import { useDispatch } from "react-redux";
-import { EXPENSES_MODAL_ACTION_TYPE } from "../../../../../redux/actions-type";
+import { FOOD_RATİON_MODAL_ACTION_TYPE } from "../../../../../redux/actions-type";
 
 const FoodRationCard = ({ data, mode, cellNumber, page }) => {
   const dispatch = useDispatch();
-  const [deleteExpensesModal, setDeleteExpensesModal] = useState(false);
+  const [deleteFoodRationModal, setDeleteFoodRationModal] = useState(false);
   const [arrowUp, setArrowUp] = useState(false);
 
   const handleDeleteModal = () => {
-    setDeleteExpensesModal(!deleteExpensesModal);
+    setDeleteFoodRationModal(!deleteFoodRationModal);
   };
   const handleUpdate = (data) => {
     const { category, amount, _id, appointment, date } = data;
     dispatch({
-      type: EXPENSES_MODAL_ACTION_TYPE.GET_EXPENSES_MODAL,
+      type: FOOD_RATİON_MODAL_ACTION_TYPE.GET_FOOD_RATİON_MODAL,
       payload: {
         data: {
           category,
@@ -75,7 +75,7 @@ const FoodRationCard = ({ data, mode, cellNumber, page }) => {
               handleDeleteModal={handleDeleteModal}
               handleUpdate={handleUpdate}
               data={data}
-              deleteExpensesModal={deleteExpensesModal}
+              deleteFoodRationModal={deleteFoodRationModal}
               dataType="expenses"
             />
           </td>
@@ -115,7 +115,7 @@ const FoodRationCard = ({ data, mode, cellNumber, page }) => {
               handleDeleteModal={handleDeleteModal}
               handleUpdate={handleUpdate}
               data={data}
-              deleteExpensesModal={deleteExpensesModal}
+              deleteFoodRationModal={deleteFoodRationModal}
               dataType="expenses"
             />
           </div>

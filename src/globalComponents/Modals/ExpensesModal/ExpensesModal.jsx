@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, TextField } from "@mui/material";
 import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
@@ -9,6 +10,7 @@ import Category from "./components/InputDropdowns/Category";
 import DeleteExpensesModal from "../../FuncComponent/components/DeleteExpensesModal/DeleteExpensesModal";
 export const ExpensesModal = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
   const inputNameArr = ["appointment", "amount","date"];
   const { expensesModalData, expensesOpenModal } = useSelector(
     (state) => state.expensesModal
@@ -45,7 +47,9 @@ export const ExpensesModal = () => {
     });
   };
   const categoryDropdown = () => {
-    setCategoryOpen(!categoryOpen);
+    if(location.pathname !== "/finance/food-ration") {
+      setCategoryOpen(!categoryOpen);
+    }
   };
   const categoryAddData = (item) => {
     updateModalState("category", item.key);
@@ -64,9 +68,11 @@ export const ExpensesModal = () => {
           )[0]?.name,
         });
       }
+    } else if (location.pathname === "/finance/food-ration") {
+      updateModalState("category", 'food');
+      setSelectedCategory({name:'Qida'})
     }
   }, []);
-
 
   return (
     <div className="create-update-modal-con">
@@ -95,6 +101,7 @@ export const ExpensesModal = () => {
               categoryOpen={categoryOpen}
               selectedCategoryList={selectedCategoryList}
               categoryAddData={categoryAddData}
+              location={location}
             />
             {inputNameArr.map((name, index) => (
               <InputField

@@ -1,7 +1,7 @@
 import axios from "axios";
 import {
-  EXPENSES_ACTION_TYPE,
-  EXPENSES_MODAL_ACTION_TYPE,
+  FOOD_RATION_ACTION_TYPE,
+  FOOD_RATİON_MODAL_ACTION_TYPE,
 } from "../actions-type";
 import { toast } from "react-toastify";
 import { logoutAction } from "./auth";
@@ -41,20 +41,20 @@ const toastSuccess = (message) => {
   });
 };
 
-export const setLoadingExpensesAction = (loadingValue) => ({
-  type: EXPENSES_ACTION_TYPE.EXPENSES_LOADING,
+export const setLoadingFoodRationAction = (loadingValue) => ({
+  type: FOOD_RATION_ACTION_TYPE.FOOD_RATION_LOADING,
   payload: loadingValue,
 });
 
-const expensesModalLoading = (loadingValue) => ({
-  type: EXPENSES_MODAL_ACTION_TYPE.EXPENSES_MODAL_LOADING,
+const foodRationModalLoading = (loadingValue) => ({
+  type: FOOD_RATİON_MODAL_ACTION_TYPE.FOOD_RATİON_MODAL_LOADING,
   payload: loadingValue,
 });
 
-export const getExpensesPaginationAction =
+export const getFoodRationPaginationAction =
   (page = 1, startDate, endDate, monthCount, category, sort) =>
   async (dispatch) => {
-    dispatch(setLoadingExpensesAction(true));
+    dispatch(setLoadingFoodRationAction(true));
     // console.log(page, startDate, endDate, monthCount, category, sort);
     try {
       const { data } = await API.get(
@@ -67,11 +67,11 @@ export const getExpensesPaginationAction =
       // console.log(data,"get")
 
       dispatch({
-        type: EXPENSES_ACTION_TYPE.GET_EXPENSES_LAST_PAGE,
+        type: FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_LAST_PAGE,
         payload: page,
       });
       dispatch({
-        type: EXPENSES_ACTION_TYPE.GET_EXPENSES_PAGINATION,
+        type: FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_PAGINATION,
         payload: data,
       });
     } catch (error) {
@@ -97,11 +97,11 @@ export const getExpensesPaginationAction =
           );
 
           dispatch({
-            type: EXPENSES_ACTION_TYPE.GET_EXPENSES_LAST_PAGE,
+            type: FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_LAST_PAGE,
             payload: page,
           });
           dispatch({
-            type: EXPENSES_ACTION_TYPE.GET_EXPENSES_PAGINATION,
+            type: FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_PAGINATION,
             payload: data,
           });
         } catch (error) {
@@ -112,28 +112,20 @@ export const getExpensesPaginationAction =
         }
       }
     } finally {
-      dispatch(setLoadingExpensesAction(false));
+      dispatch(setLoadingFoodRationAction(false));
     }
   };
 
-export const createExpensesAction = (expensesData) => async (dispatch) => {
-  dispatch(expensesModalLoading(true));
+export const createFoodRationAction = (expensesData) => async (dispatch) => {
+  dispatch(foodRationModalLoading(true));
   try {
     const { data } = await API.post("/", expensesData);
-    if (window.location.pathname ===  "/finance/food-ration") {
       dispatch(
-        getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
+        getFoodRationPaginationAction(data.lastPage, "", "", 1, "food", "oldest")
       );
-    } else {
-      dispatch(
-        getExpensesPaginationAction(data.lastPage, "", "", 1, "", "oldest")
-      );
-    }
-   
-
     // console.log(data);
     dispatch({
-      type: EXPENSES_MODAL_ACTION_TYPE.EXPENSES_OPEN_MODAL,
+      type: FOOD_RATİON_MODAL_ACTION_TYPE.FOOD_RATİON_OPEN_MODAL,
       payload: false,
     });
     toastSuccess("Yeni məhsul əlavə edildi");
@@ -151,18 +143,11 @@ export const createExpensesAction = (expensesData) => async (dispatch) => {
         );
 
         const { data } = await API.post("/", expensesData);
-        console.log(data, "xeeeerc");
-        if (window.location.pathname ===  "/finance/food-ration") {
           dispatch(
-            getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
+            getFoodRationPaginationAction(data.lastPage, "", "", 1, "food", "oldest")
           );
-        } else {
-          dispatch(
-            getExpensesPaginationAction(data.lastPage, "", "", 1, "", "oldest")
-          );
-        }
         dispatch({
-          type: EXPENSES_MODAL_ACTION_TYPE.EXPENSES_OPEN_MODAL,
+          type: FOOD_RATİON_MODAL_ACTION_TYPE.FOOD_RATİON_OPEN_MODAL,
           payload: false,
         });
         toastSuccess("Yeni məhsul əlavə edildi");
@@ -174,17 +159,17 @@ export const createExpensesAction = (expensesData) => async (dispatch) => {
       }
     }
   } finally {
-    dispatch(expensesModalLoading(false));
+    dispatch(foodRationModalLoading(false));
   }
 };
 
-export const updateExpensesAction = (_id, expensesData) => async (dispatch) => {
-  dispatch(expensesModalLoading(true));
+export const updateFoodRationAction = (_id, expensesData) => async (dispatch) => {
+  dispatch(foodRationModalLoading(true));
   try {
     const { data } = await API.patch(`/${_id}`, expensesData);
-    dispatch({ type: EXPENSES_ACTION_TYPE.UPDATE_EXPENSES, payload: data });
+    dispatch({ type: FOOD_RATION_ACTION_TYPE.UPDATE_FOOD_RATION, payload: data });
     dispatch({
-      type: EXPENSES_MODAL_ACTION_TYPE.EXPENSES_OPEN_MODAL,
+      type: FOOD_RATİON_MODAL_ACTION_TYPE.FOOD_RATİON_OPEN_MODAL,
       payload: false,
     });
     toastSuccess("Məhsul yeniləndi");
@@ -201,9 +186,9 @@ export const updateExpensesAction = (_id, expensesData) => async (dispatch) => {
           })
         );
         const { data } = await API.patch(`/${_id}`, expensesData);
-        dispatch({ type: EXPENSES_ACTION_TYPE.UPDATE_EXPENSES, payload: data });
+        dispatch({ type: FOOD_RATION_ACTION_TYPE.UPDATE_FOOD_RATION, payload: data });
         dispatch({
-          type: EXPENSES_MODAL_ACTION_TYPE.EXPENSES_OPEN_MODAL,
+          type: FOOD_RATİON_MODAL_ACTION_TYPE.FOOD_RATİON_OPEN_MODAL,
           payload: false,
         });
         toastSuccess("Məhsul yeniləndi");
@@ -215,21 +200,21 @@ export const updateExpensesAction = (_id, expensesData) => async (dispatch) => {
       }
     }
   } finally {
-    dispatch(expensesModalLoading(false));
+    dispatch(foodRationModalLoading(false));
   }
 };
 
-export const deleteExpensesAction = (_id) => async (dispatch) => {
+export const deleteFoodRationAction = (_id) => async (dispatch) => {
   try {
     await API.delete(`/${_id}`);
-    dispatch({ type: EXPENSES_ACTION_TYPE.DELETE_EXPENSES, payload: _id });
+    dispatch({ type: FOOD_RATION_ACTION_TYPE.DELETE_FOOD_RATION, payload: _id });
     if (window.location.pathname ===  "/finance/food-ration") {
       dispatch(
-        getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
+        getFoodRationPaginationAction(1, "", "", 1, "food", "oldest")
       );
     } else {
       dispatch(
-        getExpensesPaginationAction(1, "", "", 1, "", "oldest")
+        getFoodRationPaginationAction(1, "", "", 1, "", "oldest")
       );
     }
     toastSuccess("Məhsul silindi");
@@ -247,14 +232,14 @@ export const deleteExpensesAction = (_id) => async (dispatch) => {
         );
 
         await API.delete(`/${_id}`);
-        dispatch({ type: EXPENSES_ACTION_TYPE.DELETE_EXPENSES, payload: _id });
+        dispatch({ type: FOOD_RATION_ACTION_TYPE.DELETE_FOOD_RATION, payload: _id });
         if (window.location.pathname ===  "/finance/food-ration") {
           dispatch(
-            getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
+            getFoodRationPaginationAction(1, "", "", 1, "food", "oldest")
           );
         } else {
           dispatch(
-            getExpensesPaginationAction(1, "", "", 1, "", "oldest")
+            getFoodRationPaginationAction(1, "", "", 1, "", "oldest")
           );
         }
         toastSuccess("Məhsul silindi");

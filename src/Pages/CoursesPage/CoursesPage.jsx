@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SHOWNAV_ACTION_TYPE, COURSES_MODAL_ACTION_TYPE } from "../../redux/actions-type";
+import { COURSES_MODAL_ACTION_TYPE } from "../../redux/actions-type";
 import { getCoursesPaginationAction } from "../../redux/actions/coursesActions";
 import CoursesData from "./components/CoursesData/CoursesData";
 import GlobalHead from "../../globalComponents/GlobalHead/GlobalHead";

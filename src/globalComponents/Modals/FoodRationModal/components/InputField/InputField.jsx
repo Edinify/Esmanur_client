@@ -3,7 +3,7 @@ import moment from "moment";
 import { useState } from "react";
 
 export default function InputField({
-  expensesModalData,
+  foodRationModalData,
   inputName,
   updateModalState,
 }) {
@@ -15,7 +15,7 @@ export default function InputField({
       type: "text",
       marginTop: "20px",
       marginBottom: "0",
-      inputValue: expensesModalData[inputName] || "",
+      inputValue: foodRationModalData[inputName] || "",
     },
     {
       inputName: "appointment",
@@ -23,7 +23,7 @@ export default function InputField({
       type: "string",
       marginTop: "0",
       marginBottom: "0",
-      inputValue: expensesModalData[inputName] || "",
+      inputValue: foodRationModalData[inputName] || "",
     },
     {
       inputName: "amount",
@@ -31,7 +31,7 @@ export default function InputField({
       type: "number",
       marginTop: "20px",
       marginBottom: "0",
-      inputValue: expensesModalData[inputName] || "",
+      inputValue: foodRationModalData[inputName] || "",
     },
     {
       inputName: "date",
@@ -39,8 +39,8 @@ export default function InputField({
       type: "date",
       marginTop: "20px",
       marginBottom: "0",
-      inputValue: (expensesModalData[inputName] && inputName === "date")
-        ? moment(expensesModalData[inputName]).format("YYYY-MM-DD")
+      inputValue: (foodRationModalData[inputName] && inputName === "date")
+        ? moment(foodRationModalData[inputName]).format("YYYY-MM-DD")
         : "",
     },
   ];

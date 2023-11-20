@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeachersPaginationAction } from "../../redux/actions/teachersActions";
-import { SHOWNAV_ACTION_TYPE, TEACHERS_MODAL_ACTION_TYPE} from "../../redux/actions-type";
+import { TEACHERS_MODAL_ACTION_TYPE} from "../../redux/actions-type";
 import TeachersData from "./components/TeachersData/TeachersData";
 import GlobalHead from "../../globalComponents/GlobalHead/GlobalHead";
 import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunctions";
@@ -76,7 +76,7 @@ const TeachersPage = () => {
       openModal={openModal} 
       DATA_SEARCH_VALUE={'TEACHERS_SEARCH_VALUE'} 
       dataSearchValues={teachersSearchValues}
-      statusType='teacher'
+      statusType='course teacher'
       />
       <TeachersData teacherPageNum={teacherPageNum} getPageNumber={getPageNumber} />
     </div>

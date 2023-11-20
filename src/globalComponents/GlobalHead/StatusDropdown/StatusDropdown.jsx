@@ -23,7 +23,7 @@ export const StatusDropdown = ({ statusType, deviceType = '' }) => {
   const getCategory = (categoryType) => {
     setSelectedType(categoryType.name);
     setDropdownOpen(false);
-    if (statusType === "teacher") {
+    if (statusType === "course teacher") {
       dispatch({
         type: TEACHER_STATUS_FILTER_ACTION_TYPE.GET_TEACHER_STATUS,
         payload: categoryType.key,
@@ -53,7 +53,7 @@ export const StatusDropdown = ({ statusType, deviceType = '' }) => {
       </div>
 
       <div className="dropdown-body">
-        {statusType === "teacher" ? (
+        {statusType === "course teacher" ? (
           <ul>
             {StatusFilter.map((item) => (
               <li key={item.key} onClick={() => getCategory(item)}>

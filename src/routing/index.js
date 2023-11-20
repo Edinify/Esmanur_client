@@ -9,6 +9,7 @@ import NotFoundPage from "../Pages/NotFoundPage/NotFoundPage";
 import Sidebar from "../Layout/Sidebar/Sidebar";
 import SuperAdminPanelRoute from "./SuperAdminPanelRoute";
 import AdminPanelRoute from "./AdminPanelRoute";
+import BranchesPage from "../Pages/BranchesPage/BranchesPage";
 
 export const Routing = () => {
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ export const Routing = () => {
 
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/branches" element={<BranchesPage />} />
           <Route path="*" element={<NotFoundPage setNotFound={setNotFound} />}/>
 
           {LoginRoute()}

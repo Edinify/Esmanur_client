@@ -22,9 +22,9 @@ const SuperAdminNav = ({ setOpenMenu }) => {
       </NavLink>
 
       <NavLink
-       onClick={(e) => {
-        setOpenMenu(true);
-      }}
+        onClick={(e) => {
+          setOpenMenu(true);
+        }}
         to="/"
         className={isActiveRoute(location.pathname) ? "active" : ""}
       >
@@ -32,63 +32,77 @@ const SuperAdminNav = ({ setOpenMenu }) => {
         Davamiyyət{" "}
       </NavLink>
       <NavLink
-       onClick={(e) => {
-        setOpenMenu(true);
-      }}
+        onClick={(e) => {
+          setOpenMenu(true);
+        }}
         to="/courses"
         className={({ isActive }) => (isActive ? "active" : "")}
       >
         Fənlər
       </NavLink>
       <NavLink
-       onClick={(e) => {
-        setOpenMenu(true);
-      }}
-        to="/teachers"
+        onClick={(e) => {
+          setOpenMenu(true);
+        }}
+        to="/course-teachers"
         className={({ isActive }) => (isActive ? "active" : "")}
       >
-        Müəllimlər
+        Fənn Müəllimləri
       </NavLink>
       <NavLink
-       onClick={(e) => {
-        setOpenMenu(true);
-      }}
+        onClick={() => setOpenMenu(true)}
+        to="/kindergarten-teachers"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        Bağça Müəllimləri
+      </NavLink>
+      <NavLink
+        onClick={() => setOpenMenu(true)}
+        to="/babysitters"
+        className={({ isActive }) => (isActive ? "active" : "")}
+      >
+        Dayələr
+      </NavLink>
+      <NavLink
+        onClick={(e) => {
+          setOpenMenu(true);
+        }}
         to="/students"
         className={({ isActive }) => (isActive ? "active" : "")}
       >
         Tələbələr
       </NavLink>
       <NavLink
-       onClick={(e) => {
-        setOpenMenu(true);
-      }}
+        onClick={(e) => {
+          setOpenMenu(true);
+        }}
         to="/table"
         className={({ isActive }) => (isActive ? "active" : "")}
       >
         Cədvəl
       </NavLink>
       <NavLink
-       onClick={(e) => {
-        setOpenMenu(true);
-      }}
+        onClick={(e) => {
+          setOpenMenu(true);
+        }}
         to="/salary"
         className={({ isActive }) => (isActive ? "active" : "")}
       >
         Əmək haqqı
       </NavLink>
       <NavLink
-       onClick={(e) => {
-        setOpenMenu(true);
-      }}
+        onClick={(e) => {
+          setOpenMenu(true);
+        }}
         to="/expenses"
         className={({ isActive }) => (isActive ? "active" : "")}
       >
         Xərclər
       </NavLink>
       <NavLink
-       onClick={(e) => {
-        setOpenMenu(true);
-      }}
+        onClick={(e) => {
+          setOpenMenu(true);
+        }}
         to="/incomes"
         className={({ isActive }) => (isActive ? "active" : "")}
       >

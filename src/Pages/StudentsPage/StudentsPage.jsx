@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudentsPaginationAction } from "../../redux/actions/studentsActions";
-import { SHOWNAV_ACTION_TYPE, STUDENTS_MODAL_ACTION_TYPE} from "../../redux/actions-type";
+import { STUDENTS_MODAL_ACTION_TYPE} from "../../redux/actions-type";
 import StudentsData from "./components/StudentsData/StudentsData";
 import GlobalHead from "../../globalComponents/GlobalHead/GlobalHead";
 import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunctions";

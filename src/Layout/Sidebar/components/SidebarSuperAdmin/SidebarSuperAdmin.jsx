@@ -7,7 +7,7 @@ import { ReactComponent as StudentsIcon } from "../../../../assets/icons/student
 import { ReactComponent as SalaryIcon } from "../../../../assets/icons/salaryIcon.svg";
 import { ReactComponent as ExpensesIcon } from "../../../../assets/icons/expensenIcon.svg";
 import { ReactComponent as IncomesIcon } from "../../../../assets/icons/incomesIcon.svg";
-import {ReactComponent as AdminIcon} from "../../../../assets/icons/sidebar/users-01.svg"
+import { ReactComponent as AdminIcon } from "../../../../assets/icons/sidebar/users-01.svg";
 
 const SidebarSuperAdmin = ({ closeSidebar }) => {
   const location = useLocation();
@@ -21,8 +21,11 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
     return stimulationNav.includes(route);
   };
 
-
-  const financeNav = ["/finance/incomes", "/finance/expenses","/finance/food-ration" ];
+  const financeNav = [
+    "/finance/incomes",
+    "/finance/expenses",
+    "/finance/food-ration",
+  ];
 
   const isFinanceRoute = (route) => {
     return financeNav.includes(route);
@@ -31,6 +34,28 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
   return (
     <ul className="sidebar-nav-list">
       <li>
+        <NavLink to="/students" onClick={closeSidebar}>
+          <StudentsIcon />
+          Tələbələr
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/teachers" onClick={closeSidebar}>
+          <TeachersIcon />
+          Müəllimlər
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/finance/incomes"
+          onClick={closeSidebar}
+          className={isFinanceRoute(location.pathname) ? "active" : ""}
+        >
+          <ExpensesIcon />
+          Maliyyə
+        </NavLink>
+      </li>
+      {/* <li>
         <NavLink to="/dashboard" onClick={closeSidebar}>
           <DashboardIcon />
           İdarəetmə paneli
@@ -43,43 +68,9 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/course-teachers" onClick={closeSidebar}>
-          <TeachersIcon />
-          Fənn Müəllimləri
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/kindergarten-teachers" onClick={closeSidebar}>
-          <TeachersIcon />
-          Bağça Müəllimləri
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/babysitters" onClick={closeSidebar}>
-          <TeachersIcon />
-          Dayələr
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/students" onClick={closeSidebar}>
-          <StudentsIcon />
-          Tələbələr
-        </NavLink>
-      </li>
-      <li>
         <NavLink to="/salary" onClick={closeSidebar}>
           <SalaryIcon />
           Əmək haqqı
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/finance/incomes"
-          onClick={closeSidebar}
-          className={isFinanceRoute(location.pathname) ? "active" : ""}
-        >
-          <ExpensesIcon />
-          Maliyyə
         </NavLink>
       </li>
       <li>
@@ -95,11 +86,11 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
         </NavLink>
       </li>
       <li>
-        <NavLink to="/admins" onClick={closeSidebar} className='admin'>
+        <NavLink to="/admins" onClick={closeSidebar} className="admin">
           <AdminIcon />
           Admin
         </NavLink>
-      </li>
+      </li> */}
     </ul>
   );
 };

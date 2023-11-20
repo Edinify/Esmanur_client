@@ -8,7 +8,6 @@ import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunc
 
 const StudentsPage = () => {
   const dispatch = useDispatch();
-  const { changeShowNav } = useCustomHook();
   const { lastPage } = useSelector(state=>state.studentsPagination)
   const {studentSearchValues} = useSelector(state=>state.searchValues);
   const [studentPageNum, setStudentPageNum] = useState(1);
@@ -44,11 +43,6 @@ const StudentsPage = () => {
     } else {
       dispatch(getStudentsPaginationAction(1,"","all"));
     }
-    
-    changeShowNav(false)
-    return () => {
-      changeShowNav(true)
-    };
   }, [dispatch]);
   useEffect(() => {
     if(lastPage) {

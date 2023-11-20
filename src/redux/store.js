@@ -8,7 +8,6 @@ import notificationsReducer from "./reducers/notificationsReducer";
 import { dropdownReducer } from "./reducers/dropdownReducer";
 import { dropdownNameErrReducer } from "./reducers/dropdownNameErrReducer";
 import { userReducer } from "./reducers/userReducer";
-import { shownavReducer } from "./reducers/shownavReducer";
 import { paginationPageNumberReducer } from "./reducers/paginationPageNumberReducer";
 import { teacherPaginationReducer } from "./reducers/teachersPaginationReducer";
 import { adminPaginationReducer } from "./reducers/adminsPaginationReducer";
@@ -43,6 +42,7 @@ import { financeReducer } from "./reducers/financeReducer";
 import { teacherStatusReducer } from "./reducers/teacherStatusReducer";
 import { studentStatusReducer } from "./reducers/studentStatusReducer";
 import { branchesReducer } from "./reducers/branchesReducer";
+import { teachersCategoryReducer } from "./reducers/teachersCatergoryReducer";
 
 const initialState={};
 const reducers = combineReducers({
@@ -58,7 +58,6 @@ notifications:notificationsReducer,
 dropdownName:dropdownReducer,
 dropdownNameError:dropdownNameErrReducer,
 user:userReducer,
-show:shownavReducer,
 pageNumber:paginationPageNumberReducer,
 searchValues:searchValuesReducer,
 dashboardData:dashBoardreducer,
@@ -88,6 +87,7 @@ teacherBonus:teacherBonusReducer,
 teacherStatus:teacherStatusReducer,
 studentStatus:studentStatusReducer,
 branchesData: branchesReducer,
+teachersCategory: teachersCategoryReducer,
 })
 // test
 

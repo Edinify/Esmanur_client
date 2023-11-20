@@ -9,7 +9,6 @@ const NotFoundPage = ({setNotFound}) => {
   const {user} = useSelector(state=>state.user);
   const dispatch = useDispatch()
   const navigate = useNavigate();
-  const { changeShowNav } = useCustomHook();
   const handleNav=()=>{
     if(user.role==="admin"){
       navigate("/")
@@ -25,13 +24,6 @@ const NotFoundPage = ({setNotFound}) => {
     }
   }
 
-  useEffect(() => {
-    changeShowNav(false)
-    return () => {
-      changeShowNav(true)
-    };
-  }, [dispatch]);
-  
   useEffect(()=>{
     setNotFound(true);
     return ()=>{

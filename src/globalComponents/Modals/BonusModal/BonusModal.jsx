@@ -147,7 +147,6 @@ export const BonusModal = () => {
       </div>
       {deleteModal && (
         <DeleteBonusModal
-          type="bonus"
           bonusModalData={bonusModalData}
           deleteMod={handleDeleteModal}
         />

@@ -13,7 +13,6 @@ import { useCustomHook } from "../../../../globalComponents/GlobalFunctions/glob
 export const ChangePass = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { changeShowNav } = useCustomHook();
   const [view, setView] = useState(true);
   const [passView, setPassView] = useState(true);
   const forgetPassword = useSelector(state=>state.forgetPassword);
@@ -75,12 +74,7 @@ export const ChangePass = () => {
   
   };
   
-  useEffect(() => {
-    changeShowNav(true)
-    return () => {
-      changeShowNav(false)
-    };
-  }, [dispatch]);
+
  
   return (
     <div className="login">

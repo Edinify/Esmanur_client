@@ -5,7 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import {
   INCOMES_MODAL_ACTION_TYPE,
   EXPENSES_MODAL_ACTION_TYPE,
-  FOOD_RATİON_MODAL_ACTION_TYPE,
+  FOOD_RATION_MODAL_ACTION_TYPE,
 } from "../../../../redux/actions-type";
 import { ReactComponent as PlusIcon } from "../../../../assets/icons/finance/Plus.svg";
 import FinanceDropdown from "./FinanceDropdown";
@@ -27,7 +27,7 @@ const FinanceDataHead = () => {
   };
   const openFoodRationModal = () => {
     dispatch({
-      type: FOOD_RATİON_MODAL_ACTION_TYPE.GET_FOOD_RATİON_MODAL,
+      type: FOOD_RATION_MODAL_ACTION_TYPE.GET_FOOD_RATION_MODAL,
       payload: { data: {}, openModal: true },
     });
   };

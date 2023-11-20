@@ -132,7 +132,7 @@ export const ExpensesModal = () => {
         )}
         {
           deleteModal &&(
-            <DeleteExpensesModal type="expenses" expensesModalData={expensesModalData} deleteMod={handleDeleteModal} />
+            <DeleteExpensesModal expensesModalData={expensesModalData} deleteMod={handleDeleteModal} />
           )
         }
       </div>

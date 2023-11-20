@@ -54,9 +54,6 @@ export function useCustomHook() {
     },
   ];
 
-  const changeShowNav = (value) => {
-    dispatch({ type: SHOWNAV_ACTION_TYPE.SHOW, payload: value });
-  }
   const changeDropdownNameErr = (value) => {
     dispatch({type:DROPDOWN_ERROR_TYPE.GET_DROPDOWN_ERROR,payload:value})
   }
@@ -84,7 +81,6 @@ export function useCustomHook() {
     endWeek,
     lessonHours,
     weeksArr,
-    changeShowNav,
     changeDropdownNameErr,
     getFinanceDataAfterCreate
   };

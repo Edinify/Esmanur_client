@@ -92,19 +92,19 @@ const FuncComponent = ({
         <DeleteStudentModal data={data} deleteMod={handleDeleteModal} />
       )}
       {deleteExpensesModal && (
-        <DeleteExpensesModal data={data} deleteMod={handleDeleteModal} />
+        <DeleteExpensesModal data={data} deleteMod={handleDeleteModal} type={'out-modal'}/>
       )}
       {deleteFoodRationModal && (
-        <DeleteFoodRationModal data={data} deleteMod={handleDeleteModal} />
+        <DeleteFoodRationModal data={data} deleteMod={handleDeleteModal} type={'out-modal'}/>
       )}
       {deleteIncomesModal && (
-        <DeleteIncomesModal data={data} deleteMod={handleDeleteModal} />
+        <DeleteIncomesModal data={data} deleteMod={handleDeleteModal} type={'out-modal'}/>
       )}
       {deleteBonusModal && (
-        <DeleteBonusModal data={data} deleteMod={handleDeleteModal} />
+        <DeleteBonusModal data={data} deleteMod={handleDeleteModal} type={'out-modal'}/>
       )}
       {deleteFineModal && (
-        <DeleteFineModal data={data} deleteMod={handleDeleteModal} />
+        <DeleteFineModal data={data} deleteMod={handleDeleteModal} type={'out-modal'}/>
       )}
     </div>
   );

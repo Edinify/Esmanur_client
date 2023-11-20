@@ -12,7 +12,6 @@ const AdminsPage = () => {
   const { lastPage } = useSelector((state) => state.adminsPagination);
   const { adminsSearchValues } = useSelector((state) => state.searchValues);
   const [adminPageNum, setAdminPageNum] = useState(1);
-  const { changeShowNav } = useCustomHook();
 
   const getPageNumber = (pageNumber) => {
     setAdminPageNum(pageNumber);
@@ -40,11 +39,6 @@ const AdminsPage = () => {
     } else {
       dispatch(getAdminsAction());
     }
-
-    changeShowNav(false)
-    return () => {
-      changeShowNav(true)
-    };
   }, [dispatch]);
   
   useEffect(() => {

@@ -9,7 +9,6 @@ import NotFoundPage from "../Pages/NotFoundPage/NotFoundPage";
 import Sidebar from "../Layout/Sidebar/Sidebar";
 import SuperAdminPanelRoute from "./SuperAdminPanelRoute";
 import AdminPanelRoute from "./AdminPanelRoute";
-import BranchesPage from "../Pages/BranchesPage/BranchesPage";
 
 export const Routing = () => {
   const dispatch = useDispatch();
@@ -30,13 +29,13 @@ export const Routing = () => {
       }
       if (user.role === "super-admin" && !notFound) {
         if (location.pathname.startsWith("/login")) {
-          navigate("/dashboard");
+          navigate("/branches");
         } else {
           return () => {};
         }
       } else if (user.role === "admin" && !notFound) {
         if (location.pathname.startsWith("/login")) {
-          navigate("/courses");
+          navigate("/students");
         } else {
           return () => {};
         }
@@ -54,19 +53,18 @@ export const Routing = () => {
     }
   }, [auth, user, forgetPassword]);
 
- 
+
 
 
   return (
-    // <div className={userData ? "main-container" : ""}>
-          <div className={""}>
-      {/* {userData && <Sidebar />} */}
+    <div className={userData ? "main-container" : ""}>
+        {/* <div className={""}> */}
+      {userData && <Sidebar />}
       <div className="left">
         {userData && <Header />}
 
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/branches" element={<BranchesPage />} />
           <Route path="*" element={<NotFoundPage setNotFound={setNotFound} />}/>
 
           {LoginRoute()}

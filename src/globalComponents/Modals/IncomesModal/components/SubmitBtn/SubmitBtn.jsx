@@ -6,10 +6,6 @@ import {
   updateIncomesAction,
 } from "../../../../../redux/actions/incomeActions";
 import LoadingBtn from "../../../../Loading/components/LoadingBtn/LoadingBtn";
-import { FINANCE_FILTER_ACTION_TYPE } from "../../../../../redux/actions-type";
-import { getFinanceDataAction } from "../../../../../redux/actions/financeAction";
-import { getFinanceChartAction } from "../../../../../redux/actions/financeAction";
-import moment from "moment";
 import { useCustomHook } from "../../../../../globalComponents/GlobalFunctions/globalFunctions";
 
 export default function SubmitBtn({
@@ -20,10 +16,9 @@ export default function SubmitBtn({
 }) {
   const dispatch = useDispatch();
   const { incomesModalLoading } = useSelector((state) => state.incomesModal);
-  const { financeMonthsFilter, financeChooseDate } = useSelector(
-    (state) => state.financeDateFilter
-  );
+  const { user } = useSelector((state) => state.user);
   const { getFinanceDataAfterCreate } = useCustomHook();
+  const objectLength = Object.keys(incomesModalData).length;
 
   const [isDisabled, setIsDisabled] = useState(() => {
     if (funcType === "update") {
@@ -36,7 +31,9 @@ export default function SubmitBtn({
     if (incomesModalData?._id) {
       dispatch(updateIncomesAction(incomesModalData?._id, incomesModalData));
     } else {
-      dispatch(createIncomesAction({ ...incomesModalData }));
+      dispatch(
+        createIncomesAction({ ...incomesModalData, branch: user?.branch || "" })
+      );
     }
     getFinanceDataAfterCreate();
   };
@@ -44,21 +41,13 @@ export default function SubmitBtn({
   useEffect(() => {
     setIsDisabled(() => {
       if (funcType === "update") {
-        if (
-          Object.keys(formik.errors).length === 0 &&
-          incomesModalData?.category
-        ) {
-          return false;
-        } else if (
-          Object.keys(formik.errors).length === 1 &&
-          formik.errors.password === "Bu xana tələb olunur."
-        ) {
+        if (Object.keys(formik.errors).length === 0) {
           return false;
         } else {
           return true;
         }
       } else {
-        if (formik.isValid && incomesModalData?.category) {
+        if (formik.isValid && objectLength !== 0) {
           return false;
         } else {
           return true;
@@ -67,11 +56,15 @@ export default function SubmitBtn({
     });
   }, [formik.errors]);
 
+
   return (
     <div>
       {funcType === "update" ? (
         <div className="create-update-modal-btn update ">
-          <button disabled={isDisabled || incomesModalLoading} onClick={incomesCreate}>
+          <button
+            disabled={isDisabled || incomesModalLoading}
+            onClick={incomesCreate}
+          >
             {incomesModalLoading ? (
               <LoadingBtn />
             ) : funcType === "update" ? (
@@ -93,7 +86,10 @@ export default function SubmitBtn({
         </div>
       ) : (
         <div className="create-update-modal-btn">
-          <button disabled={isDisabled || incomesModalLoading} onClick={incomesCreate}>
+          <button
+            disabled={isDisabled || incomesModalLoading}
+            onClick={incomesCreate}
+          >
             {incomesModalLoading ? (
               <LoadingBtn />
             ) : funcType === "update" ? (

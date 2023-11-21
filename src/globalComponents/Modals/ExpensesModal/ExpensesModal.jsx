@@ -1,31 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, TextField } from "@mui/material";
+import { useFormik } from "formik";
+import { ValidationSchema } from "./components/ValidationSchema/ValidationSchema";
 import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
 import { EXPENSES_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
 import InputField from "./components/InputField/InputField";
 import SubmitBtn from "./components/SubmitBtn/SubmitBtn";
-import Category from "./components/InputDropdowns/Category";
 import DeleteExpensesModal from "../../FuncComponent/components/DeleteExpensesModal/DeleteExpensesModal";
 export const ExpensesModal = () => {
   const dispatch = useDispatch();
-  const location = useLocation();
-  const inputNameArr = ["appointment", "amount","date"];
-  const { expensesModalData, expensesOpenModal } = useSelector(
-    (state) => state.expensesModal
-  );
-  const [categoryOpen, setCategoryOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const { expensesModalData } = useSelector((state) => state.expensesModal);
   const [deleteModal, setDeleteModal] = useState(false);
-  const selectedCategoryList = [
-    { key: "food", name: "Qida" },
-    { key: "cleaningSupplies", name: "Təmizlik ləvazimatları " },
-    { key: "repair", name: "Təmir" },
-    { key: "lease", name: "İcarə" },
-    { key: "equipment", name: "Avadanlıq" },
-    {key :"other",name:"Digər"}
-  ];
+  const inputNameArr = ["appointment", "amount", "date"];
+
+  // formik
+  const formik = useFormik({
+    initialValues: {
+      appointment: expensesModalData?.appointment
+        ? expensesModalData?.appointment
+        : "",
+      amount: expensesModalData?.amount ? expensesModalData?.amount : "",
+      date: expensesModalData?.date ? expensesModalData?.date : "",
+    },
+    validationSchema: ValidationSchema,
+  });
+  const setInputValue = useCallback(
+    (key, value) =>
+      formik.setValues({
+        ...formik.values,
+        [key]: value,
+      }),
+    [formik]
+  );
 
   const updateModalState = (keyName, value) => {
     dispatch({
@@ -46,33 +54,6 @@ export const ExpensesModal = () => {
       payload: { data: {}, openModal: false },
     });
   };
-  const categoryDropdown = () => {
-    if(location.pathname !== "/finance/food-ration") {
-      setCategoryOpen(!categoryOpen);
-    }
-  };
-  const categoryAddData = (item) => {
-    updateModalState("category", item.key);
-    setCategoryOpen(false);
-    setSelectedCategory(item);
-  };
-
- 
-
-  useEffect(() => {
-    if (expensesModalData?._id) {
-      if (expensesModalData.category) {
-        setSelectedCategory({
-          name: selectedCategoryList.filter(
-            (item) => item.key === expensesModalData.category
-          )[0]?.name,
-        });
-      }
-    } else if (location.pathname === "/finance/food-ration") {
-      updateModalState("category", 'food');
-      setSelectedCategory({name:'Qida'})
-    }
-  }, []);
 
   return (
     <div className="create-update-modal-con">
@@ -95,20 +76,14 @@ export const ExpensesModal = () => {
           }}
         >
           <div className="create-update-modal-form">
-            <Category
-              selectedCategory={selectedCategory}
-              categoryDropdown={categoryDropdown}
-              categoryOpen={categoryOpen}
-              selectedCategoryList={selectedCategoryList}
-              categoryAddData={categoryAddData}
-              location={location}
-            />
             {inputNameArr.map((name, index) => (
               <InputField
                 key={index}
                 inputName={name}
                 expensesModalData={expensesModalData}
                 updateModalState={updateModalState}
+                formik={formik}
+                setInputValue={setInputValue}
               />
             ))}
           </div>
@@ -116,25 +91,25 @@ export const ExpensesModal = () => {
 
         {expensesModalData?._id ? (
           <SubmitBtn
+            formik={formik}
             funcType="update"
             expensesModalData={expensesModalData}
-            closeModal={closeModal}
             setDeleteModal={setDeleteModal}
           />
         ) : (
           <SubmitBtn
+            formik={formik}
             funcType="create"
             expensesModalData={expensesModalData}
-            closeModal={closeModal}
             setDeleteModal={setDeleteModal}
-
           />
         )}
-        {
-          deleteModal &&(
-            <DeleteExpensesModal expensesModalData={expensesModalData} deleteMod={handleDeleteModal} />
-          )
-        }
+        {deleteModal && (
+          <DeleteExpensesModal
+            expensesModalData={expensesModalData}
+            deleteMod={handleDeleteModal}
+          />
+        )}
       </div>
     </div>
   );

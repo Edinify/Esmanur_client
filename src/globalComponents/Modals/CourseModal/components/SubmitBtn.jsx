@@ -21,7 +21,7 @@ export default function SubmitBtn({
   const classCreate = () => {
     if (coursesModalData?._id) {
       dispatch(
-        updateCoursesAction(coursesModalData?._id, coursesModalData, closeModal)
+        updateCoursesAction(coursesModalData?._id, coursesModalData)
       );
     } else {
       dispatch({

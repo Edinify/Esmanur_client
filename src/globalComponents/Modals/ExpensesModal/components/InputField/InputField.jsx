@@ -3,20 +3,14 @@ import moment from "moment";
 import { useState } from "react";
 
 export default function InputField({
+  formik,
+  setInputValue,
   expensesModalData,
   inputName,
   updateModalState,
 }) {
   const [shrink, setShrink] = useState(false);
   const inputData = [
-    {
-      inputName: "category",
-      label: "Xərcin kateqoriyası",
-      type: "text",
-      marginTop: "20px",
-      marginBottom: "0",
-      inputValue: expensesModalData[inputName] || "",
-    },
     {
       inputName: "appointment",
       label: "Xərcin təyinatı",
@@ -27,7 +21,7 @@ export default function InputField({
     },
     {
       inputName: "amount",
-      label: "Xərcin dəyəri",
+      label: "Xərcin qiyməti",
       type: "number",
       marginTop: "20px",
       marginBottom: "0",
@@ -39,9 +33,10 @@ export default function InputField({
       type: "date",
       marginTop: "20px",
       marginBottom: "0",
-      inputValue: (expensesModalData[inputName] && inputName === "date")
-        ? moment(expensesModalData[inputName]).format("YYYY-MM-DD")
-        : "",
+      inputValue:
+        expensesModalData[inputName] && inputName === "date"
+          ? moment(expensesModalData[inputName]).format("YYYY-MM-DD")
+          : "",
     },
   ];
 
@@ -84,9 +79,11 @@ export default function InputField({
         }
         onWheel={(e) => e.target.blur()}
         onChange={(e) => {
-          updateModalState(inputName, e.target.value)
+          updateModalState(inputName, e.target.value);
+          setInputValue(inputName, e.target.value);
         }}
         onBlur={(e) => {
+          formik.setFieldTouched(inputName, true);
           setShrink(!!e.target.value);
         }}
         onFocus={() => setShrink(true)}

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateAdminAction,
-  createAdminAction,
 } from "../../../../../redux/actions/adminsActions";
+import { createAdminAction } from "../../../../../redux/actions/userAction";
 import { ReactComponent as DeleteIcon } from "../../../../../assets/icons/Delete button.svg";
 import { ADMINS_MODAL_ACTION_TYPE } from "../../../../../redux/actions-type";
 import LoadingBtn from "../../../../Loading/components/LoadingBtn/LoadingBtn";
@@ -12,11 +12,11 @@ const SubmitBtn = ({
   formik,
   adminsModalData,
   funcType,
-  closeModal,
   setDeleteModal,
 }) => {
   const dispatch = useDispatch();
   const { adminsModalLoading } = useSelector((state) => state.adminsModal);
+  const { user } = useSelector((state) => state.user);
   const [isDisabled, setIsDisabled] = useState(() => {
     if (funcType === "update") {
       return false;
@@ -31,7 +31,7 @@ const SubmitBtn = ({
     } else {
       dispatch(
         createAdminAction({
-          ...adminsModalData,
+          ...adminsModalData, branch: user?.branch || ''
         })
       );
     }

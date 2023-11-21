@@ -13,16 +13,16 @@ const ExpensesCard = ({ data, mode, cellNumber, page }) => {
     setDeleteExpensesModal(!deleteExpensesModal);
   };
   const handleUpdate = (data) => {
-    const { category, amount, _id, appointment, date } = data;
+    const { _id, appointment, amount, date, branch } = data;
     dispatch({
       type: EXPENSES_MODAL_ACTION_TYPE.GET_EXPENSES_MODAL,
       payload: {
         data: {
-          category,
-          amount,
-          appointment,
-          date,
           _id,
+          appointment,
+          amount,
+          date,
+          branch,
         },
         openModal: true,
       },
@@ -36,25 +36,13 @@ const ExpensesCard = ({ data, mode, cellNumber, page }) => {
     { key: "repair", name: "Təmir" },
     { key: "lease", name: "İcarə" },
     { key: "equipment", name: "Avadanlıq" },
-    {key :"other",name:"Digər"}
+    { key: "other", name: "Digər" },
   ];
 
   return (
     <>
       {mode === "desktop" ? (
         <tr>
-          <td>
-            <div className="td-con">
-              <div className="cell-number">{cellNumber}.</div>
-              <div className="table-scroll-text">
-                {data.category
-                  ? categoryData.find((item) => item.key === data.category)
-                      ?.name
-                  : ""}
-              </div>
-              <div className="right-fade"></div>
-            </div>
-          </td>
           <td>
             <div className="td-con">
               <div className="table-scroll-text">{data.appointment}</div>
@@ -85,15 +73,6 @@ const ExpensesCard = ({ data, mode, cellNumber, page }) => {
           <div className="left">
             <h3>{data.fullName}</h3>
             <ul>
-              <li>
-                <span className="type">Kateqoriya:</span>
-                <p>
-                  {data.category
-                    ? categoryData.find((item) => item.key === data.category)
-                        ?.name
-                    : ""}
-                </p>
-              </li>
               <li>
                 <span className="type">Təyinat:</span>
                 <p>{data.appointment ? data.appointment : "boş"}</p>

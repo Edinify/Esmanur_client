@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 import React, { useEffect } from "react";
+=======
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+>>>>>>> aytac
 import { viewedAllNotifications } from "../../../../redux/actions/notificationsActions";
 import { useState } from "react";
 import NotificationModal from "../../../../globalComponents/Modals/NotificationModal/NotificationModal";
@@ -9,11 +15,17 @@ import { ReactComponent as UserProfileBlueIcon } from "../../../../assets/icons/
 import { ReactComponent as ChangePasswordIcon } from "../../../../assets/icons/password-check.svg";
 import { ReactComponent as LogoutIcon } from "../../../../assets/icons/log-out-03.svg";
 import { logoutAction } from "../../../../redux/actions/auth";
+<<<<<<< HEAD
 import { useDispatch, useSelector } from "react-redux";
+=======
+>>>>>>> aytac
 import { ChangePasswordModal } from "../../../../globalComponents/Header/ChangePasswordModal/ChangePasswordModal";
+import { getBranchesAction } from "../../../../redux/actions/branchesActions";
 
 const NavbarProfile = () => {
   const dispatch = useDispatch();
+  const { branchesData, loading } = useSelector((state) => state.branchesData);
+  const { user } = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openNotModal, setOpenNotModal] = useState(false);
@@ -71,9 +83,37 @@ const NavbarProfile = () => {
     }
   }, [openModal]);
 
+    useEffect(() => {
+    dispatch(getBranchesAction());
+  }, []);
+
+
   return (
     <>
       <div className="main-nav-icons">
+<<<<<<< HEAD
+=======
+        <h6 className="branch-name">filial: <span>{branchesData.find((item) => item._id === user?.branch)?.name}</span></h6>
+        {userData?.role === "student" && (
+          <div
+            className="student-amount"
+            onClick={() => {
+              setChangeLessonAmountIcon(!changeLessonAmountIcon);
+              setOpenLessonModal(!openLessonModal);
+            }}
+          >
+            {changeLessonAmountIcon ? (
+              <div className="change-student-lesson-icon">
+                <StudentLessonBlueIcon />
+              </div>
+            ) : (
+              <div className="student-lesson-icon">
+                <StudentLessonIcon />
+              </div>
+            )}
+          </div>
+        )}
+>>>>>>> aytac
         <div className="notification-con">
           <div
             className="notification-icon"
@@ -95,6 +135,7 @@ const NavbarProfile = () => {
             />
           </div>
         </div>
+
         <div className="profile-img-con">
           <div className="profile-img" onClick={(e) => handleActive(e)}>
             {changeUserIcon ? (

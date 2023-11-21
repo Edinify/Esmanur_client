@@ -41,6 +41,7 @@ import { teacherBonusReducer } from "./reducers/teacherBonusReducer";
 import { financeReducer } from "./reducers/financeReducer";
 import { teacherStatusReducer } from "./reducers/teacherStatusReducer";
 import { studentStatusReducer } from "./reducers/studentStatusReducer";
+import { branchesModalReducer } from "./reducers/branchesModalReducer";
 import { branchesReducer } from "./reducers/branchesReducer";
 import { teachersCategoryReducer } from "./reducers/teachersCatergoryReducer";
 
@@ -86,8 +87,10 @@ fineCategory:fineFilterReducer,
 teacherBonus:teacherBonusReducer,
 teacherStatus:teacherStatusReducer,
 studentStatus:studentStatusReducer,
-branchesData: branchesReducer,
+branchesModal: branchesModalReducer,
 teachersCategory: teachersCategoryReducer,
+branchesData:branchesReducer,
+
 })
 // test
 

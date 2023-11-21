@@ -3,6 +3,8 @@ import moment from "moment";
 import { useState } from "react";
 
 export default function InputField({
+  formik,
+  setInputValue,
   foodRationModalData,
   inputName,
   updateModalState,
@@ -10,16 +12,8 @@ export default function InputField({
   const [shrink, setShrink] = useState(false);
   const inputData = [
     {
-      inputName: "category",
-      label: "Xərcin kateqoriyası",
-      type: "text",
-      marginTop: "20px",
-      marginBottom: "0",
-      inputValue: foodRationModalData[inputName] || "",
-    },
-    {
-      inputName: "appointment",
-      label: "Xərcin təyinatı",
+      inputName: "name",
+      label: "Qidanın adı",
       type: "string",
       marginTop: "0",
       marginBottom: "0",
@@ -27,9 +21,25 @@ export default function InputField({
     },
     {
       inputName: "amount",
-      label: "Xərcin dəyəri",
+      label: "Xərcin qiyməti",
       type: "number",
       marginTop: "20px",
+      marginBottom: "0",
+      inputValue: foodRationModalData[inputName] || "",
+    },
+    {
+      inputName: "quantity",
+      label: "Miqdarı",
+      type: "text",
+      marginTop: "24px",
+      marginBottom: "0",
+      inputValue: foodRationModalData[inputName] || "",
+    },
+    {
+      inputName: "unitAmount",
+      label: "Vahidin qiyməti",
+      type: "number",
+      marginTop: "24px",
       marginBottom: "0",
       inputValue: foodRationModalData[inputName] || "",
     },
@@ -39,9 +49,10 @@ export default function InputField({
       type: "date",
       marginTop: "20px",
       marginBottom: "0",
-      inputValue: (foodRationModalData[inputName] && inputName === "date")
-        ? moment(foodRationModalData[inputName]).format("YYYY-MM-DD")
-        : "",
+      inputValue:
+        foodRationModalData[inputName] && inputName === "date"
+          ? moment(foodRationModalData[inputName]).format("YYYY-MM-DD")
+          : "",
     },
   ];
 
@@ -84,13 +95,20 @@ export default function InputField({
         }
         onWheel={(e) => e.target.blur()}
         onChange={(e) => {
-          updateModalState(inputName, e.target.value)
+          updateModalState(inputName, e.target.value);
+          setInputValue(inputName, e.target.value);
         }}
         onBlur={(e) => {
+          formik.setFieldTouched(inputName, true);
           setShrink(!!e.target.value);
         }}
         onFocus={() => setShrink(true)}
       />
+      {formik.errors[inputName] && formik.touched[inputName] && (
+        <small className="validation-err-message">
+          {formik.errors[inputName]}
+        </small>
+      )}
     </>
   );
 }

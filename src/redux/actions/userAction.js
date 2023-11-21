@@ -29,7 +29,7 @@ export const userAction = () => async (dispatch) => {
   
   try {
 
-    const { data } = await API.get("/auth");
+    const { data } = await API.get("/admin/current");
     dispatch({ type: USER_ACTION_TYPE.ADD_USER, payload: data });
     localStorage.setItem("userData",JSON.stringify(data))
 

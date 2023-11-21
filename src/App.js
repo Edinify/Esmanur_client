@@ -12,10 +12,12 @@ import {BonusModal} from "./globalComponents/Modals/BonusModal/BonusModal";
 import { FineModal } from "./globalComponents/Modals/FineModal/FineModal";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BranchModal } from "./globalComponents/Modals/BrancheModal/BranchModal";
 
 
 function App() {
   const { coursesOpenModal } = useSelector((state) => state.coursesModal);
+  const { branchesOpenModal } = useSelector((state) => state.branchesModal);
   const { studentsOpenModal } = useSelector((state) => state.studentsModal);
   const { teachersOpenModal } = useSelector((state) => state.teachersModal);
   const { adminsOpenModal } = useSelector((state) => state.adminsModal);
@@ -88,6 +90,7 @@ function App() {
     <div className="App">
       <Routing />
       {coursesOpenModal && <CourseModal />}
+      {branchesOpenModal && <BranchModal />}
       {studentsOpenModal && <StudentModal />}
       {teachersOpenModal && <TeacherModal />}
       {adminsOpenModal && <AdminModal />}

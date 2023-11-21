@@ -13,11 +13,7 @@ const FinanceDateFilter = () => {
   const location = useLocation();
   const {    
     financeMonthsFilter,
-    financeChooseDate,
-    financeIncomeCategory,
-    financeIncomeSorting,
-    financeExpenseCategory,
-    financeExpenseSorting,} = useSelector((state) => state.financeDateFilter);
+    financeChooseDate} = useSelector((state) => state.financeDateFilter);
   const data = [
     { key: 1, name: "Cari ay" },
     { key: 3, name: "Son 3 ay" },

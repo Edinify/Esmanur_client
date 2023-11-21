@@ -110,61 +110,11 @@ export const getAdminsAction = () => async (dispatch) => {
     dispatch(setLoadingAdminAction(false));
   }
 };
-export const getAdminsPaginationAction =
-  (pageNumber, searchQuery) => async (dispatch) => {
-    dispatch(setLoadingAdminAction(true));
-    try {
-      const { data } = await API.get(
-        `/?page=${pageNumber}&searchQuery=${searchQuery}`
-      );
-      dispatch({
-        type: ADMIN_ALL_ACTIONS_TYPE.GET_ADMIN_LAST_PAGE,
-        payload: pageNumber,
-      });
-      dispatch({
-        type: ADMIN_ALL_ACTIONS_TYPE.GET_ADMIN_PAGINATION,
-        payload: data,
-      });
-    } catch (error) {
-      console.log(error);
-      const originalRequest = error.config;
-      if (error?.response?.status === 403 && !originalRequest._retry) {
-        originalRequest._retry = true;
-        try {
-          const token = await refreshApi.get("/");
-          localStorage.setItem(
-            "auth",
-            JSON.stringify({
-              AccessToken: token.data.accesstoken,
-            })
-          );
-          const { data } = await API.get(
-            `/?page=${pageNumber}&searchQuery=${searchQuery}`
-          );
-          dispatch({
-            type: ADMIN_ALL_ACTIONS_TYPE.GET_ADMIN_LAST_PAGE,
-            payload: pageNumber,
-          });
-          dispatch({
-            type: ADMIN_ALL_ACTIONS_TYPE.GET_ADMIN_PAGINATION,
-            payload: data,
-          });
-        } catch (error) {
-          if (error?.response?.status === 401) {
-            return dispatch(logoutAction());
-          }
-          console.log(error);
-        }
-      }
-    } finally {
-      dispatch(setLoadingAdminAction(false));
-    }
-  };
-
 export const createAdminAction = (adminData) => async (dispatch) => {
+  console.log(adminData);
   dispatch(adminModalLoading(true));
   try {
-    const { data } = await REGISTERAPI.post("/admin/sign", adminData);
+    const {  } = await REGISTERAPI.post("/admin/sign", adminData);
     dispatch(getAdminsAction());
     dispatch({
       type: ADMINS_MODAL_ACTION_TYPE.ADMIN_OPEN_MODAL,
@@ -184,7 +134,7 @@ export const createAdminAction = (adminData) => async (dispatch) => {
             AccessToken: token.data.accesstoken,
           })
         );
-        const { data } = await REGISTERAPI.post("/admin/sign", adminData);
+        const {  } = await REGISTERAPI.post("/admin/sign", adminData);
         dispatch(getAdminsAction());
         dispatch({
           type: ADMINS_MODAL_ACTION_TYPE.ADMIN_OPEN_MODAL,
@@ -208,6 +158,7 @@ export const createAdminAction = (adminData) => async (dispatch) => {
 };
 
 export const updateAdminAction = (_id, adminData) => async (dispatch) => {
+  console.log(adminData);
   dispatch(adminModalLoading(true));
   try {
     const { data } = await API.patch(`/${_id}`, adminData);

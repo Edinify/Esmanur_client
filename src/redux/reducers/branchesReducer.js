@@ -1,42 +1,41 @@
-import { BRANCHES_ACTION_TYPE } from "../actions-type";
+import { BRANCHES_ALL_ACTIONS_TYPE } from "../actions-type";
 
 const initialState = {
-  branchModalData: {
-    name: "",
-    number: "",
-  },
-  branchesAllData: "",
-  branchesAllDataLoading: false,
-  branchOpenModal: false,
-  modalLoading: false,
+  branchesData: [],
+  loading: false,
 };
 
 export const branchesReducer = (state = initialState, action) => {
   switch (action.type) {
-    case BRANCHES_ACTION_TYPE.GET_ALL_BRANCHES:
+    case BRANCHES_ALL_ACTIONS_TYPE.GET_BRANCHES:
       return {
         ...state,
-        branchesAllData: action.payload.data,
+        branchesData: action.payload,
+        // loading: false,
       };
-    case BRANCHES_ACTION_TYPE.BRANCHES_ALL_LOADING:
+    case BRANCHES_ALL_ACTIONS_TYPE.BRANCHES_LOADING:
       return {
         ...state,
-        branchesAllDataLoading: action.payload,
+        loading: action.payload,
       };
-    case BRANCHES_ACTION_TYPE.GET_BRANCH_MODAL:
-      return {
-        branchModalData: action.payload.data,
-        branchOpenModal: action.payload.openModal,
-      };
-    case BRANCHES_ACTION_TYPE.BRANCH_OPEN_MODAL:
+    case BRANCHES_ALL_ACTIONS_TYPE.CREATE_BRANCHES:
       return {
         ...state,
-        branchOpenModal: action.payload,
+        branchesData: [...state.branchesData, action.payload],
       };
-    case BRANCHES_ACTION_TYPE.BRANCH_MODAL_LOADING:
+    case BRANCHES_ALL_ACTIONS_TYPE.UPDATE_BRANCHES:
       return {
         ...state,
-        modalLoading: action.payload,
+        branchesData: state.branchesData.map((branch) =>
+          branch._id === action.payload._id ? action.payload : branch
+        ),
+      };
+    case BRANCHES_ALL_ACTIONS_TYPE.DELETE_BRANCHES:
+      return {
+        ...state,
+        branchesData: state.branchesData.filter(
+          (branch) => branch._id !== action.payload
+        ),
       };
     default:
       return state;

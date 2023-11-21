@@ -6,63 +6,23 @@ import { ValidationSchema } from "./components/ValidationSchema/ValidationSchema
 import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
 import { INCOMES_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
 import InputField from "./components/InputField/InputField";
-import SubmitBtn from "./components/SubmitBtn/SubmitBtn"
-import PaymentMethod from "./components/PaymentMethod/PaymentMethod";
-import Category from "./components/InputDropdowns/Category";
-import DeleteIncomessModal from "../../FuncComponent/components/DeleteIncomesModal/DeleteIncomesModal"
+import SubmitBtn from "./components/SubmitBtn/SubmitBtn";
+import DeleteIncomessModal from "../../FuncComponent/components/DeleteIncomesModal/DeleteIncomesModal";
 
 export const IncomesModal = () => {
   const dispatch = useDispatch();
-  const { incomesModalData, incomesOpenModal } = useSelector(
-    (state) => state.incomesModal
-  );
-  const [categoryOpen, setCategoryOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const { incomesModalData } = useSelector((state) => state.incomesModal);
   const [deleteModal, setDeleteModal] = useState(false);
-
-  const handleDeleteModal = () => {
-    setDeleteModal(!deleteModal);
-  };
-
-
-  const selectedCategoryList = [
-    { key: "tuitionFees", name: "Təhsil haqqı" },
-    { key: "other", name: "Digər" },
-  ];
-
-  const [selectedPayment, setSelectedPayment] = useState([]);
-  const selectedPaymentMethod = [
-    { name: "Kart", key: "kart" },
-    { name: "Nağd", key: "cash" },
-  ];
-  const inputNameArr = [
-    // "category",
-    "appointment",
-    "unitMeasurement",
-    // "quantity",
-    "unitPrice",
-    "recipient",
-    "amount",
-    "date",
-    // "paymentMethod",
-    "imx",
-  ];
+  const inputNameArr = ["appointment", "amount", "date"];
 
   // formik
   const formik = useFormik({
     initialValues: {
-      category: incomesModalData?.category ? incomesModalData?.category : "",
-      appointment: incomesModalData?.appointment ? incomesModalData?.appointment : "",
-      unitMeasurement: incomesModalData?.unitMeasurement ? incomesModalData?.unitMeasurement : "",
-      // quantity: incomesModalData?.quantity ? incomesModalData?.quantity : "",
-      unitPrice: incomesModalData?.unitPrice ? incomesModalData?.unitPrice : "",
-      recipient: incomesModalData?.recipient ? incomesModalData?.recipient : "",
+      appointment: incomesModalData?.appointment
+        ? incomesModalData?.appointment
+        : "",
       amount: incomesModalData?.amount ? incomesModalData?.amount : "",
       date: incomesModalData?.date ? incomesModalData?.date : "",
-      paymentMethod: incomesModalData?.paymentMethod
-        ? incomesModalData?.paymentMethod
-        : "",
-      imx: incomesModalData?.imx ? incomesModalData?.imx : "",
     },
     validationSchema: ValidationSchema,
   });
@@ -74,6 +34,10 @@ export const IncomesModal = () => {
       }),
     [formik]
   );
+
+  const handleDeleteModal = () => {
+    setDeleteModal(!deleteModal);
+  };
   const updateModalState = (keyName, value) => {
     dispatch({
       type: INCOMES_MODAL_ACTION_TYPE.GET_INCOMES_MODAL,
@@ -89,26 +53,6 @@ export const IncomesModal = () => {
       payload: { data: {}, openModal: false },
     });
   };
-  const categoryDropdown = () => {
-    setCategoryOpen(!categoryOpen);
-  };
-  const categoryAddData = (item) => {
-    setInputValue("category", item.key);
-    updateModalState("category", item.key);
-    setCategoryOpen(false);
-    setSelectedCategory(item);
-  };
-
-
-
-  useEffect(() => {
-    if (incomesModalData?._id) {
-      if (incomesModalData.category) {
-        setSelectedCategory({ name: selectedCategoryList.filter((item) => item.key === incomesModalData.category)[0]?.name});
-      }
-    }
-  }, []);
-
 
   return (
     <div className="create-update-modal-con">
@@ -131,20 +75,6 @@ export const IncomesModal = () => {
           }}
         >
           <div className="create-update-modal-form">
-            <PaymentMethod
-              incomesModalData={incomesModalData}
-              updateModalState={updateModalState}
-              formik={formik}
-              setInputValue={setInputValue}
-            />
-            <Category
-              formik={formik}
-              selectedCategory={selectedCategory}
-              categoryDropdown={categoryDropdown}
-              categoryOpen={categoryOpen}
-              selectedCategoryList={selectedCategoryList}
-              categoryAddData={categoryAddData}
-            />
             {inputNameArr.map((name, index) => (
               <InputField
                 key={index}
@@ -163,7 +93,6 @@ export const IncomesModal = () => {
             formik={formik}
             funcType="update"
             incomesModalData={incomesModalData}
-            closeModal={closeModal}
             setDeleteModal={setDeleteModal}
           />
         ) : (
@@ -171,12 +100,15 @@ export const IncomesModal = () => {
             formik={formik}
             funcType="create"
             incomesModalData={incomesModalData}
-            closeModal={closeModal}
             setDeleteModal={setDeleteModal}
-
           />
         )}
-        {deleteModal && <DeleteIncomessModal incomesModalData={incomesModalData} deleteMod={handleDeleteModal} />}
+        {deleteModal && (
+          <DeleteIncomessModal
+            incomesModalData={incomesModalData}
+            deleteMod={handleDeleteModal}
+          />
+        )}
       </div>
     </div>
   );

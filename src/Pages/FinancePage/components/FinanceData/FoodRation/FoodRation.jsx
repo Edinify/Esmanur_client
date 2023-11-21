@@ -12,16 +12,14 @@ const FoodRationData = ({  getPageNumber,  page, dataHead = [] }) => {
   const { totalPages, loading, lastPage: foodRationPageNum } = useSelector((state) => state.foodRationData);
   const foodRationHead = page !== 'finance' ? [
     { id: 1, label: "Xərcin təyinatı" },
-    { id: 2, label: "Xərcin dəyəri" },
+    { id: 2, label: "Xərcin qiyməti" },
     { id: 3, label: "Xərcin tarixi" },
     { id: 4, label: "" },
   ] : [...dataHead];
 
-// console.log(foodRationPageNum);
-// console.log(lastPage);
-useEffect(() => {
-  dispatch(getFoodRationPaginationAction(1, "", "", 1, "food", "oldest"));
-}, []);
+// useEffect(() => {
+//   dispatch(getFoodRationPaginationAction(1, "", "", 1));
+// }, []);
 
 
   return (

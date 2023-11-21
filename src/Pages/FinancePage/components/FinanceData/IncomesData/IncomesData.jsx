@@ -9,25 +9,17 @@ import { getIncomePaginationAction } from "../../../../../redux/actions/incomeAc
 const IncomesData = ({ getPageNumber, page, dataHead = [] }) => {
   const dispatch = useDispatch();
   const { incomes, totalPages } = useSelector((state) => state.incomes);
-  const { loading, lastPage: incomesPageNum  } = useSelector((state) => state.incomes);
-  const incomesHead = page !== 'finance' ? [
-    { id: 1, label: "Kateqoriya" },
-    { id: 2, label: "Təyinat" },
-    { id: 3, label: "Ölçü vahidi" },
-    // { id: 4, label: "Miqdarı" },
-    { id: 5, label: "Vahidin qiyməti" },
-    { id: 6, label: "Alan şəxs" },
-    { id: 7, label: "Məbləği" },
-    { id: 8, label: "Tarix" },
-    { id: 9, label: "Ödəmə üsulu" },
-    { id: 10, label: "İMX nömrə" },
-    { id: 11, label: "" },
-  ] : [...dataHead];
+  const { loading, lastPage: incomesPageNum } = useSelector(
+    (state) => state.incomes
+  );
+  const { financeMonthsFilter, financeChooseDate } = useSelector(
+    (state) => state.financeDateFilter
+  );
+  const incomesHead = [...dataHead];
 
-  useEffect(() => {
-    dispatch(getIncomePaginationAction(1, "", "", 1, "", "oldest"));
-  }, []);
-  
+  // useEffect(() => {
+  //   dispatch(getIncomePaginationAction(1, "", "", 1));
+  // }, []);
   return (
     <>
       {loading ? (

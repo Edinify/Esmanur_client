@@ -12,7 +12,6 @@ const SubmitBtn = ({
   formik,
   adminsModalData,
   funcType,
-  closeModal,
   setDeleteModal,
 }) => {
   const dispatch = useDispatch();

@@ -52,6 +52,7 @@ const branchModalLoading = (loadingValue) => ({
 
 export const getBranchesAction = () => async (dispatch) => {
   dispatch(setLoadingBranchesAction(true));
+  // console.log('get');
   try {
     const { data } = await API.get("/");
     // console.log(data);

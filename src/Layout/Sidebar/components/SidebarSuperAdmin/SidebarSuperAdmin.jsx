@@ -61,6 +61,12 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
           Admin
         </NavLink>
       </li>
+      <li>
+        <NavLink to="/branches" onClick={closeSidebar} className="admin">
+          <CoursesIcon />
+          Filiallar
+        </NavLink>
+      </li>
       {/* <li>
         <NavLink to="/dashboard" onClick={closeSidebar}>
           <DashboardIcon />

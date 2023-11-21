@@ -2,15 +2,12 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../globalComponents/Loading/Loading";
-import { getBranchesAction } from "../../../redux/actions/branchesActions";
 import BranchCard from "./BranchCard";
 
 const BranchesData = ({ getPageNumber, page, dataHead = [] }) => {
   const dispatch = useDispatch();
   const { branchesData, loading } = useSelector((state) => state.branchesData);
-  useEffect(() => {
-    dispatch(getBranchesAction());
-  }, []);
+
 
   return (
     <>

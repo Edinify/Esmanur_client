@@ -7,37 +7,29 @@ import { FOOD_RATION_MODAL_ACTION_TYPE } from "../../../../../redux/actions-type
 const FoodRationCard = ({ data, mode, cellNumber, page }) => {
   const dispatch = useDispatch();
   const [deleteFoodRationModal, setDeleteFoodRationModal] = useState(false);
-  const [arrowUp, setArrowUp] = useState(false);
 
   const handleDeleteModal = () => {
     setDeleteFoodRationModal(!deleteFoodRationModal);
   };
   const handleUpdate = (data) => {
-    const { category, amount, _id, appointment, date } = data;
+    const { _id, name, unitAmount, amount, quantity, date, branch } = data;
     dispatch({
       type: FOOD_RATION_MODAL_ACTION_TYPE.GET_FOOD_RATION_MODAL,
       payload: {
         data: {
-          category,
-          amount,
-          appointment,
-          date,
           _id,
+          name,
+          unitAmount,
+          amount,
+          quantity,
+          date,
+          branch,
         },
         openModal: true,
       },
     });
   };
 
-  const categoryData = [
-    { key: "all", name: "Bütün kateqoriyalar" },
-    { key: "food", name: "Qida" },
-    { key: "cleaningSupplies", name: "Təmizlik ləvazimatları " },
-    { key: "repair", name: "Təmir" },
-    { key: "lease", name: "İcarə" },
-    { key: "equipment", name: "Avadanlıq" },
-    {key :"other",name:"Digər"}
-  ];
 
   return (
     <>
@@ -45,22 +37,12 @@ const FoodRationCard = ({ data, mode, cellNumber, page }) => {
         <tr>
           <td>
             <div className="td-con">
-              <div className="cell-number">{cellNumber}.</div>
-              <div className="table-scroll-text">
-                {data.category
-                  ? categoryData.find((item) => item.key === data.category)
-                      ?.name
-                  : ""}
-              </div>
+              <div className="table-scroll-text">{data.name}</div>
               <div className="right-fade"></div>
             </div>
           </td>
-          <td>
-            <div className="td-con">
-              <div className="table-scroll-text">{data.appointment}</div>
-              <div className="right-fade"></div>
-            </div>
-          </td>
+          <td>{data.quantity}</td>
+          <td>{data.unitAmount}</td>
           <td>{data.amount}</td>
           <td>
             <div className="td-con">
@@ -86,20 +68,19 @@ const FoodRationCard = ({ data, mode, cellNumber, page }) => {
             <h3>{data.fullName}</h3>
             <ul>
               <li>
-                <span className="type">Kateqoriya:</span>
-                <p>
-                  {data.category
-                    ? categoryData.find((item) => item.key === data.category)
-                        ?.name
-                    : ""}
-                </p>
+                <span className="type">Qidanın adı:</span>
+                <p>{data.name ? data.name : "boş"}</p>
               </li>
               <li>
-                <span className="type">Təyinat:</span>
-                <p>{data.appointment ? data.appointment : "boş"}</p>
+                <span className="type">Miqdarı:</span>
+                <p>{data.quantity ? data.quantity : "boş"}</p>
+              </li>
+              <li>
+                <span className="type">Vahidin məbləği:</span>
+                <p>{data.unitAmount ? data.unitAmount : "boş"}</p>
               </li>
               <li className="payment">
-                <span className="type">Məbləği:</span>
+                <span className="type">Ümumi məbləğ:</span>
                 <p>{data.amount ? data.amount : "boş"}</p>
               </li>
               <li>

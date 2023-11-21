@@ -14,34 +14,16 @@ const IncomesCard = ({ data, mode, cellNumber, page }) => {
     setDeleteIncomesModal(!deleteIncomesModal);
   };
   const handleUpdate = (data) => {
-    const {
-      category,
-      appointment,
-      _id,
-      unitMeasurement,
-      date,
-      // quantity,
-      unitPrice,
-      recipient,
-      amount,
-      paymentMethod,
-      imx,
-    } = data;
+    const { _id, appointment, amount, date, branch } = data;
     dispatch({
       type: INCOMES_MODAL_ACTION_TYPE.GET_INCOMES_MODAL,
       payload: {
         data: {
-          category,
-          appointment,
           _id,
-          date,
-          unitMeasurement,
-          // quantity,
-          unitPrice,
-          recipient,
+          appointment,
           amount,
-          paymentMethod,
-          imx,
+          date,
+          branch,
         },
         openModal: true,
       },
@@ -57,17 +39,6 @@ const IncomesCard = ({ data, mode, cellNumber, page }) => {
     <>
       {mode === "desktop" ? (
         <tr>
-          <td>
-            <div className="td-con">
-              <div className="cell-number">{cellNumber}.</div>
-              <div className="table-scroll-text">
-                {data.category
-                  ? categoryData.find((item) => item.key === data.category).name
-                  : ""}
-              </div>
-              <div className="right-fade"></div>
-            </div>
-          </td>
           <td>
             <div className="td-con">
               <div className="table-scroll-text">{data.appointment}</div>
@@ -99,15 +70,6 @@ const IncomesCard = ({ data, mode, cellNumber, page }) => {
             <h3>{data.fullName}</h3>
             <ul>
               <li>
-                <span className="type">Kateqoriya:</span>
-                <p>
-                  {data.category
-                    ? categoryData.find((item) => item.key === data.category)
-                        ?.name
-                    : ""}
-                </p>
-              </li>
-              <li>
                 <span className="type">Təyinat:</span>
                 <p>{data.appointment ? data.appointment : "boş"}</p>
               </li>
@@ -124,7 +86,7 @@ const IncomesCard = ({ data, mode, cellNumber, page }) => {
             </ul>
           </div>
           <div className="right">
-          <FuncComponent
+            <FuncComponent
               handleDeleteModal={handleDeleteModal}
               handleUpdate={handleUpdate}
               data={data}

@@ -73,8 +73,8 @@ const FinanceDataHead = () => {
 
       <div className="bottom">
         <div className="left">
-        {location.pathname !== "/finance/food-ration" && <FinanceDropdown type='category'  /> }
-        {location.pathname !== "/finance/food-ration" && <FinanceDropdown type='sorting'  /> }
+        {/* {location.pathname !== "/finance/food-ration" && <FinanceDropdown type='category'  /> }
+        {location.pathname !== "/finance/food-ration" && <FinanceDropdown type='sorting'  /> } */}
         </div>
 
         <div className="right">

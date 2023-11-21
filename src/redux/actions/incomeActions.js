@@ -56,18 +56,14 @@ const incomesModalLoading = (loadingValue) => ({
 });
 
 export const getIncomePaginationAction =
-  (page = 1, startDate, endDate, monthCount, category, sort) =>
+  (page = 1, startDate, endDate, monthCount) =>
   async (dispatch) => {
-    // console.log(page, startDate, endDate, monthCount, category, sort);
     dispatch(setLoadingIncomesAction(true));
     try {
       const { data } = await API.get(
         `/?page=${page}&startDate=${startDate || ""}&endDate=${
           endDate || ""
-        }&monthCount=${monthCount || ""}&category=${category || ""}&sort=${
-          sort || "oldest"
-        }`
-      );
+        }&monthCount=${monthCount || ""}`);
 
       // console.log(data,"get")
 
@@ -96,10 +92,7 @@ export const getIncomePaginationAction =
           const { data } = await API.get(
             `/?page=${page}&startDate=${startDate || ""}&endDate=${
               endDate || ""
-            }&monthCount=${monthCount || ""}&category=${category || ""}&sort=${
-              sort || "oldest"
-            }`
-          );
+            }&monthCount=${monthCount || ""}`);
 
           dispatch({
             type: INCOME_ACTION_TYPE.GET_INCOME_LAST_PAGE,
@@ -122,10 +115,11 @@ export const getIncomePaginationAction =
   };
 
 export const createIncomesAction = (incomesData) => async (dispatch) => {
+  // console.log(incomesData);
   dispatch(incomesModalLoading(true));
   try {
     const { data } = await API.post("/", incomesData);
-    dispatch(getIncomePaginationAction(data.lastPage, "", "", 1, "", "oldest"));
+    dispatch(getIncomePaginationAction(data.lastPage, "", "", 1));
     dispatch({
       type: INCOMES_MODAL_ACTION_TYPE.INCOMES_OPEN_MODAL,
       payload: false,
@@ -150,7 +144,7 @@ export const createIncomesAction = (incomesData) => async (dispatch) => {
 
         const { data } = await API.post("/", incomesData);
         dispatch(
-          getIncomePaginationAction(data.lastPage, "", "", 1, "", "oldest")
+          getIncomePaginationAction(data.lastPage, "", "", 1)
         );
         dispatch({
           type: INCOMES_MODAL_ACTION_TYPE.INCOMES_OPEN_MODAL,
@@ -172,10 +166,12 @@ export const createIncomesAction = (incomesData) => async (dispatch) => {
   }
 };
 export const updateIncomesAction = (_id, incomesData) => async (dispatch) => {
+  // console.log(incomesData);
   dispatch(incomesModalLoading(true));
 
   try {
     const { data } = await API.patch(`/${_id}`, incomesData);
+    // console.log(data);
     dispatch({ type: INCOME_ACTION_TYPE.UPDATE_INCOME, payload: data });
     dispatch({
       type: INCOMES_MODAL_ACTION_TYPE.INCOMES_OPEN_MODAL,
@@ -218,7 +214,7 @@ export const deleteIncomesAction = (_id) => async (dispatch) => {
   try {
     await API.delete(`/${_id}`);
     dispatch({ type: INCOME_ACTION_TYPE.DELETE_INCOME, payload: _id });
-    dispatch(getIncomePaginationAction(1, "", "", 1, "", "oldest"));
+    dispatch(getIncomePaginationAction(1, "", "", 1));
     toastSuccess("Məhsul silindi");
   } catch (error) {
     const originalRequest = error.config;
@@ -235,7 +231,7 @@ export const deleteIncomesAction = (_id) => async (dispatch) => {
 
         await API.delete(`/${_id}`);
         dispatch({ type: INCOME_ACTION_TYPE.DELETE_INCOME, payload: _id });
-        dispatch(getIncomePaginationAction(1, "", "", 1, "", "oldest"));
+        dispatch(getIncomePaginationAction(1, "", "", 1));
         toastSuccess("Məhsul silindi");
       } catch (error) {
         console.log(error);

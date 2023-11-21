@@ -8,13 +8,13 @@ import { logoutAction } from "./auth";
 import { apiRoot } from "../../apiRoot";
 
 const API = axios.create({
-  baseURL: `${apiRoot}/expense`,
-  withCredentials:true
+  baseURL: `${apiRoot}/food`,
+  withCredentials: true,
 });
 
 const refreshApi = axios.create({
   baseURL: `${apiRoot}/user/auth/refresh_token`,
-  withCredentials:true
+  withCredentials: true,
 });
 
 API.interceptors.request.use((req) => {
@@ -26,7 +26,6 @@ API.interceptors.request.use((req) => {
 
   return req;
 });
-
 
 const toastSuccess = (message) => {
   toast.success(message, {
@@ -52,20 +51,16 @@ const foodRationModalLoading = (loadingValue) => ({
 });
 
 export const getFoodRationPaginationAction =
-  (page = 1, startDate, endDate, monthCount, category, sort) =>
+  (page = 1, startDate, endDate, monthCount) =>
   async (dispatch) => {
     dispatch(setLoadingFoodRationAction(true));
-    // console.log(page, startDate, endDate, monthCount, category, sort);
     try {
       const { data } = await API.get(
         `/?page=${page}&startDate=${startDate || ""}&endDate=${
           endDate || ""
-        }&monthCount=${monthCount || ""}&category=${category || ""}&sort=${
-          sort || "oldest"
-        }`
+        }&monthCount=${monthCount || ""}`
       );
       // console.log(data,"get")
-
       dispatch({
         type: FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_LAST_PAGE,
         payload: page,
@@ -91,9 +86,7 @@ export const getFoodRationPaginationAction =
           const { data } = await API.get(
             `/?page=${page}&startDate=${startDate || ""}&endDate=${
               endDate || ""
-            }&monthCount=${monthCount || ""}&category=${category || ""}&sort=${
-              sort || "oldest"
-            }`
+            }&monthCount=${monthCount || ""}`
           );
 
           dispatch({
@@ -116,14 +109,13 @@ export const getFoodRationPaginationAction =
     }
   };
 
-export const createFoodRationAction = (expensesData) => async (dispatch) => {
+export const createFoodRationAction = (foodRationData) => async (dispatch) => {
+  console.log(foodRationData);
   dispatch(foodRationModalLoading(true));
   try {
-    const { data } = await API.post("/", expensesData);
-      dispatch(
-        getFoodRationPaginationAction(data.lastPage, "", "", 1, "food", "oldest")
-      );
-    // console.log(data);
+    const { data } = await API.post("/", foodRationData);
+    dispatch(getFoodRationPaginationAction(data.lastPage, "", "", 1));
+    console.log(data);
     dispatch({
       type: FOOD_RATION_MODAL_ACTION_TYPE.FOOD_RATION_OPEN_MODAL,
       payload: false,
@@ -142,10 +134,8 @@ export const createFoodRationAction = (expensesData) => async (dispatch) => {
           })
         );
 
-        const { data } = await API.post("/", expensesData);
-          dispatch(
-            getFoodRationPaginationAction(data.lastPage, "", "", 1, "food", "oldest")
-          );
+        const { data } = await API.post("/", foodRationData);
+        dispatch(getFoodRationPaginationAction(data.lastPage, "", "", 1));
         dispatch({
           type: FOOD_RATION_MODAL_ACTION_TYPE.FOOD_RATION_OPEN_MODAL,
           payload: false,
@@ -163,60 +153,63 @@ export const createFoodRationAction = (expensesData) => async (dispatch) => {
   }
 };
 
-export const updateFoodRationAction = (_id, expensesData) => async (dispatch) => {
-  dispatch(foodRationModalLoading(true));
-  try {
-    const { data } = await API.patch(`/${_id}`, expensesData);
-    dispatch({ type: FOOD_RATION_ACTION_TYPE.UPDATE_FOOD_RATION, payload: data });
-    dispatch({
-      type: FOOD_RATION_MODAL_ACTION_TYPE.FOOD_RATION_OPEN_MODAL,
-      payload: false,
-    });
-    toastSuccess("Məhsul yeniləndi");
-  } catch (error) {
-    const originalRequest = error.config;
-    if (error.response.status === 403 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      try {
-        const token = await refreshApi.get("/");
-        localStorage.setItem(
-          "auth",
-          JSON.stringify({
-            AccessToken: token.data.accesstoken,
-          })
-        );
-        const { data } = await API.patch(`/${_id}`, expensesData);
-        dispatch({ type: FOOD_RATION_ACTION_TYPE.UPDATE_FOOD_RATION, payload: data });
-        dispatch({
-          type: FOOD_RATION_MODAL_ACTION_TYPE.FOOD_RATION_OPEN_MODAL,
-          payload: false,
-        });
-        toastSuccess("Məhsul yeniləndi");
-      } catch (error) {
-        console.log(error);
-        if (error?.response?.status === 401) {
-          return dispatch(logoutAction());
+export const updateFoodRationAction =
+  (_id, foodRationData) => async (dispatch) => {
+    dispatch(foodRationModalLoading(true));
+    try {
+      const { data } = await API.patch(`/${_id}`, foodRationData);
+      dispatch({
+        type: FOOD_RATION_ACTION_TYPE.UPDATE_FOOD_RATION,
+        payload: data,
+      });
+      dispatch({
+        type: FOOD_RATION_MODAL_ACTION_TYPE.FOOD_RATION_OPEN_MODAL,
+        payload: false,
+      });
+      toastSuccess("Məhsul yeniləndi");
+    } catch (error) {
+      const originalRequest = error.config;
+      if (error.response.status === 403 && !originalRequest._retry) {
+        originalRequest._retry = true;
+        try {
+          const token = await refreshApi.get("/");
+          localStorage.setItem(
+            "auth",
+            JSON.stringify({
+              AccessToken: token.data.accesstoken,
+            })
+          );
+          const { data } = await API.patch(`/${_id}`, foodRationData);
+          dispatch({
+            type: FOOD_RATION_ACTION_TYPE.UPDATE_FOOD_RATION,
+            payload: data,
+          });
+          dispatch({
+            type: FOOD_RATION_MODAL_ACTION_TYPE.FOOD_RATION_OPEN_MODAL,
+            payload: false,
+          });
+          toastSuccess("Məhsul yeniləndi");
+        } catch (error) {
+          console.log(error);
+          if (error?.response?.status === 401) {
+            return dispatch(logoutAction());
+          }
         }
       }
+    } finally {
+      dispatch(foodRationModalLoading(false));
     }
-  } finally {
-    dispatch(foodRationModalLoading(false));
-  }
-};
+  };
 
 export const deleteFoodRationAction = (_id) => async (dispatch) => {
   try {
     await API.delete(`/${_id}`);
-    dispatch({ type: FOOD_RATION_ACTION_TYPE.DELETE_FOOD_RATION, payload: _id });
-    if (window.location.pathname ===  "/finance/food-ration") {
-      dispatch(
-        getFoodRationPaginationAction(1, "", "", 1, "food", "oldest")
-      );
-    } else {
-      dispatch(
-        getFoodRationPaginationAction(1, "", "", 1, "", "oldest")
-      );
-    }
+    dispatch({
+      type: FOOD_RATION_ACTION_TYPE.DELETE_FOOD_RATION,
+      payload: _id,
+    });
+    dispatch(getFoodRationPaginationAction(1, "", ""));
+
     toastSuccess("Məhsul silindi");
   } catch (error) {
     const originalRequest = error.config;
@@ -232,16 +225,12 @@ export const deleteFoodRationAction = (_id) => async (dispatch) => {
         );
 
         await API.delete(`/${_id}`);
-        dispatch({ type: FOOD_RATION_ACTION_TYPE.DELETE_FOOD_RATION, payload: _id });
-        if (window.location.pathname ===  "/finance/food-ration") {
-          dispatch(
-            getFoodRationPaginationAction(1, "", "", 1, "food", "oldest")
-          );
-        } else {
-          dispatch(
-            getFoodRationPaginationAction(1, "", "", 1, "", "oldest")
-          );
-        }
+        dispatch({
+          type: FOOD_RATION_ACTION_TYPE.DELETE_FOOD_RATION,
+          payload: _id,
+        });
+        dispatch(getFoodRationPaginationAction(1, "", "", 1));
+
         toastSuccess("Məhsul silindi");
       } catch (error) {
         console.log(error);

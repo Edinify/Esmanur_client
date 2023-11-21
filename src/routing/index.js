@@ -54,8 +54,6 @@ export const Routing = () => {
   }, [auth, user, forgetPassword]);
 
 
-  // console.log(user);
- 
 
 
   return (

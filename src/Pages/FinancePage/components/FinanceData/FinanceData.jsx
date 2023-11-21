@@ -8,7 +8,7 @@ import { getFoodRationPaginationAction } from "../../../../redux/actions/foodRat
 import {
   EXPENSES_ACTION_TYPE,
   INCOME_ACTION_TYPE,
-  FOOD_RATION_ACTION_TYPE
+  FOOD_RATION_ACTION_TYPE,
 } from "../../../../redux/actions-type";
 import IncomesData from "./IncomesData/IncomesData";
 import ExpensesData from "./ExpensesData/ExpensesData";
@@ -20,10 +20,6 @@ const FinanceData = () => {
   const {
     financeMonthsFilter,
     financeChooseDate,
-    financeIncomeCategory,
-    financeIncomeSorting,
-    financeExpenseCategory,
-    financeExpenseSorting,
   } = useSelector((state) => state.financeDateFilter);
   const { lastPage: incomesLastPage } = useSelector((state) => state.incomes);
   const { lastPage: expensesLastPage } = useSelector(
@@ -32,12 +28,19 @@ const FinanceData = () => {
   const { lastPage: foodRationLastPage } = useSelector(
     (state) => state.foodRationData
   );
-  const dataHead = [
-    { id: 1, label: "Kateqoriya" },
-    { id: 2, label: "Təyinat" },
-    { id: 3, label: "Məbləğ" },
-    { id: 4, label: "Tarix" },
-    { id: 6, label: "" },
+  const dataHead = location.pathname === "/finance/food-ration" ? [
+    { id: 1, label: "Qidanın adı" },
+    { id: 2, label: "Miqdarı" },
+    { id: 3, label: "Vahidin məbləği" },
+    { id: 3, label: "Ümumi məbləğ" },
+    { id: 3, label: "Tarix" },
+    { id: 4, label: "" },
+  ]
+  : [
+    { id: 1, label: "Təyinat" },
+    { id: 2, label: "Məbləğ" },
+    { id: 3, label: "Tarix" },
+    { id: 4, label: "" },
   ];
 
   const getPageNumberIncomes = (pageNumber) => {
@@ -52,12 +55,6 @@ const FinanceData = () => {
           financeChooseDate.startDate,
           financeChooseDate.endDate,
           "", //month
-          financeIncomeCategory
-            ? financeIncomeCategory !== "all"
-              ? financeIncomeCategory
-              : ""
-            : "",
-          financeIncomeSorting ? financeIncomeSorting : "oldest"
         )
       );
     } else {
@@ -71,12 +68,6 @@ const FinanceData = () => {
           "",
           "",
           financeMonthsFilter ? financeMonthsFilter : 1, //month
-          financeIncomeCategory
-            ? financeIncomeCategory !== "all"
-              ? financeIncomeCategory
-              : ""
-            : "",
-          financeIncomeSorting ? financeIncomeSorting : "oldest"
         )
       );
     }
@@ -92,12 +83,6 @@ const FinanceData = () => {
         financeChooseDate.startDate,
         financeChooseDate.endDate,
         "", //month
-        financeIncomeCategory
-          ? financeIncomeCategory !== "all"
-            ? financeIncomeCategory
-            : ""
-          : "",
-        financeIncomeSorting ? financeIncomeSorting : "oldest"
       )
     );
   };
@@ -112,12 +97,6 @@ const FinanceData = () => {
         "",
         "",
         financeMonthsFilter ? financeMonthsFilter : 1, //month
-        financeIncomeCategory
-          ? financeIncomeCategory !== "all"
-            ? financeIncomeCategory
-            : ""
-          : "",
-        financeIncomeSorting ? financeIncomeSorting : "oldest"
       )
     );
   };
@@ -134,12 +113,6 @@ const FinanceData = () => {
           financeChooseDate.startDate,
           financeChooseDate.endDate,
           "", //month
-          financeExpenseCategory
-            ? financeExpenseCategory !== "all"
-              ? financeExpenseCategory
-              : ""
-            : "",
-          financeExpenseSorting ? financeExpenseSorting : "oldest"
         )
       );
     } else {
@@ -153,12 +126,6 @@ const FinanceData = () => {
           "",
           "",
           financeMonthsFilter ? financeMonthsFilter : 1, //month
-          financeExpenseCategory
-            ? financeExpenseCategory !== "all"
-              ? financeExpenseCategory
-              : ""
-            : "",
-          financeExpenseSorting ? financeExpenseSorting : "oldest"
         )
       );
     }
@@ -174,12 +141,6 @@ const FinanceData = () => {
         financeChooseDate.startDate,
         financeChooseDate.endDate,
         "", //month
-        financeExpenseCategory
-          ? financeExpenseCategory !== "all"
-            ? financeExpenseCategory
-            : ""
-          : "",
-        financeExpenseSorting ? financeExpenseSorting : "oldest"
       )
     );
   };
@@ -194,12 +155,6 @@ const FinanceData = () => {
         "",
         "",
         financeMonthsFilter ? financeMonthsFilter : 1, //month
-        financeExpenseCategory
-          ? financeExpenseCategory !== "all"
-            ? financeExpenseCategory
-            : ""
-          : "",
-        financeExpenseSorting ? financeExpenseSorting : "oldest"
       )
     );
   };
@@ -215,9 +170,7 @@ const FinanceData = () => {
           pageNumber,
           financeChooseDate.startDate,
           financeChooseDate.endDate,
-          "", //month
-          "food",
-          "oldest"
+          "" //month
         )
       );
     } else {
@@ -230,9 +183,7 @@ const FinanceData = () => {
           pageNumber,
           "",
           "",
-          financeMonthsFilter ? financeMonthsFilter : 1, //month
-          "food",
-          "oldest"
+          financeMonthsFilter ? financeMonthsFilter : 1 //month
         )
       );
     }
@@ -247,9 +198,7 @@ const FinanceData = () => {
         pageNumber,
         financeChooseDate.startDate,
         financeChooseDate.endDate,
-        "", //month
-        "food",
-        "oldest"
+        "" //month
       )
     );
   };
@@ -263,9 +212,7 @@ const FinanceData = () => {
         pageNumber,
         "",
         "",
-        financeMonthsFilter ? financeMonthsFilter : 1, //month
-        "food",
-        "oldest"
+        financeMonthsFilter ? financeMonthsFilter : 1 //month
       )
     );
   };
@@ -274,7 +221,7 @@ const FinanceData = () => {
     if (financeChooseDate?.startDate && financeChooseDate?.endDate) {
       getDateFilteredIncomes(incomesLastPage);
       getDateFilteredExpenses(expensesLastPage);
-      getDateFilteredFoodRation(foodRationLastPage)
+      getDateFilteredFoodRation(foodRationLastPage);
     }
   }, [financeChooseDate]);
 
@@ -282,34 +229,17 @@ const FinanceData = () => {
     if (financeMonthsFilter) {
       getMonthFilteredIncomes(incomesLastPage);
       getMonthFilteredExpenses(expensesLastPage);
-      getMonthFilteredFoodRation(foodRationLastPage)
+      getMonthFilteredFoodRation(foodRationLastPage);
     }
   }, [financeMonthsFilter]);
 
-  useEffect(() => {
-    if (financeIncomeCategory || financeIncomeSorting) {
-      getPageNumberIncomes(incomesLastPage);
-    }
-  }, [financeIncomeCategory, financeIncomeSorting]);
 
   useEffect(() => {
-    if (financeExpenseCategory || financeExpenseSorting) {
-      getPageNumberExpenses(expensesLastPage);
-    }
-  }, [financeExpenseCategory, financeExpenseSorting]);
+    dispatch(getExpensesPaginationAction(1, "", "", 1));
+    dispatch(getIncomePaginationAction(1, "", "", 1));
+    dispatch(getFoodRationPaginationAction(1, "", "", 1));
+  }, []);
 
-  // useEffect(() => {
-  //   // page,
-  //   // startDate,
-  //   // endDate,
-  //   // monthCount,
-  //   // category
-  //   dispatch(getIncomePaginationAction(1, "", "", 1, "", "oldest"));
-  //   dispatch(getExpensesPaginationAction(1, "", "", 1, "", "oldest"));
-  // }, []);
-
-  // console.log('months: ', financeMonthsFilter);
-  // console.log('date: ', financeChooseDate);
 
   return (
     <div>

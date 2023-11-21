@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { viewedAllNotifications } from "../../../../redux/actions/notificationsActions";
 import { useState } from "react";
@@ -12,11 +13,13 @@ import { ReactComponent as LogoutIcon } from "../../../../assets/icons/log-out-0
 import { ReactComponent as StudentLessonIcon } from "../../../../assets/icons/student-home/book-open-01.svg";
 import { ReactComponent as StudentLessonBlueIcon } from "../../../../assets/icons/student-home/book-open-02.svg";
 import { logoutAction } from "../../../../redux/actions/auth";
-import { useDispatch } from "react-redux";
 import { ChangePasswordModal } from "../../../../globalComponents/Header/ChangePasswordModal/ChangePasswordModal";
+import { getBranchesAction } from "../../../../redux/actions/branchesActions";
 
 const NavbarProfile = () => {
   const dispatch = useDispatch();
+  const { branchesData, loading } = useSelector((state) => state.branchesData);
+  const { user } = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
   const [openModal, setOpenModal] = useState(false);
   const [openNotModal, setOpenNotModal] = useState(false);
@@ -79,9 +82,15 @@ const NavbarProfile = () => {
     }
   }, [openModal]);
 
+    useEffect(() => {
+    dispatch(getBranchesAction());
+  }, []);
+
+
   return (
     <>
       <div className="main-nav-icons">
+        <h6 className="branch-name">filial: <span>{branchesData.find((item) => item._id === user?.branch)?.name}</span></h6>
         {userData?.role === "student" && (
           <div
             className="student-amount"
@@ -122,6 +131,7 @@ const NavbarProfile = () => {
             />
           </div>
         </div>
+
         <div className="profile-img-con">
           <div className="profile-img" onClick={(e) => handleActive(e)}>
             {changeUserIcon ? (

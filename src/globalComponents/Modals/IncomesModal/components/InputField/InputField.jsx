@@ -2,12 +2,12 @@ import { useState } from "react";
 import { TextField } from "@mui/material";
 import moment from "moment";
 
-export default function InputField({ 
+export default function InputField({
   formik,
   setInputValue,
-  incomesModalData, 
-  inputName, 
-  updateModalState 
+  incomesModalData,
+  inputName,
+  updateModalState,
 }) {
   const [shrink, setShrink] = useState(false);
   const inputData = [
@@ -16,38 +16,6 @@ export default function InputField({
       label: "Xidmətin adı",
       type: "text",
       marginTop: "0",
-      marginBottom: "0",
-      inputValue: incomesModalData[inputName] || "",
-    },
-    {
-      inputName: "unitMeasurement",
-      label: "Ölçü vahidi",
-      type: "text",
-      marginTop: "24px",
-      marginBottom: "0",
-      inputValue: incomesModalData[inputName] || "",
-    },
-    {
-      inputName: "quantity",
-      label: "Miqdarı",
-      type: "number",
-      marginTop: "24px",
-      marginBottom: "0",
-      inputValue: incomesModalData[inputName] || "",
-    },
-    {
-      inputName: "unitPrice",
-      label: "Vahidin qiyməti",
-      type: "number",
-      marginTop: "24px",
-      marginBottom: "0",
-      inputValue: incomesModalData[inputName] || "",
-    },
-    {
-      inputName: "recipient",
-      label: "Alan şəxs",
-      type: "text",
-      marginTop: "24px",
       marginBottom: "0",
       inputValue: incomesModalData[inputName] || "",
     },
@@ -66,25 +34,10 @@ export default function InputField({
       type: "date",
       marginTop: "24px",
       marginBottom: "0",
-      inputValue: (incomesModalData[inputName] && inputName === "date")
-        ? moment(incomesModalData[inputName]).format("YYYY-MM-DD")
-        : "",
-    },
-    {
-      inputName: "paymentMethod",
-      label: "Ödəmə üsulu",
-      type: "text",
-      marginTop: "24px",
-      marginBottom: "0",
-      inputValue: incomesModalData[inputName] || "",
-    },
-    {
-      inputName: "imx",
-      label: "İMX nömrə",
-      type: "number",
-      marginTop: "24px",
-      marginBottom: "0",
-      inputValue: incomesModalData[inputName] || "",
+      inputValue:
+        incomesModalData[inputName] && inputName === "date"
+          ? moment(incomesModalData[inputName]).format("YYYY-MM-DD")
+          : "",
     },
   ];
 
@@ -127,7 +80,7 @@ export default function InputField({
         }
         onWheel={(e) => e.target.blur()}
         onChange={(e) => {
-          updateModalState(inputName, e.target.value)
+          updateModalState(inputName, e.target.value);
           setInputValue(inputName, e.target.value);
         }}
         onBlur={(e) => {
@@ -137,8 +90,11 @@ export default function InputField({
         onFocus={() => setShrink(true)}
       />
 
-      {formik.errors[inputName] && formik.touched[inputName] && (<small className="validation-err-message">{formik.errors[inputName]}</small>) }
-        
+      {formik.errors[inputName] && formik.touched[inputName] && (
+        <small className="validation-err-message">
+          {formik.errors[inputName]}
+        </small>
+      )}
     </>
   );
 }

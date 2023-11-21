@@ -47,6 +47,8 @@ export const Header = () => {
         return "Maliyyə";
       case "/finance/food-ration":
         return "Maliyyə";
+      case "/branches":
+        return "Filiallar";
       default:
         return "";
     }

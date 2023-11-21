@@ -17,6 +17,7 @@ import "./assets/css/pages/loginPage.css";
 import "./assets/css/pages/tablePage.css";
 import "./assets/css/pages/salaryPage.css";
 import "./assets/css/pages/stimulationPage.css";
+import "./assets/css/pages/branchesPage.css";
 
 
 import App from "./App";

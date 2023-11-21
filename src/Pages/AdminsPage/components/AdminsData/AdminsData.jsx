@@ -6,7 +6,7 @@ import Loading from "../../../../globalComponents/Loading/Loading";
 import MoreModal from "../../../../globalComponents/MoreModal/MoreModal";
 import { ADMINS_MODAL_ACTION_TYPE } from "../../../../redux/actions-type";
 
-const AdminsData = ({ adminPageNum, getPageNumber }) => {
+const AdminsData = ( ) => {
   const dispatch = useDispatch();
   const { admins, totalPages,loading } = useSelector((state) => state.adminsPagination);
   const [openMoreModal, setOpenMoreModal] = useState(false);
@@ -17,7 +17,7 @@ const AdminsData = ({ adminPageNum, getPageNumber }) => {
   ];
 
   const handleUpdate = (data, modalType) => {
-    const { fullName, email, password, _id, createdAt } = data;
+    const { fullName, email, password, _id, branch } = data;
     dispatch({
       type: ADMINS_MODAL_ACTION_TYPE.GET_ADMINS_MODAL,
       payload: {
@@ -26,6 +26,7 @@ const AdminsData = ({ adminPageNum, getPageNumber }) => {
           email,
           password,
           _id,
+          branch
         },
         openModal: modalType !== "more" ? true : false,
       },
@@ -54,7 +55,6 @@ const AdminsData = ({ adminPageNum, getPageNumber }) => {
                   key={i}
                   data={teacher}
                   mode="desktop"
-                  cellNumber={i + 1 + (adminPageNum - 1) * 10}
                   setOpenMoreModal={setOpenMoreModal}
                 />
               ))}
@@ -69,21 +69,9 @@ const AdminsData = ({ adminPageNum, getPageNumber }) => {
                 key={i}
                 data={teacher}
                 mode="tablet"
-                cellNumber={i + 1 + (adminPageNum - 1) * 10}
               />
             ))}
           </div>
-
-          {totalPages > 1 && (
-            <div className="pages-pagination">
-              <Pagination
-                current={adminPageNum}
-                defaultCurrent={1}
-                total={totalPages * 10}
-                onChange={getPageNumber}
-              />
-            </div>
-          )}
         </>
       )}
     </>

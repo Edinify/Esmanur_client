@@ -55,6 +55,12 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
           Maliyyə
         </NavLink>
       </li>
+      <li>
+        <NavLink to="/admins" onClick={closeSidebar} className="admin">
+          <AdminIcon />
+          Admin
+        </NavLink>
+      </li>
       {/* <li>
         <NavLink to="/dashboard" onClick={closeSidebar}>
           <DashboardIcon />
@@ -83,12 +89,6 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
         >
           <IncomesIcon />
           Həvəsləndirmə
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to="/admins" onClick={closeSidebar} className="admin">
-          <AdminIcon />
-          Admin
         </NavLink>
       </li> */}
     </ul>

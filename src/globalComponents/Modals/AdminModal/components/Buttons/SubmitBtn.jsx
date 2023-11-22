@@ -31,7 +31,7 @@ const SubmitBtn = ({
     } else {
       dispatch(
         createAdminAction({
-          ...adminsModalData, branch: user?.branch || ''
+          ...adminsModalData
         })
       );
     }

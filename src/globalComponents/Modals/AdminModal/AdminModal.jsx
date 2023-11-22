@@ -11,32 +11,28 @@ import { ValidationSchema } from "./components/ValidationSchema/ValidationSchema
 import Status from "./components/Buttons/Status";
 import SubmitBtn from "./components/Buttons/SubmitBtn";
 import InputField from "./components/Inputs/InputField";
+import Category from "./components/InputDropdowns/Category";
 
 const AdminModal = () => {
   const dispatch = useDispatch();
-  const { adminsModalData } = useSelector(
-    (state) => state.adminsModal
-  );
+  const { branchesData, loading } = useSelector((state) => state.branchesData);
+  const { adminsModalData } = useSelector((state) => state.adminsModal);
   const [classIcon, setClassIcon] = useState(false);
   const inputNameArr1 = ["fullName", "email", "password"];
   const [deleteModal, setDeleteModal] = useState(false);
-
-
-  const handleDeleteModal = () => {
-    setDeleteModal(!deleteModal);
-  };
-
+  const [categoryOpen, setCategoryOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   // formik
   const formik = useFormik({
     initialValues: {
+      branch: adminsModalData.branch ? adminsModalData.branch : "",
       fullName: adminsModalData.fullName ? adminsModalData.fullName : "",
       email: adminsModalData.email ? adminsModalData.email : "",
       password: adminsModalData.password ? adminsModalData.password : "",
     },
     validationSchema: ValidationSchema,
   });
-
   const setInputValue = useCallback(
     (key, value) =>
       formik.setValues({
@@ -46,6 +42,24 @@ const AdminModal = () => {
     [formik]
   );
 
+  const handleDeleteModal = () => {
+    setDeleteModal(!deleteModal);
+  };
+  const categoryDropdown = () => {
+    setCategoryOpen(!categoryOpen);
+  };
+  const categoryAddData = (item) => {
+    setInputValue("branch", item.name);
+    dispatch({
+      type: ADMINS_MODAL_ACTION_TYPE.GET_ADMINS_MODAL,
+      payload: {
+        data: { ...adminsModalData, branch: item._id },
+        openModal: true,
+      },
+    });
+    setCategoryOpen(false);
+    setSelectedCategory(item);
+  };
   const closeModal = () => {
     dispatch({
       type: ADMINS_MODAL_ACTION_TYPE.GET_ADMINS_MODAL,
@@ -57,6 +71,16 @@ const AdminModal = () => {
     dispatch(setLoadingAdminAction(false));
   }, [dispatch]);
 
+
+  useEffect(() => {
+    if (adminsModalData?._id) {
+      if (adminsModalData.branch) {
+        setSelectedCategory(branchesData.find((item) => item._id === adminsModalData.branch));
+      }
+    }
+  }, []);
+
+  // console.log(adminsModalData);
 
   return (
     <div className="create-update-modal-con admin-modal">
@@ -77,6 +101,13 @@ const AdminModal = () => {
           }}
         >
           <div className="create-update-modal-form">
+            <Category
+              formik={formik}
+              selectedCategory={selectedCategory}
+              categoryDropdown={categoryDropdown}
+              categoryOpen={categoryOpen}
+              categoryAddData={categoryAddData}
+            />
             {inputNameArr1.map((name, index) => (
               <InputField
                 key={index}
@@ -104,20 +135,21 @@ const AdminModal = () => {
             funcType="create"
             closeModal={closeModal}
             setDeleteModal={setDeleteModal}
-
           />
         )}
 
         {adminsModalData?._id && (
           <div className="joined-time">
-            Qoşuldu:{" "}
-            {moment(adminsModalData.createdAt).format("YYYY.MM.DD")}
+            Qoşuldu: {moment(adminsModalData.createdAt).format("YYYY.MM.DD")}
           </div>
         )}
-        {
-          deleteModal &&
-          <DeleteAdminModal type="admin" data={adminsModalData}  deleteMod={handleDeleteModal}/>
-        }
+        {deleteModal && (
+          <DeleteAdminModal
+            type="admin"
+            data={adminsModalData}
+            deleteMod={handleDeleteModal}
+          />
+        )}
       </div>
     </div>
   );

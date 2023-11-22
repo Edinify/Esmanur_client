@@ -114,7 +114,7 @@ export const createAdminAction = (adminData) => async (dispatch) => {
   console.log(adminData);
   dispatch(adminModalLoading(true));
   try {
-    const {  } = await REGISTERAPI.post("/admin/sign", adminData);
+    const { data } = await REGISTERAPI.post("/admin/sign", adminData);
     dispatch(getAdminsAction());
     dispatch({
       type: ADMINS_MODAL_ACTION_TYPE.ADMIN_OPEN_MODAL,
@@ -134,7 +134,7 @@ export const createAdminAction = (adminData) => async (dispatch) => {
             AccessToken: token.data.accesstoken,
           })
         );
-        const {  } = await REGISTERAPI.post("/admin/sign", adminData);
+        const { data } = await REGISTERAPI.post("/admin/sign", adminData);
         dispatch(getAdminsAction());
         dispatch({
           type: ADMINS_MODAL_ACTION_TYPE.ADMIN_OPEN_MODAL,

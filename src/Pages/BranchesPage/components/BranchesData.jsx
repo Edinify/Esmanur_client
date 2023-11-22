@@ -9,9 +9,9 @@ const BranchesData = ({ getPageNumber, page, dataHead = [] }) => {
   const { branchesData, loading } = useSelector((state) => state.branchesData);
   const { user } = useSelector((state) => state.user);
 
-// console.log(user);
+  // console.log(user);
   return (
-    <>
+    <div className="container">
       {loading ? (
         <Loading />
       ) : (
@@ -21,7 +21,7 @@ const BranchesData = ({ getPageNumber, page, dataHead = [] }) => {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

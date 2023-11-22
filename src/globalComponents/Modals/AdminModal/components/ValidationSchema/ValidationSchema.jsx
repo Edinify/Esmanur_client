@@ -5,6 +5,7 @@ const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2
 
 
 export const ValidationSchema = yup.object().shape({
+    branch: yup.string().required('Bu xana tələb olunur.'),
     fullName: yup.string().min(3, 'Mininum 3 hərfdən ibarət olmalıdır.').required('Bu xana tələb olunur.'),
     email: yup.string().email('Emaili doğru daxil edin.').required('Bu xana tələb olunur.'),
     password: yup.string().min(6, 'Şifrə minimum 6 hərfdən ibarət olmalıdır.').required("Bu xana tələb olunur."),

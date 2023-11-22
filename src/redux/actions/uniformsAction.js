@@ -60,7 +60,7 @@ export const getUniformsPaginationAction =
           endDate || ""
         }&monthCount=${monthCount || ""}`
       );
-      console.log(data,"get")
+      // console.log(data,"get")
       dispatch({
         type: UNIFORMS_ACTION_TYPE.GET_UNIFORMS_LAST_PAGE,
         payload: page,

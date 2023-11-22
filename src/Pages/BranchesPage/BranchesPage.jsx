@@ -3,6 +3,7 @@ import { ReactComponent as PlusIcon } from "../../assets/icons/Plus.svg";
 import { useSelector, useDispatch } from "react-redux";
 import BranchesData from "./components/BranchesData";
 import { BRANCHES_MODAL_ACTION_TYPE } from "../../redux/actions-type";
+import GlobalHead from "../../globalComponents/GlobalHead/GlobalHead";
 
 const BranchesPage = () => {
   const dispatch = useDispatch();
@@ -12,17 +13,11 @@ const BranchesPage = () => {
       payload: { data: {}, openModal: true },
     });
   };
- 
+
   return (
-    <div className="branches-page">
-      <div className="container">
-        <div className="branches-con">
-          <BranchesData />
-          <button className="add-branch add" onClick={openBranchModal}>
-            <PlusIcon /> <p>Əlavə et</p>
-          </button>
-        </div>
-      </div>
+    <div className="details-page branches-page">
+      <GlobalHead openModal={openBranchModal} search={false} />
+      <BranchesData />
     </div>
   );
 };

@@ -6,11 +6,17 @@ import { Pagination } from "antd";
 import Loading from "../../../../../globalComponents/Loading/Loading";
 import { getExpensesPaginationAction } from "../../../../../redux/actions/expensesAction";
 
-const ExpensesData = ({  getPageNumber,  page, dataHead = [] }) => {
+const ExpensesData = ({  getPageNumber,  page}) => {
   const dispatch = useDispatch();
   const expensesData = useSelector((state) => state?.expensesData.expensesData);
   const { totalPages, loading, lastPage: expensesPageNum } = useSelector((state) => state.expensesData);
-  const expensesHead = [...dataHead];
+  const expensesHead = [
+    { id: 1, label: "Təyinat" },
+    { id: 2, label: "Məbləğ" },
+    { id: 3, label: "Tarix" },
+    { id: 4, label: "" },
+  ];
+
 
 
 // useEffect(() => {

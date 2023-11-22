@@ -19,6 +19,7 @@ import { dashBoardreducer } from "./reducers/dashboardReducer";
 import forgotPasswordReducer from "./reducers/forgetPasswordReducer";
 import { expensesReducer } from "./reducers/expensesPaginationReducer";
 import { foodRationReducer } from "./reducers/foodRationPaginationReducer";
+import { uniformsReducer } from "./reducers/uniformsPaginationReducer";
 import { allCoursesReducer } from "./reducers/allCoursesReducer";
 import { incomeReducer } from "./reducers/incomeReducer";
 import { funcComponentReducer } from "./reducers/funcComponentReducer";
@@ -28,6 +29,7 @@ import { teachersModalReducer } from "./reducers/teachersModalReducer";
 import { adminsModalReducer } from "./reducers/adminsModalReducer";
 import {expensesModalReducer} from "./reducers/expensesModalReducer"
 import { foodRationModalReducer } from "./reducers/foodRationModalReducer";
+import { uniformsModalReducer } from "./reducers/uniformsModalReducer";
 import { incomesModalReducer } from "./reducers/incomesModalReducer";
 import { sidebarOpenReducer } from "./reducers/sidebarOpenReducer";
 import { stimulationTypeReducer } from "./reducers/stimulationTypeReducer";
@@ -90,7 +92,8 @@ studentStatus:studentStatusReducer,
 branchesModal: branchesModalReducer,
 teachersCategory: teachersCategoryReducer,
 branchesData:branchesReducer,
-
+uniformModal: uniformsModalReducer,
+uniformsData: uniformsReducer
 })
 // test
 

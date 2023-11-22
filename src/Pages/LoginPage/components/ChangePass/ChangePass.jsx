@@ -83,7 +83,8 @@ export const ChangePass = () => {
       </>
       <div className="login-right change">
       <div className="login-right-header">
-        <LoginLogo/>
+        {/* <LoginLogo/> */}
+        <h1 className="logo-title">Esmanur</h1>
       <h2>Şifrəni dəyiş</h2>
       </div>
       <Box

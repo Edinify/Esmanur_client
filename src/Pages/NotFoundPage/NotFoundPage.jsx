@@ -1,26 +1,18 @@
 import React, { useEffect } from 'react';
 import "./notFoundPage.css";
 import {  useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import NotFoundPageImg from "../../assets/images/notfound.svg";
-import { useCustomHook } from '../../globalComponents/GlobalFunctions/globalFunctions';
 
 const NotFoundPage = ({setNotFound}) => {
   const {user} = useSelector(state=>state.user);
-  const dispatch = useDispatch()
   const navigate = useNavigate();
   const handleNav=()=>{
     if(user.role==="admin"){
-      navigate("/")
+      navigate("/finance/incomes")
     }
     else if (user.role==="super-admin"){
-      navigate("/")
-    }
-    else if (user.role==="teacher"){
-      navigate("/teacher-panel/home")
-    }
-    else if (user.role==="student"){
-      navigate("/student-panel")
+      navigate("/branches")
     }
   }
 

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import FuncComponent from "../../../../globalComponents/FuncComponent/FuncComponent";
+import { useSelector } from "react-redux";
 const AdminCard = ({
   data,
   mode,
@@ -8,6 +9,7 @@ const AdminCard = ({
   handleUpdate,
 }) => {
   const [deleteModal, setDeleteModal] = useState(false);
+  const { branchesData, loading } = useSelector((state) => state.branchesData);
 
   const handleDeleteModal = () => {
     setDeleteModal(!deleteModal);
@@ -35,6 +37,12 @@ const AdminCard = ({
             </div>
           </td>
           <td>
+            <div className="td-con">
+              <div className="table-scroll-text">{branchesData && branchesData?.find((item) => item._id ===data.branch)?.name}</div>
+              <div className="right-fade"></div>
+            </div>
+          </td>
+          <td>
             <FuncComponent
               handleDeleteModal={handleDeleteModal}
               handleUpdate={handleUpdate}
@@ -51,6 +59,10 @@ const AdminCard = ({
               <li className="email">
                 <span className="type">Email:</span>
                 <p>{data.email ? data.email : "boş"}</p>
+              </li>
+              <li className="email">
+                <span className="type">Filial:</span>
+                <p>{branchesData && branchesData?.find((item) => item._id ===data.branch)?.name}</p>
               </li>
             </ul>
           </div>

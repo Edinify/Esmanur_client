@@ -13,6 +13,7 @@ const AdminsData = ( ) => {
   const tableHead = [
     { id: 1, label: "Müəllim adı" },
     { id: 3, label: "Email" },
+    { id: 4, label: "Filial" },
     { id: 7, label: "" },
   ];
 

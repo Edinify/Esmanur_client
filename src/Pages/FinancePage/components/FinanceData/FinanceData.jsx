@@ -10,6 +10,7 @@ import {
   EXPENSES_ACTION_TYPE,
   INCOME_ACTION_TYPE,
   FOOD_RATION_ACTION_TYPE,
+  UNIFORMS_ACTION_TYPE,
 } from "../../../../redux/actions-type";
 import IncomesData from "./IncomesData/IncomesData";
 import ExpensesData from "./ExpensesData/ExpensesData";
@@ -178,6 +179,7 @@ const FinanceData = () => {
       );
     }
   };
+ 
   const getDateFilteredFoodRation = (pageNumber) => {
     dispatch({
       type: FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_LAST_PAGE,
@@ -205,6 +207,36 @@ const FinanceData = () => {
         financeMonthsFilter ? financeMonthsFilter : 1 //month
       )
     );
+  };
+
+  const getPageNumberUniforms = (pageNumber) => {
+    if (financeChooseDate.startDate && financeChooseDate.endDate) {
+      dispatch({
+        type: UNIFORMS_ACTION_TYPE.GET_UNIFORMS_LAST_PAGE,
+        payload: pageNumber,
+      });
+      dispatch(
+        getFoodRationPaginationAction(
+          pageNumber,
+          financeChooseDate.startDate,
+          financeChooseDate.endDate,
+          "" //month
+        )
+      );
+    } else {
+      dispatch({
+        type: UNIFORMS_ACTION_TYPE.GET_UNIFORMS_LAST_PAGE,
+        payload: pageNumber,
+      });
+      dispatch(
+        getUniformsPaginationAction(
+          pageNumber,
+          "",
+          "",
+          financeMonthsFilter ? financeMonthsFilter : 1 //month
+        )
+      );
+    }
   };
 
   useEffect(() => {
@@ -254,7 +286,7 @@ const FinanceData = () => {
 
       {location.pathname === "/finance/uniforms" && (
         <UniformsData
-          getPageNumber={getPageNumberFoodRation}
+          getPageNumber={getPageNumberUniforms}
           page={"finance"}
         />
       )}

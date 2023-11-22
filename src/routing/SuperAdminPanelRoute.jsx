@@ -12,8 +12,8 @@ import BranchesPage from "../Pages/BranchesPage/BranchesPage";
 const SuperAdminPanelRoute = () => {
   return (
     <>
-      <Route path="/students" element={<StudentsPage />} />
-      <Route path="/teachers" element={<TeachersPage />} />
+      {/* <Route path="/students" element={<StudentsPage />} />
+      <Route path="/teachers" element={<TeachersPage />} /> */}
       <Route path="/admins" element={<AdminsPage />} />
       <Route path="/finance/expenses" element={<FinancePage />} />
       <Route path="/finance/incomes" element={<FinancePage />} />

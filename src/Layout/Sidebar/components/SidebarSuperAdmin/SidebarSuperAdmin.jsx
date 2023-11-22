@@ -34,7 +34,7 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
 
   return (
     <ul className="sidebar-nav-list">
-      <li>
+      {/* <li>
         <NavLink to="/students" onClick={closeSidebar}>
           <StudentsIcon />
           Tələbələr
@@ -45,7 +45,7 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
           <TeachersIcon />
           Müəllimlər
         </NavLink>
-      </li>
+      </li> */}
       <li>
         <NavLink
           to="/finance/incomes"

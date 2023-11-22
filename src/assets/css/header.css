@@ -47,7 +47,7 @@
   align-items: center;
 }
 .main-nav-icons .branch-name {
-  color: var(--neutrals-600);
+  color: var(--neutrals-900);
   font-size: 14px;
   font-weight: 700;
   overflow: hidden;

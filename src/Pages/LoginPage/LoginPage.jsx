@@ -69,7 +69,8 @@ export const Login = () => {
 
       <div className="login-right">
         <div className="login-right-header">
-          <LoginLogo />
+          {/* <LoginLogo /> */}
+          <h1 className="logo-title">Esmanur</h1>
           <h2>Daxil olun</h2>
         </div>
 

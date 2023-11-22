@@ -92,7 +92,8 @@ export const SendCode = () => {
       </>
       <div className="login-right send">
         <div className="login-right-header">
-          <LoginLogo />
+          {/* <LoginLogo /> */}
+          <h1 className="logo-title">Esmanur</h1>
           <h2>Mobil nömrənizə kod göndərdik</h2>
           <p>
             {hiddenEmail} nömrənizə göndərilən 6 rəqəmli doğrulama kodunu daxil

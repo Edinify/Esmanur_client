@@ -1,34 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as DeleteIcon } from "../../../../../assets/icons/Delete button.svg";
-import { createFoodRationAction, updateFoodRationAction } from "../../../../../redux/actions/foodRationAction";
+import {
+  createFoodRationAction,
+  updateFoodRationAction,
+} from "../../../../../redux/actions/foodRationAction";
 import LoadingBtn from "../../../../Loading/components/LoadingBtn/LoadingBtn";
 import { useCustomHook } from "../../../../GlobalFunctions/globalFunctions";
 
 export default function SubmitBtn({
+  formik,
   funcType,
   foodRationModalData,
-  closeModal,
   setDeleteModal,
 }) {
   const dispatch = useDispatch();
-  const { foodRationModalLoading } = useSelector((state) => state.foodRationModal);
+  const { foodRationModalLoading } = useSelector(
+    (state) => state.foodRationModal
+  );
+  const { user } = useSelector((state) => state.user);
   const { getFinanceDataAfterCreate } = useCustomHook();
+  const objectLength = Object.keys(foodRationModalData).length;
+
+  const [isDisabled, setIsDisabled] = useState(() => {
+    if (funcType === "update") {
+      return false;
+    } else {
+      return true;
+    }
+  });
 
   const expensesCreate = () => {
     if (foodRationModalData?._id) {
-      dispatch(updateFoodRationAction(foodRationModalData?._id, foodRationModalData));
+      dispatch(
+        updateFoodRationAction(foodRationModalData?._id, foodRationModalData)
+      );
     } else {
-      dispatch(createFoodRationAction({ ...foodRationModalData }));
+      dispatch(createFoodRationAction({ ...foodRationModalData, branch: user?.branch || ""  }));
     }
     getFinanceDataAfterCreate();
   };
+
+  useEffect(() => {
+    setIsDisabled(() => {
+      if (funcType === "update") {
+        if (Object.keys(formik.errors).length === 0) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        if (formik.isValid && objectLength !== 0) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    });
+  }, [formik.errors]);
+
 
   return (
     <div>
       {funcType === "update" ? (
         <div className="create-update-modal-btn update ">
-          <button onClick={expensesCreate} disabled={foodRationModalLoading}>
+          <button
+            onClick={expensesCreate}
+            disabled={isDisabled || foodRationModalLoading}
+          >
             {foodRationModalLoading ? (
               <LoadingBtn />
             ) : funcType === "update" ? (
@@ -50,7 +89,10 @@ export default function SubmitBtn({
         </div>
       ) : (
         <div className="create-update-modal-btn">
-          <button onClick={expensesCreate} disabled={foodRationModalLoading}>
+          <button
+            onClick={expensesCreate}
+            disabled={isDisabled || foodRationModalLoading}
+          >
             {foodRationModalLoading ? (
               <LoadingBtn />
             ) : funcType === "update" ? (

@@ -75,6 +75,14 @@
 .login .login-right .password-class{
   position: relative;
 }
+.login .login-right .login-right-header .logo-title{
+  /* color: #fff; */
+  color: rgb(0, 174, 255);
+    font-weight: 700;
+    font-size: 40px;
+    /* margin-bottom: 10px; */
+    /* border-bottom: 1px solid rgb(0, 174, 255); */
+}
 .login .login-right .login-right-header  h2 {
   /* text-align: center; */
   margin: 24px 0  16px 0;

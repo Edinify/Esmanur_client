@@ -9,12 +9,12 @@ import { apiRoot } from "../../apiRoot";
 
 const API = axios.create({
   baseURL: `${apiRoot}/expense`,
-  withCredentials:true
+  withCredentials: true,
 });
 
 const refreshApi = axios.create({
   baseURL: `${apiRoot}/user/auth/refresh_token`,
-  withCredentials:true
+  withCredentials: true,
 });
 
 API.interceptors.request.use((req) => {
@@ -26,7 +26,6 @@ API.interceptors.request.use((req) => {
 
   return req;
 });
-
 
 const toastSuccess = (message) => {
   toast.success(message, {
@@ -52,17 +51,14 @@ const expensesModalLoading = (loadingValue) => ({
 });
 
 export const getExpensesPaginationAction =
-  (page = 1, startDate, endDate, monthCount, category, sort) =>
+  (page = 1, startDate, endDate, monthCount) =>
   async (dispatch) => {
     dispatch(setLoadingExpensesAction(true));
-    // console.log(page, startDate, endDate, monthCount, category, sort);
     try {
       const { data } = await API.get(
         `/?page=${page}&startDate=${startDate || ""}&endDate=${
           endDate || ""
-        }&monthCount=${monthCount || ""}&category=${category || ""}&sort=${
-          sort || "oldest"
-        }`
+        }&monthCount=${monthCount || ""}`
       );
       // console.log(data,"get")
 
@@ -91,9 +87,7 @@ export const getExpensesPaginationAction =
           const { data } = await API.get(
             `/?page=${page}&startDate=${startDate || ""}&endDate=${
               endDate || ""
-            }&monthCount=${monthCount || ""}&category=${category || ""}&sort=${
-              sort || "oldest"
-            }`
+            }&monthCount=${monthCount || ""}`
           );
 
           dispatch({
@@ -117,19 +111,14 @@ export const getExpensesPaginationAction =
   };
 
 export const createExpensesAction = (expensesData) => async (dispatch) => {
+  // console.log(expensesData);
   dispatch(expensesModalLoading(true));
   try {
     const { data } = await API.post("/", expensesData);
-    if (window.location.pathname ===  "/finance/food-ration") {
-      dispatch(
-        getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
-      );
-    } else {
-      dispatch(
-        getExpensesPaginationAction(data.lastPage, "", "", 1, "", "oldest")
-      );
-    }
-   
+
+    dispatch(
+      getExpensesPaginationAction(data.lastPage, "", "", 1)
+    );
 
     // console.log(data);
     dispatch({
@@ -152,15 +141,10 @@ export const createExpensesAction = (expensesData) => async (dispatch) => {
 
         const { data } = await API.post("/", expensesData);
         console.log(data, "xeeeerc");
-        if (window.location.pathname ===  "/finance/food-ration") {
-          dispatch(
-            getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
-          );
-        } else {
-          dispatch(
-            getExpensesPaginationAction(data.lastPage, "", "", 1, "", "oldest")
-          );
-        }
+
+        dispatch(
+          getExpensesPaginationAction(data.lastPage, "", "", 1)
+        );
         dispatch({
           type: EXPENSES_MODAL_ACTION_TYPE.EXPENSES_OPEN_MODAL,
           payload: false,
@@ -223,15 +207,8 @@ export const deleteExpensesAction = (_id) => async (dispatch) => {
   try {
     await API.delete(`/${_id}`);
     dispatch({ type: EXPENSES_ACTION_TYPE.DELETE_EXPENSES, payload: _id });
-    if (window.location.pathname ===  "/finance/food-ration") {
-      dispatch(
-        getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
-      );
-    } else {
-      dispatch(
-        getExpensesPaginationAction(1, "", "", 1, "", "oldest")
-      );
-    }
+
+    dispatch(getExpensesPaginationAction(1, "", "", 1));
     toastSuccess("Məhsul silindi");
   } catch (error) {
     const originalRequest = error.config;
@@ -248,15 +225,8 @@ export const deleteExpensesAction = (_id) => async (dispatch) => {
 
         await API.delete(`/${_id}`);
         dispatch({ type: EXPENSES_ACTION_TYPE.DELETE_EXPENSES, payload: _id });
-        if (window.location.pathname ===  "/finance/food-ration") {
-          dispatch(
-            getExpensesPaginationAction(1, "", "", 1, "food", "oldest")
-          );
-        } else {
-          dispatch(
-            getExpensesPaginationAction(1, "", "", 1, "", "oldest")
-          );
-        }
+
+        dispatch(getExpensesPaginationAction(1, "", "", 1));
         toastSuccess("Məhsul silindi");
       } catch (error) {
         console.log(error);

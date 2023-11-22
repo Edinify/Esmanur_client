@@ -10,18 +10,12 @@ const ExpensesData = ({  getPageNumber,  page, dataHead = [] }) => {
   const dispatch = useDispatch();
   const expensesData = useSelector((state) => state?.expensesData.expensesData);
   const { totalPages, loading, lastPage: expensesPageNum } = useSelector((state) => state.expensesData);
-  const expensesHead = page !== 'finance' ? [
-    { id: 1, label: "Xərcin təyinatı" },
-    { id: 2, label: "Xərcin dəyəri" },
-    { id: 3, label: "Xərcin tarixi" },
-    { id: 4, label: "" },
-  ] : [...dataHead];
+  const expensesHead = [...dataHead];
 
-// console.log(expensesPageNum);
-// console.log(lastPage);
-useEffect(() => {
-  dispatch(getExpensesPaginationAction(1, "", "", 1, "", "oldest"));
-}, []);
+
+// useEffect(() => {
+//   dispatch(getExpensesPaginationAction(1, "", "", 1));
+// }, []);
 
   return (
     <>

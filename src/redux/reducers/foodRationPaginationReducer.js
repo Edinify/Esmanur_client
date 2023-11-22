@@ -13,7 +13,7 @@ export const foodRationReducer = (state = initialState, action) => {
     case FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION:
       return {
         ...state,
-        foodRationData: action.payload.expenses,
+        foodRationData: action.payload.foods,
         totalPages: action.payload.totalPages,
         // loading: false,
       };
@@ -21,7 +21,7 @@ export const foodRationReducer = (state = initialState, action) => {
     case FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_PAGINATION:
       return {
         ...state,
-        foodRationData: action.payload.expenses,
+        foodRationData: action.payload.foods,
         totalPages:action.payload.totalPages,
       };
     case FOOD_RATION_ACTION_TYPE.FOOD_RATION_LOADING:

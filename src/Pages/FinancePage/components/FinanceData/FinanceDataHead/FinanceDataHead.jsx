@@ -14,6 +14,7 @@ import FinanceDropdown from "./FinanceDropdown";
 const FinanceDataHead = () => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const {user} = useSelector(state=>state.user);
   const openIncomesModal = () => {
     dispatch({
       type: INCOMES_MODAL_ACTION_TYPE.GET_INCOMES_MODAL,
@@ -47,7 +48,7 @@ const FinanceDataHead = () => {
     } else if (location.pathname === "/finance/food-ration") {
       openFoodRationModal();
     } else if (location.pathname === "/finance/uniforms") {
-      openUniformModal();
+      user.role==="super-admin" && openUniformModal();
     }
   };
   return (
@@ -77,14 +78,17 @@ const FinanceDataHead = () => {
         >
           Qida rasionu
         </Link>
-        <Link
-          to="/finance/uniforms"
-          className={`data-type ${
-            location.pathname === "/finance/uniforms" ? "active" : ""
-          }`}
-        >
-          Formalar
-        </Link>
+        {user.role==="super-admin" &&
+           <Link
+           to="/finance/uniforms"
+           className={`data-type ${
+             location.pathname === "/finance/uniforms" ? "active" : ""
+           }`}
+         >
+           Formalar
+         </Link> 
+        }
+     
       </div>
 
       <div className="bottom">

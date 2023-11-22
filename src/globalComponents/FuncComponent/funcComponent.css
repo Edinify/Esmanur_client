@@ -35,7 +35,9 @@
 .delete-update-modal h4:first-child {
   padding: 10px 60px 0 15px;
 }
-
+.delete-update-modal h4.only {
+  padding: 10px 60px 10px 15px;
+}
 .delete-update-modal .delete-func {
   color: #f03b2a;
   padding: 10px 60px 12px 15px;

@@ -27,7 +27,7 @@ const FuncComponent = ({
   deleteIncomesModal,
   deleteFineModal,
   deleteBonusModal,
-  dataType,
+  dataType = "",
 }) => {
   const dispatch = useDispatch();
   const { funcComp } = useSelector((state) => state.funcComponent);
@@ -72,13 +72,17 @@ const FuncComponent = ({
         ref={modalRef}
       >
         <>
-          <h4 onClick={() => handleUpdate(data)}>Yenilə</h4>
-          <h4
-            className="delete-func"
-            onClick={() => handleDeleteModal(data._id)}
-          >
-            Sil
-          </h4>
+          <h4 onClick={() => handleUpdate(data)} className={dataType === "branches" ? 'only' : ''}>Yenilə</h4>
+          {dataType !== "branches" ? (
+            <h4
+              className="delete-func"
+              onClick={() => handleDeleteModal(data._id)}
+            >
+              Sil
+            </h4>
+          ) : (
+            ''
+          )}
         </>
       </div>
       {deleteModal && (
@@ -94,22 +98,46 @@ const FuncComponent = ({
         <DeleteStudentModal data={data} deleteMod={handleDeleteModal} />
       )}
       {deleteExpensesModal && (
-        <DeleteExpensesModal data={data} deleteMod={handleDeleteModal} type={'out-modal'}/>
+        <DeleteExpensesModal
+          data={data}
+          deleteMod={handleDeleteModal}
+          type={"out-modal"}
+        />
       )}
       {deleteFoodRationModal && (
-        <DeleteFoodRationModal data={data} deleteMod={handleDeleteModal} type={'out-modal'}/>
+        <DeleteFoodRationModal
+          data={data}
+          deleteMod={handleDeleteModal}
+          type={"out-modal"}
+        />
       )}
-       {deleteUniformModal && (
-        <DeleteUniformModal data={data} deleteMod={handleDeleteModal} type={'out-modal'}/>
+      {deleteUniformModal && (
+        <DeleteUniformModal
+          data={data}
+          deleteMod={handleDeleteModal}
+          type={"out-modal"}
+        />
       )}
       {deleteIncomesModal && (
-        <DeleteIncomesModal data={data} deleteMod={handleDeleteModal} type={'out-modal'}/>
+        <DeleteIncomesModal
+          data={data}
+          deleteMod={handleDeleteModal}
+          type={"out-modal"}
+        />
       )}
       {deleteBonusModal && (
-        <DeleteBonusModal data={data} deleteMod={handleDeleteModal} type={'out-modal'}/>
+        <DeleteBonusModal
+          data={data}
+          deleteMod={handleDeleteModal}
+          type={"out-modal"}
+        />
       )}
       {deleteFineModal && (
-        <DeleteFineModal data={data} deleteMod={handleDeleteModal} type={'out-modal'}/>
+        <DeleteFineModal
+          data={data}
+          deleteMod={handleDeleteModal}
+          type={"out-modal"}
+        />
       )}
     </div>
   );

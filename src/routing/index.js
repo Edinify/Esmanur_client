@@ -35,7 +35,7 @@ export const Routing = () => {
         }
       } else if (user.role === "admin" && !notFound) {
         if (location.pathname.startsWith("/login")) {
-          navigate("/students");
+          navigate("/finance/incomes");
         } else {
           return () => {};
         }

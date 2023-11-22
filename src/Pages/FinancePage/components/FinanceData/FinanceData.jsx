@@ -179,7 +179,6 @@ const FinanceData = () => {
       );
     }
   };
- 
   const getDateFilteredFoodRation = (pageNumber) => {
     dispatch({
       type: FOOD_RATION_ACTION_TYPE.GET_FOOD_RATION_LAST_PAGE,
@@ -216,7 +215,7 @@ const FinanceData = () => {
         payload: pageNumber,
       });
       dispatch(
-        getFoodRationPaginationAction(
+        getUniformsPaginationAction(
           pageNumber,
           financeChooseDate.startDate,
           financeChooseDate.endDate,
@@ -238,12 +237,41 @@ const FinanceData = () => {
       );
     }
   };
+  const getDateFilteredUniforms = (pageNumber) => {
+    dispatch({
+      type: UNIFORMS_ACTION_TYPE.GET_UNIFORMS_LAST_PAGE,
+      payload: pageNumber,
+    });
+    dispatch(
+      getUniformsPaginationAction(
+        pageNumber,
+        financeChooseDate.startDate,
+        financeChooseDate.endDate,
+        "" //month
+      )
+    );
+  };
+  const getMonthFilteredUniforms = (pageNumber) => {
+    dispatch({
+      type: UNIFORMS_ACTION_TYPE.GET_UNIFORMS_LAST_PAGE,
+      payload: pageNumber,
+    });
+    dispatch(
+      getUniformsPaginationAction(
+        pageNumber,
+        "",
+        "",
+        financeMonthsFilter ? financeMonthsFilter : 1 //month
+      )
+    );
+  };
 
   useEffect(() => {
     if (financeChooseDate?.startDate && financeChooseDate?.endDate) {
       getDateFilteredIncomes(incomesLastPage);
       getDateFilteredExpenses(expensesLastPage);
       getDateFilteredFoodRation(foodRationLastPage);
+      getDateFilteredUniforms(uniformsLastPage)
     }
   }, [financeChooseDate]);
 
@@ -252,6 +280,7 @@ const FinanceData = () => {
       getMonthFilteredIncomes(incomesLastPage);
       getMonthFilteredExpenses(expensesLastPage);
       getMonthFilteredFoodRation(foodRationLastPage);
+      getMonthFilteredUniforms(uniformsLastPage)
     }
   }, [financeMonthsFilter]);
 
@@ -265,16 +294,10 @@ const FinanceData = () => {
   return (
     <div>
       {location.pathname === "/finance/incomes" && (
-        <IncomesData
-          getPageNumber={getPageNumberIncomes}
-          page={"finance"}
-        />
+        <IncomesData getPageNumber={getPageNumberIncomes} page={"finance"} />
       )}
       {location.pathname === "/finance/expenses" && (
-        <ExpensesData
-          getPageNumber={getPageNumberExpenses}
-          page={"finance"}
-        />
+        <ExpensesData getPageNumber={getPageNumberExpenses} page={"finance"} />
       )}
 
       {location.pathname === "/finance/food-ration" && (
@@ -285,10 +308,7 @@ const FinanceData = () => {
       )}
 
       {location.pathname === "/finance/uniforms" && (
-        <UniformsData
-          getPageNumber={getPageNumberUniforms}
-          page={"finance"}
-        />
+        <UniformsData getPageNumber={getPageNumberUniforms} page={"finance"} />
       )}
     </div>
   );

@@ -25,6 +25,7 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
     "/finance/incomes",
     "/finance/expenses",
     "/finance/food-ration",
+    "/finance/uniforms",
   ];
 
   const isFinanceRoute = (route) => {

@@ -7,6 +7,7 @@ import { CourseModal } from "./globalComponents/Modals/CourseModal/CourseModal";
 import { StudentModal } from "./globalComponents/Modals/StudentModal/StudentModal";
 import { ExpensesModal } from "./globalComponents/Modals/ExpensesModal/ExpensesModal";
 import { FoodRationModal } from "./globalComponents/Modals/FoodRationModal/FoodRationModal";
+import { UniformsModal } from "./globalComponents/Modals/UniformModal/UniformsModal";
 import { IncomesModal } from "./globalComponents/Modals/IncomesModal/IncomesModal";
 import {BonusModal} from "./globalComponents/Modals/BonusModal/BonusModal";
 import { FineModal } from "./globalComponents/Modals/FineModal/FineModal";
@@ -23,6 +24,7 @@ function App() {
   const { adminsOpenModal } = useSelector((state) => state.adminsModal);
   const { expensesOpenModal } = useSelector((state) => state.expensesModal);
   const { foodRationOpenModal } = useSelector((state) => state.foodRationModal);
+  const { uniformOpenModal } = useSelector((state) => state.uniformModal);
   const { incomesOpenModal } = useSelector((state) => state.incomesModal);
   const { bonusOpenModal } = useSelector((state) => state.bonusModal);
   const { fineOpenModal } = useSelector((state) => state.fineModal);
@@ -96,6 +98,7 @@ function App() {
       {adminsOpenModal && <AdminModal />}
       {expensesOpenModal && <ExpensesModal />}
       {foodRationOpenModal && <FoodRationModal />}
+      {uniformOpenModal && <UniformsModal />}
       {incomesOpenModal && <IncomesModal />}
       {bonusOpenModal && <BonusModal />}
       {fineOpenModal && <FineModal />}

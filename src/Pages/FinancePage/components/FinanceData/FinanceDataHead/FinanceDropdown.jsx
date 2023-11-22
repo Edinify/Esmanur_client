@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ReactComponent as ArrowIcon } from "../../../../assets/icons/finance/arrow-down.svg";
-import { FINANCE_FILTER_ACTION_TYPE } from "../../../../redux/actions-type";
+import { ReactComponent as ArrowIcon } from "../../../../../assets/icons/finance/arrow-down.svg";
+import { FINANCE_FILTER_ACTION_TYPE } from "../../../../../redux/actions-type";
 
 const FinanceDropdown = ({ type }) => {
   const dispatch = useDispatch();

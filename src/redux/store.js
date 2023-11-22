@@ -4,7 +4,6 @@ import thunk from "redux-thunk";
 import authReducer from "./reducers/authReducer";
 import { changePasswordReducer } from "./reducers/changePasswordReducer";
 import datePickerReducer from "./reducers/datepickerReducer";
-import notificationsReducer from "./reducers/notificationsReducer";
 import { dropdownReducer } from "./reducers/dropdownReducer";
 import { dropdownNameErrReducer } from "./reducers/dropdownNameErrReducer";
 import { userReducer } from "./reducers/userReducer";
@@ -55,7 +54,6 @@ auth:authReducer,
 changePass:changePasswordReducer,
 salaryPagination:salaryPaginationReducer,
 datepicker:datePickerReducer,
-notifications:notificationsReducer,
 dropdownName:dropdownReducer,
 dropdownNameError:dropdownNameErrReducer,
 user:userReducer,

@@ -46,7 +46,8 @@ export const ForgotPass = () => {
       </>
       <div className="login-right forgot ">
         <div className="login-right-header">
-          <LoginLogo />
+        <h1 className="logo-title">Esmanur</h1>
+          {/* <LoginLogo /> */}
           <h2>Şifrəni unutmusunuz?</h2>
           <p>İki addımda şifrəni yenilə.</p>
         </div>

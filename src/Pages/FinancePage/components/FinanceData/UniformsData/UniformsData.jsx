@@ -1,29 +1,24 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import FoodRationCard from "./FooadRationCard";
+import UniformCard from "./UniformCard";
 import { Pagination } from "antd";
 import Loading from "../../../../../globalComponents/Loading/Loading";
-import { getFoodRationPaginationAction } from "../../../../../redux/actions/foodRationAction";
+import { getUniformsPaginationAction } from "../../../../../redux/actions/uniformsAction";
 
-const FoodRationData = ({  getPageNumber,  page }) => {
+const UniformsData = ({  getPageNumber,  page }) => {
   const dispatch = useDispatch();
-  const foodRationData = useSelector((state) => state?.foodRationData.foodRationData);
-  const { totalPages, loading, lastPage: foodRationPageNum } = useSelector((state) => state.foodRationData);
-  const foodRationHead = [
-    { id: 1, label: "Qidanın adı" },
-    { id: 2, label: "Miqdarı" },
-    { id: 3, label: "Vahidin məbləği" },
-    { id: 3, label: "Ümumi məbləğ" },
-    { id: 3, label: "Tarix" },
-    { id: 4, label: "" },
+  const uniformsData = useSelector((state) => state?.uniformsData.uniformsData);
+  const { totalPages, loading, lastPage: uniformsPageNum } = useSelector((state) => state.uniformsData);
+  const uniformsHead = [
+    { id: 1, label: "Uşağın adı" },
+    { id: 2, label: "Formaların sayı" },
+    { id: 3, label: "Alış qiyməti" },
+    { id: 4, label: "Satış qiyməti" },
+    { id: 5, label: "Uşağın ödənişi" },
+    { id: 6, label: "Tarix" },
+    { id: 7, label: "" },
   ];
-
-// useEffect(() => {
-//   dispatch(getFoodRationPaginationAction(1, "", "", 1));
-// }, []);
-
-
   return (
     <>
       {loading ? (
@@ -33,18 +28,18 @@ const FoodRationData = ({  getPageNumber,  page }) => {
           <table className="details-table expenses-table">
             <thead>
               <tr>
-                {foodRationHead.map((head, i) => (
+                {uniformsHead.map((head, i) => (
                   <th key={i}>{head.label}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {foodRationData?.map((expense, i) => (
-                <FoodRationCard
+              {uniformsData?.map((expense, i) => (
+                <UniformCard
                   key={i}
                   data={expense}
                   mode="desktop"
-                  cellNumber={i + 1 + (foodRationPageNum - 1) * 10}
+                  cellNumber={i + 1 + (uniformsPageNum - 1) * 10}
                   page={page}
                 />
               ))}
@@ -52,12 +47,12 @@ const FoodRationData = ({  getPageNumber,  page }) => {
           </table>
 
           <div className="details-list-tablet incomes-page ">
-          {foodRationData?.map((expense, i) => (
-            <FoodRationCard
+          {uniformsData?.map((expense, i) => (
+            <UniformCard
               key={i}
               data={expense}
               mode="tablet"
-              cellNumber={i + 1 + (foodRationPageNum - 1) * 10}
+              cellNumber={i + 1 + (uniformsPageNum - 1) * 10}
               page={page}
             />
           ))}
@@ -66,7 +61,7 @@ const FoodRationData = ({  getPageNumber,  page }) => {
           {totalPages > 1 && (
             <div className="pages-pagination">
               <Pagination
-                current={foodRationPageNum}
+                current={uniformsPageNum}
                 defaultCurrent={1}
                 total={totalPages * 10}
                 onChange={getPageNumber}
@@ -79,4 +74,4 @@ const FoodRationData = ({  getPageNumber,  page }) => {
   );
 };
 
-export default FoodRationData;
+export default UniformsData;

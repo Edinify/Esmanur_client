@@ -6,8 +6,9 @@ import {
   INCOMES_MODAL_ACTION_TYPE,
   EXPENSES_MODAL_ACTION_TYPE,
   FOOD_RATION_MODAL_ACTION_TYPE,
-} from "../../../../redux/actions-type";
-import { ReactComponent as PlusIcon } from "../../../../assets/icons/finance/Plus.svg";
+  UNIFORMS_MODAL_ACTION_TYPE,
+} from "../../../../../redux/actions-type";
+import { ReactComponent as PlusIcon } from "../../../../../assets/icons/finance/Plus.svg";
 import FinanceDropdown from "./FinanceDropdown";
 
 const FinanceDataHead = () => {
@@ -31,7 +32,12 @@ const FinanceDataHead = () => {
       payload: { data: {}, openModal: true },
     });
   };
-
+  const openUniformModal = () => {
+    dispatch({
+      type: UNIFORMS_MODAL_ACTION_TYPE.GET_UNIFORMS_MODAL,
+      payload: { data: {}, openModal: true },
+    });
+  };
 
   const openModal = () => {
     if (location.pathname === "/finance/incomes") {
@@ -40,7 +46,9 @@ const FinanceDataHead = () => {
       openExpensesModal();
     } else if (location.pathname === "/finance/food-ration") {
       openFoodRationModal();
-    } 
+    } else if (location.pathname === "/finance/uniforms") {
+      openUniformModal();
+    }
   };
   return (
     <div className="finance-data-head">
@@ -69,11 +77,19 @@ const FinanceDataHead = () => {
         >
           Qida rasionu
         </Link>
+        <Link
+          to="/finance/uniforms"
+          className={`data-type ${
+            location.pathname === "/finance/uniforms" ? "active" : ""
+          }`}
+        >
+          Formalar
+        </Link>
       </div>
 
       <div className="bottom">
         <div className="left">
-        {/* {location.pathname !== "/finance/food-ration" && <FinanceDropdown type='category'  /> }
+          {/* {location.pathname !== "/finance/food-ration" && <FinanceDropdown type='category'  /> }
         {location.pathname !== "/finance/food-ration" && <FinanceDropdown type='sorting'  /> } */}
         </div>
 

@@ -6,7 +6,7 @@ import { Pagination } from "antd";
 import Loading from "../../../../../globalComponents/Loading/Loading";
 import { getIncomePaginationAction } from "../../../../../redux/actions/incomeActions";
 
-const IncomesData = ({ getPageNumber, page, dataHead = [] }) => {
+const IncomesData = ({ getPageNumber, page }) => {
   const dispatch = useDispatch();
   const { incomes, totalPages } = useSelector((state) => state.incomes);
   const { loading, lastPage: incomesPageNum } = useSelector(
@@ -15,7 +15,12 @@ const IncomesData = ({ getPageNumber, page, dataHead = [] }) => {
   const { financeMonthsFilter, financeChooseDate } = useSelector(
     (state) => state.financeDateFilter
   );
-  const incomesHead = [...dataHead];
+  const incomesHead = [
+    { id: 1, label: "Təyinat" },
+    { id: 2, label: "Məbləğ" },
+    { id: 3, label: "Tarix" },
+    { id: 4, label: "" },
+  ];
 
   // useEffect(() => {
   //   dispatch(getIncomePaginationAction(1, "", "", 1));

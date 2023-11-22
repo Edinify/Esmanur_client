@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getIncomePaginationAction } from "../../../../redux/actions/incomeActions";
 import { getExpensesPaginationAction } from "../../../../redux/actions/expensesAction";
 import { getFoodRationPaginationAction } from "../../../../redux/actions/foodRationAction";
+import { getUniformsPaginationAction } from "../../../../redux/actions/uniformsAction";
 import {
   EXPENSES_ACTION_TYPE,
   INCOME_ACTION_TYPE,
@@ -13,14 +14,14 @@ import {
 import IncomesData from "./IncomesData/IncomesData";
 import ExpensesData from "./ExpensesData/ExpensesData";
 import FoodRationData from "./FoodRation/FoodRation";
+import UniformsData from "./UniformsData/UniformsData";
 
 const FinanceData = () => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const {
-    financeMonthsFilter,
-    financeChooseDate,
-  } = useSelector((state) => state.financeDateFilter);
+  const { financeMonthsFilter, financeChooseDate } = useSelector(
+    (state) => state.financeDateFilter
+  );
   const { lastPage: incomesLastPage } = useSelector((state) => state.incomes);
   const { lastPage: expensesLastPage } = useSelector(
     (state) => state.expensesData
@@ -28,20 +29,9 @@ const FinanceData = () => {
   const { lastPage: foodRationLastPage } = useSelector(
     (state) => state.foodRationData
   );
-  const dataHead = location.pathname === "/finance/food-ration" ? [
-    { id: 1, label: "Qidanın adı" },
-    { id: 2, label: "Miqdarı" },
-    { id: 3, label: "Vahidin məbləği" },
-    { id: 3, label: "Ümumi məbləğ" },
-    { id: 3, label: "Tarix" },
-    { id: 4, label: "" },
-  ]
-  : [
-    { id: 1, label: "Təyinat" },
-    { id: 2, label: "Məbləğ" },
-    { id: 3, label: "Tarix" },
-    { id: 4, label: "" },
-  ];
+  const { lastPage: uniformsLastPage } = useSelector(
+    (state) => state.uniformsData
+  );
 
   const getPageNumberIncomes = (pageNumber) => {
     if (financeChooseDate.startDate && financeChooseDate.endDate) {
@@ -54,7 +44,7 @@ const FinanceData = () => {
           pageNumber,
           financeChooseDate.startDate,
           financeChooseDate.endDate,
-          "", //month
+          "" //month
         )
       );
     } else {
@@ -67,7 +57,7 @@ const FinanceData = () => {
           pageNumber,
           "",
           "",
-          financeMonthsFilter ? financeMonthsFilter : 1, //month
+          financeMonthsFilter ? financeMonthsFilter : 1 //month
         )
       );
     }
@@ -82,7 +72,7 @@ const FinanceData = () => {
         pageNumber,
         financeChooseDate.startDate,
         financeChooseDate.endDate,
-        "", //month
+        "" //month
       )
     );
   };
@@ -96,7 +86,7 @@ const FinanceData = () => {
         pageNumber,
         "",
         "",
-        financeMonthsFilter ? financeMonthsFilter : 1, //month
+        financeMonthsFilter ? financeMonthsFilter : 1 //month
       )
     );
   };
@@ -112,7 +102,7 @@ const FinanceData = () => {
           pageNumber,
           financeChooseDate.startDate,
           financeChooseDate.endDate,
-          "", //month
+          "" //month
         )
       );
     } else {
@@ -125,7 +115,7 @@ const FinanceData = () => {
           pageNumber,
           "",
           "",
-          financeMonthsFilter ? financeMonthsFilter : 1, //month
+          financeMonthsFilter ? financeMonthsFilter : 1 //month
         )
       );
     }
@@ -140,7 +130,7 @@ const FinanceData = () => {
         pageNumber,
         financeChooseDate.startDate,
         financeChooseDate.endDate,
-        "", //month
+        "" //month
       )
     );
   };
@@ -154,7 +144,7 @@ const FinanceData = () => {
         pageNumber,
         "",
         "",
-        financeMonthsFilter ? financeMonthsFilter : 1, //month
+        financeMonthsFilter ? financeMonthsFilter : 1 //month
       )
     );
   };
@@ -233,13 +223,12 @@ const FinanceData = () => {
     }
   }, [financeMonthsFilter]);
 
-
   useEffect(() => {
     dispatch(getExpensesPaginationAction(1, "", "", 1));
     dispatch(getIncomePaginationAction(1, "", "", 1));
     dispatch(getFoodRationPaginationAction(1, "", "", 1));
+    dispatch(getUniformsPaginationAction(1, "", "", 1));
   }, []);
-
 
   return (
     <div>
@@ -247,14 +236,12 @@ const FinanceData = () => {
         <IncomesData
           getPageNumber={getPageNumberIncomes}
           page={"finance"}
-          dataHead={dataHead}
         />
       )}
       {location.pathname === "/finance/expenses" && (
         <ExpensesData
           getPageNumber={getPageNumberExpenses}
           page={"finance"}
-          dataHead={dataHead}
         />
       )}
 
@@ -262,7 +249,13 @@ const FinanceData = () => {
         <FoodRationData
           getPageNumber={getPageNumberFoodRation}
           page={"finance"}
-          dataHead={dataHead}
+        />
+      )}
+
+      {location.pathname === "/finance/uniforms" && (
+        <UniformsData
+          getPageNumber={getPageNumberFoodRation}
+          page={"finance"}
         />
       )}
     </div>

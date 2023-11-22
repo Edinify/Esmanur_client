@@ -21,7 +21,7 @@ const FinanceChart = () => {
       data: [0],
     },
     {
-      name: "Dövriyyə",
+      name: "Qida xərcləri",
       data: [0],
     },
     {
@@ -30,18 +30,6 @@ const FinanceChart = () => {
     },
   ]);
   const monthsLang = [
-    // { key: "January", name: "Yanvar" },
-    // { key: "February", name: "Fevral" },
-    // { key: "March", name: "Mart" },
-    // { key: "April", name: "Aprel" },
-    // { key: "May", name: "May" },
-    // { key: "June", name: "Iyun" },
-    // { key: "July", name: "Iyul" },
-    // { key: "August", name: "Avqust" },
-    // { key: "September", name: "Sentyabr" },
-    // { key: "October", name: "Oktyabr" },
-    // { key: "November", name: "Noyabr" },
-    // { key: "December", name: "Dekabr" },
     { key: "January", name: "Yan" },
     { key: "February", name: "Fev" },
     { key: "March", name: "Mar" },
@@ -85,9 +73,9 @@ const FinanceChart = () => {
         })
       : [];
 
-  const turnoverValues =
-    financeChart && financeChart?.chartTurnover?.length > 0
-      ? financeChart?.chartTurnover.map((item) => {
+  const foodRationValues =
+    financeChart && financeChart?.chartFoodExpense?.length > 0
+      ? financeChart?.chartFoodExpense.map((item) => {
           return item;
         })
       : [];
@@ -158,8 +146,8 @@ const FinanceChart = () => {
         data: value === "Xərc" ? [...expenseValues] : [0],
       },
       {
-        name: "Dövriyyə",
-        data: value === "Dövriyyə" ? [...turnoverValues] : [0],
+        name: "Qida xərcləri",
+        data: value === "Qida xərcləri" ? [...foodRationValues] : [0],
       },
       {
         name: "Qazanc",
@@ -183,8 +171,8 @@ const FinanceChart = () => {
         data: [...expenseValues],
       },
       {
-        name: "Dövriyyə",
-        data: [...turnoverValues],
+        name: "Qida xərcləri",
+        data: [...foodRationValues],
       },
       {
         name: "Qazanc",
@@ -229,8 +217,11 @@ const FinanceChart = () => {
         <div className="legend red" onClick={() => selectData("Xərc")}>
           Xərc
         </div>
-        <div className="legend yellow" onClick={() => selectData("Dövriyyə")}>
-          Dövriyyə
+        <div
+          className="legend yellow"
+          onClick={() => selectData("Qida xərcləri")}
+        >
+          Qida xərcləri
         </div>
         <div className="legend green" onClick={() => selectData("Qazanc")}>
           Qazanc

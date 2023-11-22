@@ -74,11 +74,11 @@ const FinanceStatistics = () => {
 
         <div className="right">
           <div className="top">
-            <h2 className="title">Dövriyyə</h2>
+            <h2 className="title">Qida xərcləri</h2>
             <div className="diff-pointer plus">+36.47%</div>
           </div>
           <p className="amount">
-            ₼ {financeData?.turnover ? financeData?.turnover : 0}
+            ₼ {financeData?.foodExpense ? financeData?.foodExpense : 0}
             <small className="diff-pointer plus">+36.47%</small>
           </p>
         </div>

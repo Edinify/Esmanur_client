@@ -158,7 +158,7 @@ export const createAdminAction = (adminData) => async (dispatch) => {
 };
 
 export const updateAdminAction = (_id, adminData) => async (dispatch) => {
-  console.log(adminData);
+  // console.log(adminData);
   dispatch(adminModalLoading(true));
   try {
     const { data } = await API.patch(`/${_id}`, adminData);

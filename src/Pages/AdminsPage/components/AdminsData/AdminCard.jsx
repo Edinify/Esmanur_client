@@ -23,7 +23,7 @@ const AdminCard = ({
         <tr>
           <td>
             <div className="td-con">
-              <div className="cell-number">{cellNumber}.</div>
+              {/* <div className="cell-number">{cellNumber}.</div> */}
               <div className="table-scroll-text">{data.fullName}</div>
               <div className="right-fade"></div>
             </div>

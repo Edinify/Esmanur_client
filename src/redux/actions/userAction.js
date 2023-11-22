@@ -97,9 +97,9 @@ export const userAction = () => async (dispatch) => {
 };
 
 export const userUpdateAction = (_id, branchData) => async (dispatch) => {
-  // console.log(_id, branchData);
+  // console.log(branchData);
   try {
-    const { data } = await API.patch(`/admin/${_id}`, branchData);
+    const { data } = await API.patch(`/admin/super/${_id}`, branchData);
     dispatch({ type: USER_ACTION_TYPE.ADD_USER, payload: data });
     localStorage.setItem("userData", JSON.stringify(data));
     // console.log(data);

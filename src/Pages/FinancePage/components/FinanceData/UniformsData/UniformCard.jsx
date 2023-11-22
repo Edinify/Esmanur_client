@@ -51,8 +51,8 @@ const UniformCard = ({ data, mode, cellNumber, page }) => {
             </div>
           </td>
           <td>{data.count}</td>
-          <td>{data.outPrice}</td>
           <td>{data.inPrice}</td>
+          <td>{data.outPrice}</td>
           <td>{data.childPrice}</td>
           <td>
             <div className="td-con">
@@ -85,13 +85,13 @@ const UniformCard = ({ data, mode, cellNumber, page }) => {
                 <span className="type">Formaların sayı:</span>
                 <p>{data.count ? data.count : "boş"}</p>
               </li>
-              <li>
+              <li className="payment">
                 <span className="type">Alış qiyməti:</span>
-                <p>{data.outPrice ? data.outPrice : "boş"}</p>
+                <p>{data.inPrice ? data.inPrice : "boş"}</p>
               </li>
               <li className="payment">
                 <span className="type">Satış qiyməti:</span>
-                <p>{data.inPrice ? data.inPrice : "boş"}</p>
+                <p>{data.outPrice ? data.outPrice : "boş"}</p>
               </li>
               <li className="payment">
                 <span className="type">Uşağın ödənişi:</span>

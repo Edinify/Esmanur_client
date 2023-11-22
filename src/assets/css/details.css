@@ -254,9 +254,11 @@
     width: 20px;
     height: 20px;
   }
+  .incomes-page .content-box .left ul li {
+    font-size: 14px;
+  }
   .incomes-page .content-box .left ul li p {
     color: var(--neutrals-600);
-    font-size: 14px;
   }
   .details-list-tablet .content-box .left .payment {
     color: var(--neutrals-900);

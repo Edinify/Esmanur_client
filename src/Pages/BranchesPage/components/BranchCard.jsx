@@ -31,6 +31,7 @@ const BranchCard = ({ data }) => {
     dispatch(userUpdateAction(user?._id, {branch: id}))
   }
 
+
   return (
     <div className={`add-branch ${user?.branch === data._id ? 'active' : ''}`}>
       <p  onClick={() => selectBranch(data._id)}>{data.name}</p>
@@ -38,8 +39,7 @@ const BranchCard = ({ data }) => {
         handleDeleteModal={handleDeleteModal}
         handleUpdate={handleUpdate}
         data={data}
-        deleteIncomesModal={deleteIncomesModal}
-        dataType="incomes"
+        dataType='branches'
       />
     </div>
   );

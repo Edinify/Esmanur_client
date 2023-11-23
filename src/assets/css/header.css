@@ -141,6 +141,9 @@
   /* margin-top: 16px; */
 }
 
+
+
+
 .main-nav-icons .profile-img-con .user-func .logout-func {
   display: flex;
   align-items: center;
@@ -148,6 +151,13 @@
 }
 .main-nav-icons .profile-img-con .user-func .logout-func p {
   color: var(--error-500);
+}
+
+.main-nav-icons .profile-img-con .user-func.admin{
+  padding: 8px;
+}
+.main-nav-icons .profile-img-con .user-func.admin .logout-func{
+  margin: 0;
 }
 
 .main-nav-icons .notification-con {

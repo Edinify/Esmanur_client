@@ -59,12 +59,15 @@ const Category = ({
             categoryOpen ? "active" : ""
           }`}
         >
-          {branchesData.map((item, i) => (
-            <li key={i} onClick={() => categoryAddData(item)}>
-              {selectedCategory && selectedCategory._id === item._id &&  <CheckIcon />}
-              <h4>{item.name}</h4>
-            </li>
-          ))}
+          {branchesData.length > 0 &&
+            branchesData.map((item, i) => (
+              <li key={i} onClick={() => categoryAddData(item)}>
+                {selectedCategory && selectedCategory._id === item._id && (
+                  <CheckIcon />
+                )}
+                <h4>{item.name}</h4>
+              </li>
+            ))}
         </ul>
       </div>
     </>

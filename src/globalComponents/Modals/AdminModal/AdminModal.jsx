@@ -73,7 +73,7 @@ const AdminModal = () => {
 
 
   useEffect(() => {
-    if (adminsModalData?._id) {
+    if (adminsModalData?._id && branchesData.length > 0) {
       if (adminsModalData.branch) {
         setSelectedCategory(branchesData.find((item) => item._id === adminsModalData.branch));
       }

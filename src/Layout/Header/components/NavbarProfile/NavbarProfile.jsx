@@ -55,12 +55,14 @@ const NavbarProfile = () => {
   return (
     <>
       <div className="main-nav-icons">
-        <h6 className="branch-name">
-          filial:{" "}
-          <span>
-            {branchesData.find((item) => item._id === user?.branch)?.name}
-          </span>
-        </h6>
+        {branchesData.length > 0 && (
+          <h6 className="branch-name">
+            filial:{" "}
+            <span>
+              {branchesData.find((item) => item._id === user?.branch)?.name}
+            </span>
+          </h6>
+        )}
 
         <div className="profile-img-con">
           <div className="profile-img" onClick={(e) => handleActive(e)}>

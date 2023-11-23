@@ -8,21 +8,18 @@ import FinancePage from "../Pages/FinancePage/FinancePage";
 import AdminsPage from "../Pages/AdminsPage/AdminsPage";
 import TeachersPage from "../Pages/TeachersPage/TeachersPage";
 import BranchesPage from "../Pages/BranchesPage/BranchesPage";
-import { useSelector } from "react-redux";
-import WarningPage from "../Pages/WarningPage/WarningPage";
 
 const SuperAdminPanelRoute = () => {
-  const { branchesData} = useSelector((state) => state.branchesData);
-
+  
   return (
     <>
       {/* <Route path="/students" element={<StudentsPage />} />
       <Route path="/teachers" element={<TeachersPage />} /> */}
-      <Route path="/admins" element={branchesData.length > 0 ? <AdminsPage /> : <WarningPage />} />
-      <Route path="/finance/expenses" element={branchesData.length > 0 ? <FinancePage /> : <WarningPage />} />
-      <Route path="/finance/incomes" element={branchesData.length > 0 ? <FinancePage /> : <WarningPage />} />
-      <Route path="/finance/food-ration" element={branchesData.length > 0 ? <FinancePage /> : <WarningPage />} />
-      <Route path="/finance/uniforms" element={branchesData.length > 0 ? <FinancePage /> : <WarningPage />} />
+      <Route path="/admins" element={<AdminsPage />} />
+      <Route path="/finance/expenses" element={<FinancePage />} />
+      <Route path="/finance/incomes" element={<FinancePage />} />
+      <Route path="/finance/food-ration" element={<FinancePage />} />
+      <Route path="/finance/uniforms" element={<FinancePage />} />
       <Route path="/branches" element={<BranchesPage />} />
 
 

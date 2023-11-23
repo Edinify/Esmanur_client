@@ -81,6 +81,9 @@
     position: relative;
     transition: .3s;
 }
+.main-sidebar .sidebar-nav-list li.disabled a {
+    pointer-events: none;
+}
 .main-sidebar .sidebar-nav-list li a.active,
 .main-sidebar .sidebar-nav-list li a:hover {
     background-color: var(--primary-400);

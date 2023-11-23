@@ -54,8 +54,6 @@ export const Routing = () => {
   }, [auth, user, forgetPassword]);
 
 
-
-
   return (
     <div className={userData ? "main-container" : ""}>
         {/* <div className={""}> */}

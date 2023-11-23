@@ -8,9 +8,11 @@ import { ReactComponent as SalaryIcon } from "../../../../assets/icons/salaryIco
 import { ReactComponent as ExpensesIcon } from "../../../../assets/icons/expensenIcon.svg";
 import { ReactComponent as IncomesIcon } from "../../../../assets/icons/incomesIcon.svg";
 import { ReactComponent as AdminIcon } from "../../../../assets/icons/sidebar/users-01.svg";
+import { useSelector } from "react-redux";
 
 const SidebarSuperAdmin = ({ closeSidebar }) => {
   const location = useLocation();
+  const { user } = useSelector((state) => state.user);
   let nav = ["/student", "/"];
   const isActiveRoute = (route) => {
     return nav.includes(route);
@@ -46,7 +48,7 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
           Müəllimlər
         </NavLink>
       </li> */}
-      <li>
+      <li className={user.branch ? '' : 'disabled'}>
         <NavLink
           to="/finance/incomes"
           onClick={closeSidebar}
@@ -56,7 +58,7 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
           Maliyyə
         </NavLink>
       </li>
-      <li>
+      <li className={user.branch ? '' : 'disabled'}>
         <NavLink to="/admins" onClick={closeSidebar} className="admin">
           <AdminIcon />
           Admin

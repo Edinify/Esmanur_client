@@ -14,7 +14,7 @@ const AdminsData = ( ) => {
     { id: 1, label: "Müəllim adı" },
     { id: 3, label: "Email" },
     { id: 4, label: "Filial" },
-    { id: 7, label: "" },
+    { id: 7, label: "", type: 'more-options-head' },
   ];
 
   const handleUpdate = (data, modalType) => {
@@ -44,7 +44,7 @@ const AdminsData = ( ) => {
             <thead>
               <tr>
                 {tableHead.map((head, i) => (
-                  <th key={i}>{head.label}</th>
+                  <th key={i} className={head.type ? head.type : ''}>{head.label}</th>
                 ))}
               </tr>
             </thead>

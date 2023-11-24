@@ -5,15 +5,11 @@ import { Pagination } from "antd";
 import Loading from "../../../../globalComponents/Loading/Loading";
 
 const SalaryData = ({ salaryPageNum, getPageNumber }) => {
-  const { salariesData, totalPage,loading } = useSelector(
+  const { salariesData, totalPage, loading } = useSelector(
     (state) => state.salaryPagination
   );
   const [bonusEditModal, setBonusEditModal] = useState(false);
   const [bonusModal, setBonusModal] = useState(false);
-  
-
-
-
 
   const salaryTableHead = [
     { id: 1, head: "Müəllim adı" },
@@ -23,10 +19,8 @@ const SalaryData = ({ salaryPageNum, getPageNumber }) => {
     { id: 5, head: "Əmək haqqı" },
     { id: 6, head: "Toplam əmək haqqı" },
     { id: 7, head: "Bonus" },
-    { id: 8, head: "" },
+    { id: 8, head: "", type: "more-options-head" },
   ];
-
-  
 
   return (
     <>
@@ -34,12 +28,11 @@ const SalaryData = ({ salaryPageNum, getPageNumber }) => {
         <Loading />
       ) : (
         <>
-
           <table className="details-table salary-table">
             <thead>
               <tr>
                 {salaryTableHead.map((salaryHead) => (
-                  <th key={salaryHead.id}>{salaryHead.head}</th>
+                  <th key={salaryHead.id} className={salaryHead.type ? salaryHead.type : ''}>{salaryHead.head}</th>
                 ))}
               </tr>
             </thead>
@@ -71,7 +64,6 @@ const SalaryData = ({ salaryPageNum, getPageNumber }) => {
                 setBonusEditModal={setBonusEditModal}
                 setBonusModal={setBonusModal}
                 bonusEditModal={bonusEditModal}
-
               />
             ))}
           </div>

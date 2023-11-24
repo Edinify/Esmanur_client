@@ -52,7 +52,7 @@
   font-weight: 700;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100px;
+  max-width: 700px;
   white-space: nowrap;
 }
 .main-nav-icons .branch-name span {
@@ -224,7 +224,26 @@
     font-size: 14px;
   }
 }
-
+@media screen and (max-width: 950px) {
+  .main-nav-icons .branch-name {
+    max-width: 500px;
+  }
+}
+@media screen and (max-width: 750px) {
+  .main-nav-icons .branch-name {
+    max-width: 400px;
+  }
+}
+@media screen and (max-width: 650px) {
+  .main-nav-icons .branch-name {
+    max-width: 350px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .main-nav-icons .branch-name {
+    max-width: 100px;
+  }
+}
 @media screen and (max-width: 500px) {
   .main-header .header-content .header-content-container .header-context svg {
     display: block;

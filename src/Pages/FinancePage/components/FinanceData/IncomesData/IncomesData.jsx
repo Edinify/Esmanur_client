@@ -8,6 +8,7 @@ import { getIncomePaginationAction } from "../../../../../redux/actions/incomeAc
 
 const IncomesData = ({ getPageNumber, page }) => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const { incomes, totalPages } = useSelector((state) => state.incomes);
   const { loading, lastPage: incomesPageNum } = useSelector(
     (state) => state.incomes
@@ -15,16 +16,24 @@ const IncomesData = ({ getPageNumber, page }) => {
   const { financeMonthsFilter, financeChooseDate } = useSelector(
     (state) => state.financeDateFilter
   );
-  const incomesHead = [
-    { id: 1, label: "Təyinat" },
-    { id: 2, label: "Məbləğ" },
-    { id: 3, label: "Tarix" },
-    { id: 4, label: "" },
-  ];
+  const incomesHead =
+    user.role === "super-admin"
+      ? [
+          { id: 1, label: "Təyinat" },
+          { id: 2, label: "Məbləğ" },
+          { id: 3, label: "Tarix" },
+          { id: 4, label: "", type: 'more-options-head' },
+        ]
+      : [
+          { id: 1, label: "Təyinat" },
+          { id: 2, label: "Məbləğ" },
+          { id: 3, label: "Tarix" },
+        ];
 
   // useEffect(() => {
   //   dispatch(getIncomePaginationAction(1, "", "", 1));
   // }, []);
+
   return (
     <>
       {loading ? (
@@ -35,7 +44,7 @@ const IncomesData = ({ getPageNumber, page }) => {
             <thead>
               <tr>
                 {incomesHead.map((head, i) => (
-                  <th key={i}>{head.label}</th>
+                  <th key={i} className={head.type ? head.type : ''}>{head.label}</th>
                 ))}
               </tr>
             </thead>

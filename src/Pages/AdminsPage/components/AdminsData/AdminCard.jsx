@@ -42,7 +42,7 @@ const AdminCard = ({
               <div className="right-fade"></div>
             </div>
           </td>
-          <td>
+          <td className="more-options">
             <FuncComponent
               handleDeleteModal={handleDeleteModal}
               handleUpdate={handleUpdate}

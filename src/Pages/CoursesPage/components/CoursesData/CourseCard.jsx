@@ -29,16 +29,16 @@ const CourseCard = ({ data, mode, cellNumber }) => {
               <div className="right-fade"></div>
             </div>
           </td>
-          <td>
-            {user.role === "super-admin" ? (
+          {user.role === "super-admin" ? (
+            <td className="more-options">
               <FuncComponent
                 handleUpdate={handleUpdate}
                 handleDeleteModal={handleDeleteModal}
                 data={data}
                 deleteCourseModal={deleteCourseModal}
               />
-            ) : null}
-          </td>
+            </td>
+          ) : null}
         </tr>
       ) : (
         <div className="content-box">

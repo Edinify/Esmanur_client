@@ -17,7 +17,7 @@ const UniformsData = ({  getPageNumber,  page }) => {
     { id: 4, label: "Satış qiyməti" },
     { id: 5, label: "Uşağın ödənişi" },
     { id: 6, label: "Tarix" },
-    { id: 7, label: "" },
+    { id: 7, label: "", type: 'more-options-head' },
   ];
   return (
     <>
@@ -29,7 +29,7 @@ const UniformsData = ({  getPageNumber,  page }) => {
             <thead>
               <tr>
                 {uniformsHead.map((head, i) => (
-                  <th key={i}>{head.label}</th>
+                  <th key={i} className={head.type ? head.type : ''}>{head.label}</th>
                 ))}
               </tr>
             </thead>

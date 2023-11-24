@@ -111,7 +111,7 @@ export const getAdminsAction = () => async (dispatch) => {
   }
 };
 export const createAdminAction = (adminData) => async (dispatch) => {
-  console.log(adminData);
+  // console.log(adminData);
   dispatch(adminModalLoading(true));
   try {
     const { data } = await REGISTERAPI.post("/admin/sign", adminData);

@@ -75,9 +75,11 @@ export const getIncomePaginationAction =
         type: INCOME_ACTION_TYPE.GET_INCOME_PAGINATION,
         payload: data,
       });
+      dispatch(setLoadingIncomesAction(false));
     } catch (error) {
       console.log(error);
       const originalRequest = error.config;
+      dispatch(setLoadingIncomesAction(false));
       if (error.response.status === 403 && !originalRequest._retry) {
         originalRequest._retry = true;
         try {
@@ -109,9 +111,10 @@ export const getIncomePaginationAction =
           }
         }
       }
-    } finally {
-      dispatch(setLoadingIncomesAction(false));
-    }
+    } 
+    // finally {
+    //   dispatch(setLoadingIncomesAction(false));
+    // }
   };
 
 export const createIncomesAction = (incomesData) => async (dispatch) => {

@@ -6,22 +6,32 @@ import { Pagination } from "antd";
 import Loading from "../../../../../globalComponents/Loading/Loading";
 import { getExpensesPaginationAction } from "../../../../../redux/actions/expensesAction";
 
-const ExpensesData = ({  getPageNumber,  page}) => {
+const ExpensesData = ({ getPageNumber, page }) => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const expensesData = useSelector((state) => state?.expensesData.expensesData);
-  const { totalPages, loading, lastPage: expensesPageNum } = useSelector((state) => state.expensesData);
-  const expensesHead = [
-    { id: 1, label: "Təyinat" },
-    { id: 2, label: "Məbləğ" },
-    { id: 3, label: "Tarix" },
-    { id: 4, label: "" },
-  ];
+  const {
+    totalPages,
+    loading,
+    lastPage: expensesPageNum,
+  } = useSelector((state) => state.expensesData);
+  const expensesHead =
+    user.role === "super-admin"
+      ? [
+          { id: 1, label: "Təyinat" },
+          { id: 2, label: "Məbləğ" },
+          { id: 3, label: "Tarix" },
+          { id: 4, label: "", type: 'more-options-head' },
+        ]
+      : [
+          { id: 1, label: "Təyinat" },
+          { id: 2, label: "Məbləğ" },
+          { id: 3, label: "Tarix" },
+        ];
 
-
-
-// useEffect(() => {
-//   dispatch(getExpensesPaginationAction(1, "", "", 1));
-// }, []);
+  // useEffect(() => {
+  //   dispatch(getExpensesPaginationAction(1, "", "", 1));
+  // }, []);
 
   return (
     <>
@@ -33,7 +43,7 @@ const ExpensesData = ({  getPageNumber,  page}) => {
             <thead>
               <tr>
                 {expensesHead.map((head, i) => (
-                  <th key={i}>{head.label}</th>
+                  <th key={i} className={head.type ? head.type : ''}>{head.label}</th>
                 ))}
               </tr>
             </thead>
@@ -51,15 +61,15 @@ const ExpensesData = ({  getPageNumber,  page}) => {
           </table>
 
           <div className="details-list-tablet incomes-page ">
-          {expensesData?.map((expense, i) => (
-            <ExpensesCard
-              key={i}
-              data={expense}
-              mode="tablet"
-              cellNumber={i + 1 + (expensesPageNum - 1) * 10}
-              page={page}
-            />
-          ))}
+            {expensesData?.map((expense, i) => (
+              <ExpensesCard
+                key={i}
+                data={expense}
+                mode="tablet"
+                cellNumber={i + 1 + (expensesPageNum - 1) * 10}
+                page={page}
+              />
+            ))}
           </div>
 
           {totalPages > 1 && (

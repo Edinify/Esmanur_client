@@ -2,13 +2,13 @@ import React from "react";
 import moment from "moment";
 import { useState } from "react";
 import FuncComponent from "../../../../../globalComponents/FuncComponent/FuncComponent";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { INCOMES_MODAL_ACTION_TYPE } from "../../../../../redux/actions-type";
 
 const IncomesCard = ({ data, mode, cellNumber, page }) => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const [deleteIncomesModal, setDeleteIncomesModal] = useState(false);
-  // const [arrowUp, setArrowUp] = useState(false);
 
   const handleDeleteModal = () => {
     setDeleteIncomesModal(!deleteIncomesModal);
@@ -54,15 +54,17 @@ const IncomesCard = ({ data, mode, cellNumber, page }) => {
               <div className="right-fade"></div>
             </div>
           </td>
-          <td>
-            <FuncComponent
-              handleDeleteModal={handleDeleteModal}
-              handleUpdate={handleUpdate}
-              data={data}
-              deleteIncomesModal={deleteIncomesModal}
-              dataType="incomes"
-            />
-          </td>
+          {user.role === "super-admin" && (
+            <td className="more-options">
+              <FuncComponent
+                handleDeleteModal={handleDeleteModal}
+                handleUpdate={handleUpdate}
+                data={data}
+                deleteIncomesModal={deleteIncomesModal}
+                dataType="incomes"
+              />
+            </td>
+          )}
         </tr>
       ) : (
         <div className="content-box">
@@ -85,15 +87,17 @@ const IncomesCard = ({ data, mode, cellNumber, page }) => {
               </li>
             </ul>
           </div>
-          <div className="right">
-            <FuncComponent
-              handleDeleteModal={handleDeleteModal}
-              handleUpdate={handleUpdate}
-              data={data}
-              deleteIncomesModal={deleteIncomesModal}
-              dataType="incomes"
-            />
-          </div>
+          {user.role === "super-admin" && (
+            <div className="right">
+              <FuncComponent
+                handleDeleteModal={handleDeleteModal}
+                handleUpdate={handleUpdate}
+                data={data}
+                deleteIncomesModal={deleteIncomesModal}
+                dataType="incomes"
+              />
+            </div>
+          )}
         </div>
       )}
     </>

@@ -8,21 +8,29 @@ import { getFoodRationPaginationAction } from "../../../../../redux/actions/food
 
 const FoodRationData = ({  getPageNumber,  page }) => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
   const foodRationData = useSelector((state) => state?.foodRationData.foodRationData);
   const { totalPages, loading, lastPage: foodRationPageNum } = useSelector((state) => state.foodRationData);
-  const foodRationHead = [
+  const foodRationHead = user.role === "super-admin" ? [
     { id: 1, label: "Qidanın adı" },
     { id: 2, label: "Miqdarı" },
     { id: 3, label: "Vahidin məbləği" },
     { id: 3, label: "Ümumi məbləğ" },
     { id: 3, label: "Tarix" },
-    { id: 4, label: "" },
-  ];
+   { id: 4, label: "", type: 'more-options-head'},
+  ] :
+  [
+    { id: 1, label: "Qidanın adı" },
+    { id: 2, label: "Miqdarı" },
+    { id: 3, label: "Vahidin məbləği" },
+    { id: 3, label: "Ümumi məbləğ" },
+    { id: 3, label: "Tarix" },
+  ]
+
 
 // useEffect(() => {
 //   dispatch(getFoodRationPaginationAction(1, "", "", 1));
 // }, []);
-
 
   return (
     <>
@@ -34,7 +42,7 @@ const FoodRationData = ({  getPageNumber,  page }) => {
             <thead>
               <tr>
                 {foodRationHead.map((head, i) => (
-                  <th key={i}>{head.label}</th>
+                  <th key={i} className={head.type ? head.type : ''}>{head.label}</th>
                 ))}
               </tr>
             </thead>

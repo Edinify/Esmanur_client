@@ -49,8 +49,8 @@
   padding-left: 24px;
   border-left: none;
 }
-.details-table tr td:last-child,
-.details-table tr th:last-child {
+.details-table tr td.more-options,
+.details-table tr th.more-options-head {
   text-align: end;
   width: 60px;
   border-right: none;
@@ -89,19 +89,19 @@
   align-items: center;
   position: relative;
 }
-.details-table tr td:last-child .delete-modal {
+.details-table tr td.more-options .delete-modal {
   display: flex;
   align-items: center;
 }
-.details-table tr td:last-child .delete-update-modal {
+.details-table tr td.more-options .delete-update-modal {
   display: flex;
   align-items: flex-start;
 }
-.details-table tr td:last-child > .func-component {
+.details-table tr td.more-options > .func-component {
   display: flex;
   align-items: center;
 }
-.details-table tr td:last-child .func-component svg {
+.details-table tr td.more-options .func-component svg {
   cursor: pointer;
 }
 .details-table .cell-number {

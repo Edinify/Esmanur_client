@@ -9,7 +9,7 @@ const CoursesData = ({ coursePageNum, getPageNumber }) => {
   const { loading } = useSelector((state) => state.coursesPagination);
   const tableHead = [
     { id: 1, label: "Fənn adı" },
-    { id: 3, label: "" },
+    { id: 3, label: "", type: 'more-options-head' },
   ];
   return (
     <>
@@ -21,7 +21,7 @@ const CoursesData = ({ coursePageNum, getPageNumber }) => {
             <thead>
               <tr>
                 {tableHead.map((head, i) => (
-                  <th key={i}>{head.label}</th>
+                  <th key={i} className={head.type ? head.type : ''}>{head.label}</th>
                 ))}
               </tr>
             </thead>

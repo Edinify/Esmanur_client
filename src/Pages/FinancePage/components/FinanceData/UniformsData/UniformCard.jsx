@@ -62,7 +62,7 @@ const UniformCard = ({ data, mode, cellNumber, page }) => {
               <div className="right-fade"></div>
             </div>
           </td>
-          <td>
+          <td className="more-options">
             <FuncComponent
               handleDeleteModal={handleDeleteModal}
               handleUpdate={handleUpdate}

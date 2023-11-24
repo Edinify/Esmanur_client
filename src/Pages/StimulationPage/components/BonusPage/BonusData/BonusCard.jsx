@@ -49,7 +49,7 @@ const BonusCard = ({ data, mode, cellNumber, handleUpdate }) => {
               ? moment(data.createdAt).format("DD-MM-YYYY")
               : ""}
           </td>
-          <td>
+          <td className="more-options">
             <FuncComponent
               handleDeleteModal={handleDeleteModal}
               handleUpdate={handleUpdate}

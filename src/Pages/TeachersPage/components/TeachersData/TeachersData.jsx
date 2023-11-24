@@ -17,7 +17,6 @@ const TeachersData = ({ teacherPageNum, getPageNumber }) => {
     { id: 3, label: "Email" },
     { id: 4, label: "Telefon nömrəsi" },
     { id: 5, label: "Əmək haqqı" },
-    // { id: 5, label: "Status" },
     { id: 6, label: "" },
     { id: 7, label: "" },
   ];

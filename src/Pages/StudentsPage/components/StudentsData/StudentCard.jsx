@@ -11,9 +11,9 @@ const StudentCard = ({
 }) => {
   const [modal, setModal] = useState(false);
   const [deleteStudentModal, setDeleteStudentModal] = useState(false);
-  const {user} = useSelector(state=>state.user)
+  const { user } = useSelector((state) => state.user);
 
-  // 
+  //
 
   let courses =
     Array.isArray(data.courses) && data.courses.length > 0
@@ -84,60 +84,53 @@ const StudentCard = ({
               <div className="right-fade"></div>
             </div>
           </td>
-          <td className="more" onClick={() => openMoreModal()}>Ətraflı</td>
-
-          {/* <td>{data.lessonAmount}</td>
-          <td>{data.status ? "Aktiv" : "Deaktiv"}</td> */}
-          <td>
-            {user.role==="super-admin"?
-            
-            <FuncComponent
-              handleUpdate={handleUpdate}
-              handleModal={handleModal}
-              data={data}
-              deleteStudentModal={deleteStudentModal}
-              handleDeleteModal={handleDeleteModal}
-            />
-            :
-            null
-        }
+          <td className="more" onClick={() => openMoreModal()}>
+            Ətraflı
           </td>
+          {user.role === "super-admin" && (
+            <td className="more-options">
+              <FuncComponent
+                handleUpdate={handleUpdate}
+                handleModal={handleModal}
+                data={data}
+                deleteStudentModal={deleteStudentModal}
+                handleDeleteModal={handleDeleteModal}
+              />
+            </td>
+          )}
         </tr>
       ) : (
         <div className="content-box">
-            <div className="left">
-              <h3>{data.fullName}</h3>
-              <ul>
-                <li>
-                  <span className="type">Fənn:</span>
-                  <p>{courses}</p>
-                </li>
-                <li>
-                  <span className="type">Ana telefon nömrəsi:</span>
-                  <p>{data.motherPhone ? data.motherPhone : "boş"}</p>
-                </li>
-                <li>
-                  <span className="type">Ata telefon nömrəsi:</span>
-                  <p>{data.fatherPhone ? data.fatherPhone : "boş"}</p>
-                </li>
-              </ul>
-            </div>
-            <div className="right">
-              {user.role==="super-admin"
-              ?
-              <FuncComponent
-              handleDeleteModal={handleDeleteModal}
-              handleUpdate={handleUpdate}
-              data={data}
-              deleteStudentModal={deleteStudentModal}
-            />
-            :
-            null
-              }
-             
-              <span onClick={() => openMoreModal()}>Ətraflı</span>
-            </div>
+          <div className="left">
+            <h3>{data.fullName}</h3>
+            <ul>
+              <li>
+                <span className="type">Fənn:</span>
+                <p>{courses}</p>
+              </li>
+              <li>
+                <span className="type">Ana telefon nömrəsi:</span>
+                <p>{data.motherPhone ? data.motherPhone : "boş"}</p>
+              </li>
+              <li>
+                <span className="type">Ata telefon nömrəsi:</span>
+                <p>{data.fatherPhone ? data.fatherPhone : "boş"}</p>
+              </li>
+            </ul>
           </div>
+          <div className="right">
+            {user.role === "super-admin" ? (
+              <FuncComponent
+                handleDeleteModal={handleDeleteModal}
+                handleUpdate={handleUpdate}
+                data={data}
+                deleteStudentModal={deleteStudentModal}
+              />
+            ) : null}
+
+            <span onClick={() => openMoreModal()}>Ətraflı</span>
+          </div>
+        </div>
       )}
     </>
   );

@@ -63,15 +63,13 @@ const TeacherCard = ({
           <td className="more" onClick={() => openMoreModal()}>
             Ətraflı
           </td>
-          <td>
-            {user.role === "super-admin" ? (
-              <FuncComponent
-                handleDeleteModal={handleDeleteModal}
-                handleUpdate={handleUpdate}
-                data={data}
-                deleteModal={deleteModal}
-              />
-            ) : null}
+          <td className="more-options">
+            <FuncComponent
+              handleDeleteModal={handleDeleteModal}
+              handleUpdate={handleUpdate}
+              data={data}
+              deleteModal={deleteModal}
+            />
           </td>
         </tr>
       ) : (
@@ -101,14 +99,12 @@ const TeacherCard = ({
             </ul>
           </div>
           <div className="right">
-            {user.role === "super-admin" ? (
-              <FuncComponent
-                handleDeleteModal={handleDeleteModal}
-                handleUpdate={handleUpdate}
-                data={data}
-                deleteModal={deleteModal}
-              />
-            ) : null}
+            <FuncComponent
+              handleDeleteModal={handleDeleteModal}
+              handleUpdate={handleUpdate}
+              data={data}
+              deleteModal={deleteModal}
+            />
             <span onClick={() => openMoreModal()}>Ətraflı</span>
           </div>
         </div>

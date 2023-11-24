@@ -285,8 +285,8 @@ const FinanceData = () => {
   }, [financeMonthsFilter]);
 
   useEffect(() => {
-    dispatch(getExpensesPaginationAction(1, "", "", 1));
     dispatch(getIncomePaginationAction(1, "", "", 1));
+    dispatch(getExpensesPaginationAction(1, "", "", 1));
     dispatch(getFoodRationPaginationAction(1, "", "", 1));
     dispatch(getUniformsPaginationAction(1, "", "", 1));
   }, []);

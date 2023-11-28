@@ -40,12 +40,12 @@ const toastSuccess = (message) => {
   });
 };
 
-export const setLoadingExpensesAction = (loadingValue) => ({
+const pageLoading = (loadingValue) => ({
   type: EXPENSES_ACTION_TYPE.EXPENSES_LOADING,
   payload: loadingValue,
 });
 
-const expensesModalLoading = (loadingValue) => ({
+const modalLoading = (loadingValue) => ({
   type: EXPENSES_MODAL_ACTION_TYPE.EXPENSES_MODAL_LOADING,
   payload: loadingValue,
 });
@@ -53,7 +53,7 @@ const expensesModalLoading = (loadingValue) => ({
 export const getExpensesPaginationAction =
   (page = 1, startDate, endDate, monthCount) =>
   async (dispatch) => {
-    dispatch(setLoadingExpensesAction(true));
+    dispatch(pageLoading(true));
     try {
       const { data } = await API.get(
         `/?page=${page}&startDate=${startDate || ""}&endDate=${
@@ -106,13 +106,13 @@ export const getExpensesPaginationAction =
         }
       }
     } finally {
-      dispatch(setLoadingExpensesAction(false));
+      dispatch(pageLoading(false));
     }
   };
 
 export const createExpensesAction = (expensesData) => async (dispatch) => {
   // console.log(expensesData);
-  dispatch(expensesModalLoading(true));
+  dispatch(modalLoading(true));
   try {
     const { data } = await API.post("/", expensesData);
 
@@ -158,12 +158,12 @@ export const createExpensesAction = (expensesData) => async (dispatch) => {
       }
     }
   } finally {
-    dispatch(expensesModalLoading(false));
+    dispatch(modalLoading(false));
   }
 };
 
 export const updateExpensesAction = (_id, expensesData) => async (dispatch) => {
-  dispatch(expensesModalLoading(true));
+  dispatch(modalLoading(true));
   try {
     const { data } = await API.patch(`/${_id}`, expensesData);
     dispatch({ type: EXPENSES_ACTION_TYPE.UPDATE_EXPENSES, payload: data });
@@ -199,7 +199,7 @@ export const updateExpensesAction = (_id, expensesData) => async (dispatch) => {
       }
     }
   } finally {
-    dispatch(expensesModalLoading(false));
+    dispatch(modalLoading(false));
   }
 };
 

@@ -11,6 +11,7 @@ import { UniformsModal } from "./globalComponents/Modals/UniformModal/UniformsMo
 import { IncomesModal } from "./globalComponents/Modals/IncomesModal/IncomesModal";
 import {BonusModal} from "./globalComponents/Modals/BonusModal/BonusModal";
 import { FineModal } from "./globalComponents/Modals/FineModal/FineModal";
+import { StudentPaymentModal } from "./globalComponents/Modals/StudentPaymentModal/StudentPaymentModal";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BranchModal } from "./globalComponents/Modals/BrancheModal/BranchModal";
@@ -23,6 +24,7 @@ function App() {
   const { teachersOpenModal } = useSelector((state) => state.teachersModal);
   const { adminsOpenModal } = useSelector((state) => state.adminsModal);
   const { expensesOpenModal } = useSelector((state) => state.expensesModal);
+  const { studentPaymentOpenModal } = useSelector((state) => state.studentPaymentModal);
   const { foodRationOpenModal } = useSelector((state) => state.foodRationModal);
   const { uniformOpenModal } = useSelector((state) => state.uniformModal);
   const { incomesOpenModal } = useSelector((state) => state.incomesModal);
@@ -97,6 +99,7 @@ function App() {
       {teachersOpenModal && <TeacherModal />}
       {adminsOpenModal && <AdminModal />}
       {expensesOpenModal && <ExpensesModal />}
+      {studentPaymentOpenModal && <StudentPaymentModal />}
       {foodRationOpenModal && <FoodRationModal />}
       {uniformOpenModal && <UniformsModal />}
       {incomesOpenModal && <IncomesModal />}

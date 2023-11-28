@@ -66,10 +66,10 @@
 .finance-page .details-table tr th {
   border-top: 0.5px solid var(--neutrals-500);
 }
-.details-table.teacher-table tr th:nth-last-child(2),
+/* .details-table.teacher-table tr th:nth-last-child(2),
 .details-table.student-table tr th:nth-last-child(2) {
   width: 80px;
-}
+} */
 .details-table.teacher-table tr td:nth-last-child(2),
 .details-table.student-table tr td:nth-last-child(2) {
   text-decoration: underline;

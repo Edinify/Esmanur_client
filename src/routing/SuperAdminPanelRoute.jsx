@@ -13,13 +13,14 @@ const SuperAdminPanelRoute = () => {
   
   return (
     <>
-      {/* <Route path="/students" element={<StudentsPage />} />
-      <Route path="/teachers" element={<TeachersPage />} /> */}
+      <Route path="/students" element={<StudentsPage />} />
+      {/* <Route path="/teachers" element={<TeachersPage />} /> */}
       <Route path="/admins" element={<AdminsPage />} />
       <Route path="/finance/expenses" element={<FinancePage />} />
       <Route path="/finance/incomes" element={<FinancePage />} />
       <Route path="/finance/food-ration" element={<FinancePage />} />
       <Route path="/finance/uniforms" element={<FinancePage />} />
+      <Route path="/finance/student-payments" element={<FinancePage />} />
       <Route path="/branches" element={<BranchesPage />} />
 
 

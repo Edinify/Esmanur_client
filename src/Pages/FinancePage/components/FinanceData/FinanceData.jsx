@@ -16,6 +16,7 @@ import IncomesData from "./IncomesData/IncomesData";
 import ExpensesData from "./ExpensesData/ExpensesData";
 import FoodRationData from "./FoodRation/FoodRation";
 import UniformsData from "./UniformsData/UniformsData";
+import StudentPayments from "./StudentPayments/StudentPayments";
 
 const FinanceData = () => {
   const dispatch = useDispatch();
@@ -271,7 +272,7 @@ const FinanceData = () => {
       getDateFilteredIncomes(incomesLastPage);
       getDateFilteredExpenses(expensesLastPage);
       getDateFilteredFoodRation(foodRationLastPage);
-      getDateFilteredUniforms(uniformsLastPage)
+      getDateFilteredUniforms(uniformsLastPage);
     }
   }, [financeChooseDate]);
 
@@ -280,7 +281,7 @@ const FinanceData = () => {
       getMonthFilteredIncomes(incomesLastPage);
       getMonthFilteredExpenses(expensesLastPage);
       getMonthFilteredFoodRation(foodRationLastPage);
-      getMonthFilteredUniforms(uniformsLastPage)
+      getMonthFilteredUniforms(uniformsLastPage);
     }
   }, [financeMonthsFilter]);
 
@@ -294,21 +295,23 @@ const FinanceData = () => {
   return (
     <div>
       {location.pathname === "/finance/incomes" && (
-        <IncomesData getPageNumber={getPageNumberIncomes} page={"finance"} />
+        <IncomesData getPageNumber={getPageNumberIncomes} />
       )}
       {location.pathname === "/finance/expenses" && (
-        <ExpensesData getPageNumber={getPageNumberExpenses} page={"finance"} />
+        <ExpensesData getPageNumber={getPageNumberExpenses}/>
       )}
-
       {location.pathname === "/finance/food-ration" && (
         <FoodRationData
           getPageNumber={getPageNumberFoodRation}
-          page={"finance"}
         />
       )}
-
       {location.pathname === "/finance/uniforms" && (
-        <UniformsData getPageNumber={getPageNumberUniforms} page={"finance"} />
+        <UniformsData getPageNumber={getPageNumberUniforms} />
+      )}
+      {location.pathname === "/finance/student-payments" && (
+        <StudentPayments
+          getPageNumber={getPageNumberUniforms}
+        />
       )}
     </div>
   );

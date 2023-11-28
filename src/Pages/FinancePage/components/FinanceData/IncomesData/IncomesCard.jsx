@@ -1,19 +1,16 @@
 import React from "react";
 import moment from "moment";
 import { useState } from "react";
-import FuncComponent from "../../../../../globalComponents/FuncComponent/FuncComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { INCOMES_MODAL_ACTION_TYPE } from "../../../../../redux/actions-type";
+import UpdateDeleteModal from "../../../../../globalComponents/Modals/UpdateDeleteModal/UpdateDeleteModal";
+import { deleteIncomesAction } from "../../../../../redux/actions/incomeActions";
 
-const IncomesCard = ({ data, mode, cellNumber, page }) => {
+const IncomesCard = ({ data, mode, cellNumber }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const [deleteIncomesModal, setDeleteIncomesModal] = useState(false);
-
-  const handleDeleteModal = () => {
-    setDeleteIncomesModal(!deleteIncomesModal);
-  };
-  const handleUpdate = (data) => {
+ 
+  const updateItem = () => {
     const { _id, appointment, amount, date, branch } = data;
     dispatch({
       type: INCOMES_MODAL_ACTION_TYPE.GET_INCOMES_MODAL,
@@ -28,13 +25,10 @@ const IncomesCard = ({ data, mode, cellNumber, page }) => {
         openModal: true,
       },
     });
-  };
-
-  const categoryData = [
-    { key: "all", name: "Bütün kateqoriyalar" },
-    { key: "tuitionFees", name: "Təhsil haqqı" },
-    { key: "other", name: "Digər" },
-  ];
+  }
+  const deleteItem = () => {
+    dispatch(deleteIncomesAction(data._id));
+  }
   return (
     <>
       {mode === "desktop" ? (
@@ -56,11 +50,10 @@ const IncomesCard = ({ data, mode, cellNumber, page }) => {
           </td>
           {user.role === "super-admin" && (
             <td className="more-options">
-              <FuncComponent
-                handleDeleteModal={handleDeleteModal}
-                handleUpdate={handleUpdate}
+              <UpdateDeleteModal
+                updateItem={updateItem}
+                deleteItem={deleteItem}
                 data={data}
-                deleteIncomesModal={deleteIncomesModal}
                 dataType="incomes"
               />
             </td>
@@ -89,11 +82,10 @@ const IncomesCard = ({ data, mode, cellNumber, page }) => {
           </div>
           {user.role === "super-admin" && (
             <div className="right">
-              <FuncComponent
-                handleDeleteModal={handleDeleteModal}
-                handleUpdate={handleUpdate}
+              <UpdateDeleteModal
+                updateItem={updateItem}
+                deleteItem={deleteItem}
                 data={data}
-                deleteIncomesModal={deleteIncomesModal}
                 dataType="incomes"
               />
             </div>

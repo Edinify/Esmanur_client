@@ -10,25 +10,22 @@ import InputField from "./components/InputField/InputField";
 import SubmitBtn from "./components/SubmitBtn/SubmitBtn";
 import TeacherLists from "./components/TeacherLists/TeacherLists";
 import { getTeachersAction } from "../../../redux/actions/teachersActions";
-import DeleteBonusModal from "../../FuncComponent/components/DeleteBonusModal/DeleteBonusModal";
+import { deletetBonusAction } from "../../../redux/actions/bonusActions";
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 
 export const BonusModal = () => {
   const dispatch = useDispatch();
-  const { bonusModalData } = useSelector(
-    (state) => state.bonusModal
-  );
+  const { bonusModalData } = useSelector((state) => state.bonusModal);
   const { teachers } = useSelector((state) => state.teachersPagination);
   const teacherList = teachers?.filter((teacher) => teacher?.status);
   const [selectedTeacherName, setSelectedTeacherName] = useState("");
   const [teacherNameOpen, setTeacherNameOpen] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [classIcon, setClassIcon] = useState(false);
   const inputArr = ["amount", "comment"];
 
-
-
-  const handleDeleteModal = () => {
-    setDeleteModal(!deleteModal);
+  const handleshowDeleteModal = () => {
+    setShowDeleteModal(!showDeleteModal);
   };
   const teacherNameDropdown = () => {
     setTeacherNameOpen(!teacherNameOpen);
@@ -41,7 +38,13 @@ export const BonusModal = () => {
     setSelectedTeacherName(item);
   };
 
-
+  const deleteItem = () => {
+    dispatch(deletetBonusAction(bonusModalData._id));
+    dispatch({
+      type: BONUS_MODAL_ACTION_TYPE.GET_BONUS_MODAL,
+      payload: { data: {}, openModal: false },
+    });
+  };
   const updateModalState = (keyName, value) => {
     dispatch({
       type: BONUS_MODAL_ACTION_TYPE.GET_BONUS_MODAL,
@@ -133,22 +136,20 @@ export const BonusModal = () => {
           <SubmitBtn
             funcType="update"
             bonusModalData={bonusModalData}
-            closeModal={closeModal}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         ) : (
           <SubmitBtn
             funcType="create"
             bonusModalData={bonusModalData}
-            closeModal={closeModal}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         )}
       </div>
-      {deleteModal && (
-        <DeleteBonusModal
-          bonusModalData={bonusModalData}
-          deleteMod={handleDeleteModal}
+      {showDeleteModal && (
+        <DeleteItemModal
+          setShowDeleteModal={setShowDeleteModal}
+          deleteItem={deleteItem}
         />
       )}
     </div>

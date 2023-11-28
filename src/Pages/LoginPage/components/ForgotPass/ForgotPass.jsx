@@ -2,9 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, TextField } from "@mui/material";
-import {
-  FORGET_PASSWORD_ACTIONS_TYPE,
-} from "../../../../redux/actions-type";
+import { FORGET_PASSWORD_ACTIONS_TYPE } from "../../../../redux/actions-type";
 import { sendToEmailAction } from "../../../../redux/actions/forgetPasswordAction";
 import PreviewImg from "../PreviewImg/PreviewImg";
 import { ReactComponent as LoginLogo } from "../../../../assets/icons/Login-Logo.svg";
@@ -38,7 +36,6 @@ export const ForgotPass = () => {
     e.preventDefault();
   };
 
-
   return (
     <div className="login">
       <>
@@ -46,7 +43,15 @@ export const ForgotPass = () => {
       </>
       <div className="login-right forgot ">
         <div className="login-right-header">
-        <h1 className="logo-title">Esmanur</h1>
+          <h1 className="logo-title">
+            <span>E</span>
+            <span>s</span>
+            <span>m</span>
+            <span>a</span>
+            <span>n</span>
+            <span>u</span>
+            <span>r</span>
+          </h1>
           {/* <LoginLogo /> */}
           <h2>Şifrəni unutmusunuz?</h2>
           <p>İki addımda şifrəni yenilə.</p>

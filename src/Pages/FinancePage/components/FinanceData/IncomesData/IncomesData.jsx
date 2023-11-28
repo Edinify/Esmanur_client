@@ -6,7 +6,7 @@ import { Pagination } from "antd";
 import Loading from "../../../../../globalComponents/Loading/Loading";
 import { getIncomePaginationAction } from "../../../../../redux/actions/incomeActions";
 
-const IncomesData = ({ getPageNumber, page }) => {
+const IncomesData = ({ getPageNumber }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { incomes, totalPages } = useSelector((state) => state.incomes);
@@ -55,7 +55,6 @@ const IncomesData = ({ getPageNumber, page }) => {
                   data={income}
                   mode="desktop"
                   cellNumber={i + 1 + (incomesPageNum - 1) * 10}
-                  page={page}
                 />
               ))}
             </tbody>
@@ -68,7 +67,6 @@ const IncomesData = ({ getPageNumber, page }) => {
                 data={income}
                 mode="tablet"
                 cellNumber={i + 1 + (incomesPageNum - 1) * 10}
-                page={page}
               />
             ))}
           </div>

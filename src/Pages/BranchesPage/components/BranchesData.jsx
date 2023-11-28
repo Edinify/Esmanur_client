@@ -7,7 +7,6 @@ import BranchCard from "./BranchCard";
 const BranchesData = ({ getPageNumber, page, dataHead = [] }) => {
   const dispatch = useDispatch();
   const { branchesData, loading } = useSelector((state) => state.branchesData);
-  const { user } = useSelector((state) => state.user);
 
   // console.log(user);
   return (

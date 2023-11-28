@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-import BonusData from "../BonusPage/BonusData/BonusData";
-import FineData from "../FinePage/FineData/FineData";
-import { FINE_FILTER_ACTION_TYPE } from "../../../../redux/actions-type";
+import BonusData from "../BonusData/BonusData";
+import FineData from "../FineData/FineData";
 
 const StimulationData = ({getPageNumberBonus, getPageNumberFine, finePageNum, bonusPageNum}) => {
   const location = useLocation();

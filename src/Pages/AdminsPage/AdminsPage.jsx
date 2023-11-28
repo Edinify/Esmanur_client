@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAdminsAction } from "../../redux/actions/adminsActions";
 import { ADMINS_MODAL_ACTION_TYPE} from "../../redux/actions-type";
 import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunctions";
-
-import AdminsData from "./components/AdminsData/AdminsData";
+import AdminsData from "./components/AdminsData";
 import GlobalHead from "../../globalComponents/GlobalHead/GlobalHead";
 
 const AdminsPage = () => {

@@ -1,18 +1,15 @@
 import { useState, React } from "react";
-import FuncComponent from "../../../../../globalComponents/FuncComponent/FuncComponent";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { FOOD_RATION_MODAL_ACTION_TYPE } from "../../../../../redux/actions-type";
+import UpdateDeleteModal from "../../../../../globalComponents/Modals/UpdateDeleteModal/UpdateDeleteModal";
+import { deleteFoodRationAction } from "../../../../../redux/actions/foodRationAction";
 
-const FoodRationCard = ({ data, mode, cellNumber, page }) => {
+const FoodRationCard = ({ data, mode, cellNumber }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
-  const [deleteFoodRationModal, setDeleteFoodRationModal] = useState(false);
 
-  const handleDeleteModal = () => {
-    setDeleteFoodRationModal(!deleteFoodRationModal);
-  };
-  const handleUpdate = (data) => {
+  const updateItem = () => {
     const { _id, name, unitAmount, amount, quantity, date, branch } = data;
     dispatch({
       type: FOOD_RATION_MODAL_ACTION_TYPE.GET_FOOD_RATION_MODAL,
@@ -29,6 +26,9 @@ const FoodRationCard = ({ data, mode, cellNumber, page }) => {
         openModal: true,
       },
     });
+  };
+  const deleteItem = () => {
+    dispatch(deleteFoodRationAction(data._id));
   };
 
   return (
@@ -54,12 +54,10 @@ const FoodRationCard = ({ data, mode, cellNumber, page }) => {
           </td>
           {user.role === "super-admin" && (
             <td className="more-options">
-              <FuncComponent
-                handleDeleteModal={handleDeleteModal}
-                handleUpdate={handleUpdate}
+              <UpdateDeleteModal
+                updateItem={updateItem}
+                deleteItem={deleteItem}
                 data={data}
-                deleteFoodRationModal={deleteFoodRationModal}
-                dataType="expenses"
               />
             </td>
           )}
@@ -95,12 +93,10 @@ const FoodRationCard = ({ data, mode, cellNumber, page }) => {
           </div>
           {user.role === "super-admin" && (
             <div className="right">
-              <FuncComponent
-                handleDeleteModal={handleDeleteModal}
-                handleUpdate={handleUpdate}
+              <UpdateDeleteModal
+                updateItem={updateItem}
+                deleteItem={deleteItem}
                 data={data}
-                deleteFoodRationModal={deleteFoodRationModal}
-                dataType="expenses"
               />
             </div>
           )}

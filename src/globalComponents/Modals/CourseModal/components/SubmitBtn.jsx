@@ -14,7 +14,6 @@ export default function SubmitBtn({
   formik,
   coursesModalData,
   funcType,
-  closeModal,
 }) {
   const dispatch = useDispatch();
   const { coursesModalLoading } = useSelector((state) => state.coursesModal);

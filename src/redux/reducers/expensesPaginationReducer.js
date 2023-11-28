@@ -5,7 +5,6 @@ const initialState = {
   loading: false,
   totalPages: 1,
   lastPage: 1,
-  // openExpenseModal:false
 };
 
 export const expensesReducer = (state = initialState, action) => {
@@ -15,14 +14,13 @@ export const expensesReducer = (state = initialState, action) => {
         ...state,
         expensesData: action.payload.expenses,
         totalPages: action.payload.totalPages,
-        // loading: false,
       };
 
     case EXPENSES_ACTION_TYPE.GET_EXPENSES_PAGINATION:
       return {
         ...state,
         expensesData: action.payload.expenses,
-        totalPages:action.payload.totalPages,
+        totalPages: action.payload.totalPages,
       };
     case EXPENSES_ACTION_TYPE.EXPENSES_LOADING:
       return {
@@ -52,14 +50,9 @@ export const expensesReducer = (state = initialState, action) => {
     case EXPENSES_ACTION_TYPE.GET_EXPENSES_LAST_PAGE:
       return {
         ...state,
-        loading:false,
+        loading: false,
         lastPage: action.payload,
       };
-      // case EXPENSES_ACTION_TYPE.EXPENSES_MODAL:
-      //   return{
-      //     ...state,
-      //     openExpenseModal:action.payload
-      //   }
     default:
       return state;
   }

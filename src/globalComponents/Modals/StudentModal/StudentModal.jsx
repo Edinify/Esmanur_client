@@ -183,12 +183,12 @@ export const StudentModal = () => {
     },
   ];
   const inputNameArr1 = [
-    "fin",
-    "seria",
+    // "fin",
+    // "seria",
     "birthday",
     "healthStatus",
-    "educationalInstitution",
-    "educationDegree",
+    // "educationalInstitution",
+    // "educationDegree",
     "motherName",
     "fatherName",
     "motherPhone",
@@ -202,7 +202,11 @@ export const StudentModal = () => {
       fullName: studentsModalData.fullName ? studentsModalData.fullName : "",
       email: studentsModalData.email ? studentsModalData.email : "",
       password: studentsModalData.password ? studentsModalData.password : "",
-      lessonAmount: studentsModalData?.courses ? (studentsModalData?.courses?.find((item) => !item.lessonAmount) ? '' : 1) : '' ,
+      lessonAmount: studentsModalData?.courses
+        ? studentsModalData?.courses?.find((item) => !item.lessonAmount)
+          ? ""
+          : 1
+        : "",
       payment: studentsModalData.payment ? studentsModalData.payment : "",
       // sector: studentsModalData?.sector ? studentsModalData?.sector : "",
       // educationalInstitution: studentsModalData.educationalInstitution
@@ -352,9 +356,6 @@ export const StudentModal = () => {
     }
   }, [selectedClassList]);
 
-
-
-
   return (
     <div className="create-update-modal-con student-modal">
       <div className="create-update-modal">
@@ -395,14 +396,14 @@ export const StudentModal = () => {
               ))}
             </div>
 
-            <InputField
+            {/* <InputField
               inputName={"emergencyPhone"}
               formik={formik}
               setInputValue={setInputValue}
               studentsModalData={studentsModalData}
               updateModalState={updateModalState}
-            />
-            <RegionDropdown
+            /> */}
+            {/* <RegionDropdown
               formik={formik}
               selectedWhereFrom={selectedWhereFrom}
               WhereFromDropdown={WhereFromDropdown}
@@ -417,14 +418,9 @@ export const StudentModal = () => {
               whereComingOpen={whereComingOpen}
               selectedWhereComingList={selectedWhereComingList}
               whereComingAddData={whereComingAddData}
-            />
+            /> */}
             {/* sector */}
-            <RadioInput
-              studentsModalData={studentsModalData}
-              setInputValue={setInputValue}
-              formik={formik}
-              updateModalState={updateModalState}
-            />
+
             <CoursesInput
               formik={formik}
               changeIcon={changeIcon}
@@ -437,7 +433,12 @@ export const StudentModal = () => {
               updateModalState={updateModalState}
               studentsModalData={studentsModalData}
             />
-
+            <RadioInput
+              studentsModalData={studentsModalData}
+              setInputValue={setInputValue}
+              formik={formik}
+              updateModalState={updateModalState}
+            />
             <div className="input-couples">
               {inputNameArr2.map((name, index) => (
                 <InputField
@@ -485,7 +486,7 @@ export const StudentModal = () => {
 
         {studentsModalData?._id && (
           <div className="joined-time">
-            Qoşuldu:  {moment(studentsModalData.createdAt).format("YYYY.MM.DD")}
+            Qoşuldu: {moment(studentsModalData.createdAt).format("YYYY.MM.DD")}
           </div>
         )}
       </div>

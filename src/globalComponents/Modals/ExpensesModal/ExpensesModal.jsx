@@ -8,11 +8,12 @@ import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
 import { EXPENSES_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
 import InputField from "./components/InputField/InputField";
 import SubmitBtn from "./components/SubmitBtn/SubmitBtn";
-import DeleteExpensesModal from "../../FuncComponent/components/DeleteExpensesModal/DeleteExpensesModal";
+import { deleteExpensesAction } from "../../../redux/actions/expensesAction";
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 export const ExpensesModal = () => {
   const dispatch = useDispatch();
   const { expensesModalData } = useSelector((state) => state.expensesModal);
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const inputNameArr = ["appointment", "amount", "date"];
 
   // formik
@@ -35,6 +36,13 @@ export const ExpensesModal = () => {
     [formik]
   );
 
+  const deleteItem = () => {
+    dispatch(deleteExpensesAction(expensesModalData._id));
+    dispatch({
+      type: EXPENSES_MODAL_ACTION_TYPE.GET_EXPENSES_MODAL,
+      payload: { data: {}, openModal: false },
+    });
+  };
   const updateModalState = (keyName, value) => {
     dispatch({
       type: EXPENSES_MODAL_ACTION_TYPE.GET_EXPENSES_MODAL,
@@ -44,10 +52,6 @@ export const ExpensesModal = () => {
       },
     });
   };
-  const handleDeleteModal = () => {
-    setDeleteModal(!deleteModal);
-  };
-
   const closeModal = () => {
     dispatch({
       type: EXPENSES_MODAL_ACTION_TYPE.GET_EXPENSES_MODAL,
@@ -94,20 +98,20 @@ export const ExpensesModal = () => {
             formik={formik}
             funcType="update"
             expensesModalData={expensesModalData}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         ) : (
           <SubmitBtn
             formik={formik}
             funcType="create"
             expensesModalData={expensesModalData}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         )}
-        {deleteModal && (
-          <DeleteExpensesModal
-            expensesModalData={expensesModalData}
-            deleteMod={handleDeleteModal}
+        {showDeleteModal && (
+          <DeleteItemModal
+            setShowDeleteModal={setShowDeleteModal}
+            deleteItem={deleteItem}
           />
         )}
       </div>

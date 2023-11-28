@@ -208,7 +208,7 @@ export const deleteFoodRationAction = (_id) => async (dispatch) => {
       type: FOOD_RATION_ACTION_TYPE.DELETE_FOOD_RATION,
       payload: _id,
     });
-    dispatch(getFoodRationPaginationAction(1, "", ""));
+    dispatch(getFoodRationPaginationAction(1, "", "", 1));
 
     toastSuccess("Məhsul silindi");
   } catch (error) {

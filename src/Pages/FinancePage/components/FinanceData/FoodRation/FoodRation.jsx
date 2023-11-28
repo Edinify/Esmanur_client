@@ -6,7 +6,7 @@ import { Pagination } from "antd";
 import Loading from "../../../../../globalComponents/Loading/Loading";
 import { getFoodRationPaginationAction } from "../../../../../redux/actions/foodRationAction";
 
-const FoodRationData = ({  getPageNumber,  page }) => {
+const FoodRationData = ({  getPageNumber }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const foodRationData = useSelector((state) => state?.foodRationData.foodRationData);
@@ -53,7 +53,6 @@ const FoodRationData = ({  getPageNumber,  page }) => {
                   data={expense}
                   mode="desktop"
                   cellNumber={i + 1 + (foodRationPageNum - 1) * 10}
-                  page={page}
                 />
               ))}
             </tbody>
@@ -66,7 +65,6 @@ const FoodRationData = ({  getPageNumber,  page }) => {
               data={expense}
               mode="tablet"
               cellNumber={i + 1 + (foodRationPageNum - 1) * 10}
-              page={page}
             />
           ))}
           </div>

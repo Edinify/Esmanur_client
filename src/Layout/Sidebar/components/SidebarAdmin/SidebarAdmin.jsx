@@ -22,13 +22,13 @@ const SidebarAdmin = ({ closeSidebar }) => {
 
   return (
     <ul className="sidebar-nav-list">
-      {/* <li>
+      <li>
         <NavLink to="/students" onClick={closeSidebar}>
           <StudentsIcon />
           Tələbələr
         </NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink to="/teachers" onClick={closeSidebar}>
           <TeachersIcon />
           Müəllimlər

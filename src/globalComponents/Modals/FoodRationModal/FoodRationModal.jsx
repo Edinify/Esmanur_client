@@ -8,11 +8,12 @@ import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
 import { FOOD_RATION_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
 import InputField from "./components/InputField/InputField";
 import SubmitBtn from "./components/SubmitBtn/SubmitBtn";
-import DeleteFoodRationModal from "../../FuncComponent/components/DeleteFoodRationModal/DeleteFoodRationModal";
+import { deleteFoodRationAction } from "../../../redux/actions/foodRationAction";
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 export const FoodRationModal = () => {
   const dispatch = useDispatch();
   const { foodRationModalData } = useSelector((state) => state.foodRationModal);
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const inputNameArr = ["name", "quantity", "unitAmount", "amount", "date"];
 
   // formik
@@ -40,8 +41,12 @@ export const FoodRationModal = () => {
     [formik]
   );
 
-  const handleDeleteModal = () => {
-    setDeleteModal(!deleteModal);
+  const deleteItem = () => {
+    dispatch(deleteFoodRationAction(foodRationModalData._id));
+    dispatch({
+      type: FOOD_RATION_MODAL_ACTION_TYPE.GET_FOOD_RATION_MODAL,
+      payload: { data: {}, openModal: false },
+    });
   };
   const updateModalState = (keyName, value) => {
     dispatch({
@@ -98,20 +103,20 @@ export const FoodRationModal = () => {
             formik={formik}
             funcType="update"
             foodRationModalData={foodRationModalData}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         ) : (
           <SubmitBtn
             formik={formik}
             funcType="create"
             foodRationModalData={foodRationModalData}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         )}
-        {deleteModal && (
-          <DeleteFoodRationModal
-            foodRationModalData={foodRationModalData}
-            deleteMod={handleDeleteModal}
+        {showDeleteModal && (
+          <DeleteItemModal
+            setShowDeleteModal={setShowDeleteModal}
+            deleteItem={deleteItem}
           />
         )}
       </div>

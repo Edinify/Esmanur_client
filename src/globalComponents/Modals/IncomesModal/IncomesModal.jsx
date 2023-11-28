@@ -7,12 +7,13 @@ import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
 import { INCOMES_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
 import InputField from "./components/InputField/InputField";
 import SubmitBtn from "./components/SubmitBtn/SubmitBtn";
-import DeleteIncomessModal from "../../FuncComponent/components/DeleteIncomesModal/DeleteIncomesModal";
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
+import { deleteIncomesAction } from "../../../redux/actions/incomeActions";
 
 export const IncomesModal = () => {
   const dispatch = useDispatch();
   const { incomesModalData } = useSelector((state) => state.incomesModal);
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const inputNameArr = ["appointment", "amount", "date"];
 
   // formik
@@ -35,8 +36,12 @@ export const IncomesModal = () => {
     [formik]
   );
 
-  const handleDeleteModal = () => {
-    setDeleteModal(!deleteModal);
+  const deleteItem = () => {
+    dispatch(deleteIncomesAction(incomesModalData._id));
+    dispatch({
+      type: INCOMES_MODAL_ACTION_TYPE.GET_INCOMES_MODAL,
+      payload: { data: {}, openModal: false },
+    });
   };
   const updateModalState = (keyName, value) => {
     dispatch({
@@ -93,20 +98,20 @@ export const IncomesModal = () => {
             formik={formik}
             funcType="update"
             incomesModalData={incomesModalData}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         ) : (
           <SubmitBtn
             formik={formik}
             funcType="create"
             incomesModalData={incomesModalData}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         )}
-        {deleteModal && (
-          <DeleteIncomessModal
-            incomesModalData={incomesModalData}
-            deleteMod={handleDeleteModal}
+        {showDeleteModal && (
+          <DeleteItemModal
+            setShowDeleteModal={setShowDeleteModal}
+            deleteItem={deleteItem}
           />
         )}
       </div>

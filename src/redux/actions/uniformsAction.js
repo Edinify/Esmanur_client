@@ -208,7 +208,7 @@ export const deleteUniformAction = (_id) => async (dispatch) => {
       type: UNIFORMS_ACTION_TYPE.DELETE_UNIFORMS,
       payload: _id,
     });
-    dispatch(getUniformsPaginationAction(1, "", ""));
+    dispatch(getUniformsPaginationAction(1, "", "", 1));
 
     toastSuccess("Məhsul silindi");
   } catch (error) {

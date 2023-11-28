@@ -24,10 +24,6 @@ const MoreModal = ({ setOpenMoreModal, type, data }) => {
   const [deleteModal, setDeleteModal] = useState(false);
   const { user } = useSelector((state) => state.user);
 
-  const handleDeleteModal = () => {
-    setDeleteModal(!deleteModal);
-  };
-
   let courses =
     type === "teacher"
       ? Array.isArray(teachersModalData.courses) &&

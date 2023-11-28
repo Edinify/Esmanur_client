@@ -1,17 +1,14 @@
 import { useState, React } from "react";
-import FuncComponent from "../../../../../globalComponents/FuncComponent/FuncComponent";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 import { UNIFORMS_MODAL_ACTION_TYPE } from "../../../../../redux/actions-type";
+import { deleteUniformAction } from "../../../../../redux/actions/uniformsAction";
+import UpdateDeleteModal from "../../../../../globalComponents/Modals/UpdateDeleteModal/UpdateDeleteModal";
 
-const UniformCard = ({ data, mode, cellNumber, page }) => {
+const UniformCard = ({ data, mode, cellNumber }) => {
   const dispatch = useDispatch();
-  const [deleteUniformnModal, setDeleteUniformnModal] = useState(false);
 
-  const handleDeleteModal = () => {
-    setDeleteUniformnModal(!deleteUniformnModal);
-  };
-  const handleUpdate = (data) => {
+  const updateItem = () => {
     const {
       _id,
       childName,
@@ -39,6 +36,9 @@ const UniformCard = ({ data, mode, cellNumber, page }) => {
       },
     });
   };
+  const deleteItem = () => {
+    dispatch(deleteUniformAction(data._id));
+  };
 
   return (
     <>
@@ -63,12 +63,10 @@ const UniformCard = ({ data, mode, cellNumber, page }) => {
             </div>
           </td>
           <td className="more-options">
-            <FuncComponent
-              handleDeleteModal={handleDeleteModal}
-              handleUpdate={handleUpdate}
+            <UpdateDeleteModal
+              updateItem={updateItem}
+              deleteItem={deleteItem}
               data={data}
-              deleteUniformnModal={deleteUniformnModal}
-              dataType="expenses"
             />
           </td>
         </tr>
@@ -106,12 +104,10 @@ const UniformCard = ({ data, mode, cellNumber, page }) => {
             </ul>
           </div>
           <div className="right">
-            <FuncComponent
-              handleDeleteModal={handleDeleteModal}
-              handleUpdate={handleUpdate}
+            <UpdateDeleteModal
+              updateItem={updateItem}
+              deleteItem={deleteItem}
               data={data}
-              deleteUniformnModal={deleteUniformnModal}
-              dataType="expenses"
             />
           </div>
         </div>

@@ -11,8 +11,7 @@ import LoadingBtn from "../../../../Loading/components/LoadingBtn/LoadingBtn";
 export default function SubmitBtn({
   funcType,
   bonusModalData,
-  closeModal,
-  setDeleteModal,
+  setShowDeleteModal,
 }) {
   const dispatch = useDispatch();
   const { bonusesModalLoading } = useSelector((state) => state.bonusModal);
@@ -44,11 +43,11 @@ export default function SubmitBtn({
           </button>
 
           <div className="delete-income-modal-btn">
-            <DeleteIcon onClick={() => setDeleteModal(true)} />
+            <DeleteIcon onClick={() => setShowDeleteModal(true)} />
           </div>
           <button
             className="delete-income-modal-btn-mobile"
-            onClick={() => setDeleteModal(true)}
+            onClick={() => setShowDeleteModal(true)}
           >
             Sil
           </button>

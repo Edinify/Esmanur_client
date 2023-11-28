@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStudentsPaginationAction } from "../../redux/actions/studentsActions";
 import { STUDENTS_MODAL_ACTION_TYPE} from "../../redux/actions-type";
-import StudentsData from "./components/StudentsData/StudentsData";
+import StudentsData from "./components/StudentsData";
 import GlobalHead from "../../globalComponents/GlobalHead/GlobalHead";
 import { useCustomHook } from "../../globalComponents/GlobalFunctions/globalFunctions";
 

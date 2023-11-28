@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Box } from "@mui/material";
-import { DROPDOWN_NAME_ACTION_TYPE, FINE_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
+import {
+  DROPDOWN_NAME_ACTION_TYPE,
+  FINE_MODAL_ACTION_TYPE,
+} from "../../../redux/actions-type";
 import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
 import { useDispatch, useSelector } from "react-redux";
 import SubmitBtn from "./components/SubmitBtn/SubmitBtn";
@@ -8,7 +11,8 @@ import TeacherLists from "./components/TeacherLists/TeacherLists";
 import FineTypeLists from "./components/FineTypeLists/FineTypeLists";
 import { getTeachersAction } from "../../../redux/actions/teachersActions";
 import InputField from "./components/InputField/InputField";
-import DeleteFineModal from "../../FuncComponent/components/DeleteFineModal/DeleteFineModal";
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
+import { deletetFinection } from "../../../redux/actions/fineActions";
 
 export const FineModal = () => {
   const dispatch = useDispatch();
@@ -22,17 +26,13 @@ export const FineModal = () => {
   const [classIcon, setClassIcon] = useState(false);
   const [selectedFineType, setSelectedFineType] = useState(null);
   const [fineTypeOpen, setfineTypeOpen] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const fineTypeList = [
     { name: "Şifahi xəbərdarlıq", key: "verbalWarning" },
     { name: "Yazılı xəbərdarlıq", key: "writtenWarning" },
     { name: "Töhmət", key: "rebuke" },
     { name: "Şiddətli töhmət", key: "severeRebuke" },
   ];
-
-  const handleDeleteModal = () => {
-    setDeleteModal(!deleteModal);
-  };
 
   const fineTypeDropdown = () => {
     setfineTypeOpen(!fineTypeOpen);
@@ -49,9 +49,17 @@ export const FineModal = () => {
   };
   const teacherNameAddData = (item) => {
     updateModalState("teacher", item._id);
-    dispatch({type:DROPDOWN_NAME_ACTION_TYPE.GET_DROPDOWN,payload:item})
+    dispatch({ type: DROPDOWN_NAME_ACTION_TYPE.GET_DROPDOWN, payload: item });
     setTeacherNameOpen(false);
     setSelectedTeacherName(item);
+  };
+
+  const deleteItem = () => {
+    dispatch(deletetFinection(fineModalData._id));
+    dispatch({
+      type: FINE_MODAL_ACTION_TYPE.GET_FINE_MODAL,
+      payload: { data: {}, openModal: false },
+    });
   };
   const updateModalState = (keyName, value) => {
     dispatch({
@@ -77,8 +85,6 @@ export const FineModal = () => {
   useEffect(() => {
     dispatch(getTeachersAction());
   }, [dispatch]);
-  
- 
 
   useEffect(() => {
     if (fineModalData?._id && teachers) {
@@ -94,10 +100,6 @@ export const FineModal = () => {
       }
     }
   }, [teachers]);
-
-
-
-
 
   return (
     <div className="create-update-modal-con">
@@ -146,20 +148,22 @@ export const FineModal = () => {
           <SubmitBtn
             funcType="update"
             fineModalData={fineModalData}
-            closeModal={closeModal}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         ) : (
           <SubmitBtn
             funcType="create"
             fineModalData={fineModalData}
-            closeModal={closeModal}
-            setDeleteModal={setDeleteModal}
-
+            setShowDeleteModal={setShowDeleteModal}
           />
         )}
       </div>
-      {deleteModal && <DeleteFineModal fineModalData={fineModalData} deleteMod={handleDeleteModal} />}
+      {showDeleteModal && (
+        <DeleteItemModal
+          setShowDeleteModal={setShowDeleteModal}
+          deleteItem={deleteItem}
+        />
+      )}
     </div>
   );
 };

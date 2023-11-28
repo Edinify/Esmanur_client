@@ -45,6 +45,8 @@ import { studentStatusReducer } from "./reducers/studentStatusReducer";
 import { branchesModalReducer } from "./reducers/branchesModalReducer";
 import { branchesReducer } from "./reducers/branchesReducer";
 import { teachersCategoryReducer } from "./reducers/teachersCatergoryReducer";
+import { studentPaymentModalReducer } from "./reducers/studentPaymentModalReducer";
+import { studentPaymentsPaginationReducer } from "./reducers/studentPaymentsPaginationReducer";
 
 const initialState={};
 const reducers = combineReducers({
@@ -91,7 +93,9 @@ branchesModal: branchesModalReducer,
 teachersCategory: teachersCategoryReducer,
 branchesData:branchesReducer,
 uniformModal: uniformsModalReducer,
-uniformsData: uniformsReducer
+uniformsData: uniformsReducer,
+studentPaymentModal: studentPaymentModalReducer, 
+studentPaymentsData: studentPaymentsPaginationReducer
 })
 // test
 

@@ -8,11 +8,12 @@ import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
 import { UNIFORMS_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
 import InputField from "./components/InputField/InputField";
 import SubmitBtn from "./components/SubmitBtn/SubmitBtn";
-import DeleteUniformModal from "../../FuncComponent/components/DeleteUniformModal/DeleteUniformModal";
+import { deleteUniformAction } from "../../../redux/actions/uniformsAction";
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 export const UniformsModal = () => {
   const dispatch = useDispatch();
   const { uniformModalData } = useSelector((state) => state.uniformModal);
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const inputNameArr = [
     "childName",
     "count",
@@ -45,8 +46,12 @@ export const UniformsModal = () => {
     [formik]
   );
 
-  const handleDeleteModal = () => {
-    setDeleteModal(!deleteModal);
+  const deleteItem = () => {
+    dispatch(deleteUniformAction(uniformModalData._id));
+    dispatch({
+      type: UNIFORMS_MODAL_ACTION_TYPE.GET_UNIFORMS_MODAL,
+      payload: { data: {}, openModal: false },
+    });
   };
   const updateModalState = (keyName, value) => {
     dispatch({
@@ -101,20 +106,20 @@ export const UniformsModal = () => {
             formik={formik}
             funcType="update"
             uniformModalData={uniformModalData}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         ) : (
           <SubmitBtn
             formik={formik}
             funcType="create"
             uniformModalData={uniformModalData}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         )}
-        {deleteModal && (
-          <DeleteUniformModal
-            uniformModalData={uniformModalData}
-            deleteMod={handleDeleteModal}
+        {showDeleteModal && (
+          <DeleteItemModal
+            setShowDeleteModal={setShowDeleteModal}
+            deleteItem={deleteItem}
           />
         )}
       </div>

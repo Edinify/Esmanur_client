@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch ,useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Box, TextField } from "@mui/material";
 import { ReactComponent as Eye } from "../../../../assets/icons/eye.svg";
 import { ReactComponent as EyeSlash } from "../../../../assets/icons/eye-slash.svg";
@@ -15,9 +15,9 @@ export const ChangePass = () => {
   const dispatch = useDispatch();
   const [view, setView] = useState(true);
   const [passView, setPassView] = useState(true);
-  const forgetPassword = useSelector(state=>state.forgetPassword);
-  const {loading}=useSelector(state=>state.forgetPassword);
-    const [title, setTitle] = useState({
+  const forgetPassword = useSelector((state) => state.forgetPassword);
+  const { loading } = useSelector((state) => state.forgetPassword);
+  const [title, setTitle] = useState({
     password: "",
     changePass: "",
   });
@@ -25,7 +25,7 @@ export const ChangePass = () => {
     newPasswordMessage: "",
     confirmNewPasswordMessage: "",
   });
-  // 
+  //
 
   const handleView = () => {
     setView(!view);
@@ -68,119 +68,125 @@ export const ChangePass = () => {
         newPasswordMessage: "",
         confirmNewPasswordMessage: "",
       });
-      dispatch(changePasswordAction( title.password,forgetPassword.userId))
-
+      dispatch(changePasswordAction(title.password, forgetPassword.userId));
     }
-  
   };
-  
 
- 
   return (
     <div className="login">
       <>
-      <PreviewImg/>
+        <PreviewImg />
       </>
       <div className="login-right change">
-      <div className="login-right-header">
-        {/* <LoginLogo/> */}
-        <h1 className="logo-title">Esmanur</h1>
-      <h2>Şifrəni dəyiş</h2>
-      </div>
-      <Box
-        onSubmit={handleSubmit}
-        component="form"
-        sx={{
-          width: "416px",
-          display: "flex",
-          flexDirection: "column",
-          "@media (max-width: 550px)": {
-            width: "100%",
-          },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <div className="password-class">
-          <TextField
-            sx={{
-              "& input": {
-                fontSize: "16px",
-              },
-              "& .MuiFormHelperText-root": {
-                fontSize: "12px",
-                color:"#FF462A",
-                fontWeight:400 
-              },
-              marginTop: "20px",
-            }}
-            label="Şifrə"
-            helperText={error.newPasswordMessage}
-            error={error.newPasswordMessage !== ""}
-            type={view ? "password" : "text"}
-            onChange={handleChange}
-            name="password"
-            value={title.password}
-            fullWidth
-            InputLabelProps={{
-              style: {
-                fontSize: "16px",
-                color: "#3F3F3F",
-                backgroundColor: "white",
-              },
-              // onFocus:{fontSize:"12px"}
-            }}
-          />
-
-          <div className="view-icon" onClick={handleView}>
-            {view ? <EyeSlash /> : <Eye />}
-          </div>
+        <div className="login-right-header">
+          {/* <LoginLogo/> */}
+          <h1 className="logo-title">
+            <span>E</span>
+            <span>s</span>
+            <span>m</span>
+            <span>a</span>
+            <span>n</span>
+            <span>u</span>
+            <span>r</span>
+          </h1>
+          <h2>Şifrəni dəyiş</h2>
         </div>
+        <Box
+          onSubmit={handleSubmit}
+          component="form"
+          sx={{
+            width: "416px",
+            display: "flex",
+            flexDirection: "column",
+            "@media (max-width: 550px)": {
+              width: "100%",
+            },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <div className="password-class">
+            <TextField
+              sx={{
+                "& input": {
+                  fontSize: "16px",
+                },
+                "& .MuiFormHelperText-root": {
+                  fontSize: "12px",
+                  color: "#FF462A",
+                  fontWeight: 400,
+                },
+                marginTop: "20px",
+              }}
+              label="Şifrə"
+              helperText={error.newPasswordMessage}
+              error={error.newPasswordMessage !== ""}
+              type={view ? "password" : "text"}
+              onChange={handleChange}
+              name="password"
+              value={title.password}
+              fullWidth
+              InputLabelProps={{
+                style: {
+                  fontSize: "16px",
+                  color: "#3F3F3F",
+                  backgroundColor: "white",
+                },
+                // onFocus:{fontSize:"12px"}
+              }}
+            />
 
-        <div className="password-class">
-          <TextField
-            sx={{
-              "& input": {
-                fontSize: "16px",
-              },
-              "& .MuiFormHelperText-root": {
-                fontSize: "12px",
-                color:"#FF462A",
-                fontWeight:400 
-              },
-              marginTop: "20px",
-            }}
-            label="Şifrəni təsdiqlə"
-            type={passView ? "password" : "text"}
-            helperText={error.confirmNewPasswordMessage}
-            error={error.confirmNewPasswordMessage !== ""}
-            onChange={handleChange}
-            name="changePass"
-            value={title.changePass}
-            fullWidth
-            InputLabelProps={{
-              style: {
-                fontSize: "16px",
-                color: "#3F3F3F",
-                backgroundColor: "white",
-              },
-            }}
-          />
-
-          <div className="view-icon" onClick={handleChangeView}>
-            {passView ? <EyeSlash /> : <Eye />}
+            <div className="view-icon" onClick={handleView}>
+              {view ? <EyeSlash /> : <Eye />}
+            </div>
           </div>
-        </div>
-      </Box>
 
-      <button
-        type="submit"
-        onClick={handleChangePassword}
-        className="login-btn"
-      >
-       {loading ?  <Loading mode="in-button" /> : "Şifrəni dəyiş "}
-      </button>
-      <h6 className="back-btn" onClick={()=>navigate("/send")}>Geri</h6>
+          <div className="password-class">
+            <TextField
+              sx={{
+                "& input": {
+                  fontSize: "16px",
+                },
+                "& .MuiFormHelperText-root": {
+                  fontSize: "12px",
+                  color: "#FF462A",
+                  fontWeight: 400,
+                },
+                marginTop: "20px",
+              }}
+              label="Şifrəni təsdiqlə"
+              type={passView ? "password" : "text"}
+              helperText={error.confirmNewPasswordMessage}
+              error={error.confirmNewPasswordMessage !== ""}
+              onChange={handleChange}
+              name="changePass"
+              value={title.changePass}
+              fullWidth
+              InputLabelProps={{
+                style: {
+                  fontSize: "16px",
+                  color: "#3F3F3F",
+                  backgroundColor: "white",
+                },
+              }}
+            />
+
+            <div className="view-icon" onClick={handleChangeView}>
+              {passView ? <EyeSlash /> : <Eye />}
+            </div>
+          </div>
+        </Box>
+
+        <button
+          type="submit"
+          onClick={handleChangePassword}
+          className="login-btn"
+        >
+          {loading ? <Loading mode="in-button" /> : "Şifrəni dəyiş "}
+        </button>
+        <h6 className="back-btn" onClick={() => navigate("/send")}>
+          Geri
+        </h6>
       </div>
 
       {/* {error} */}

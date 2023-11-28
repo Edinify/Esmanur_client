@@ -8,14 +8,20 @@ const SidebarHead = ({ closeSidebar }) => {
   const userData = JSON.parse(localStorage.getItem("userData"));
   // const userProfileImg = JSON.parse(localStorage.getItem("userProfileImg"));
 
-
-
   return (
     <div className="sidebar-head">
       <div className="top">
         <div>
           {/* <LogoIcon /> */}
-          <h1 className="logo-title">Esmanur</h1>
+          <h1 className="logo-title">
+            <span>E</span>
+            <span>s</span>
+            <span>m</span>
+            <span>a</span>
+            <span>n</span>
+            <span>u</span>
+            <span>r</span>
+          </h1>
         </div>
 
         <div className="close-sidebar-icon" onClick={() => closeSidebar()}>

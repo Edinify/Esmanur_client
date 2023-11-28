@@ -8,8 +8,8 @@ import BranchesPage from "../Pages/BranchesPage/BranchesPage";
 const AdminPanelRoute = () => {
   return (
     <>
-      {/* <Route path="/students" element={<StudentsPage />} />
-      <Route path="/teachers" element={<TeachersPage />} /> */}
+      <Route path="/students" element={<StudentsPage />} />
+      {/* <Route path="/teachers" element={<TeachersPage />} /> */}
       <Route path="/finance/expenses" element={<FinancePage />} />
       <Route path="/finance/incomes" element={<FinancePage />} />
       <Route path="/finance/food-ration" element={<FinancePage />} />

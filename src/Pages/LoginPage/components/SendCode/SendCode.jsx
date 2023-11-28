@@ -2,9 +2,7 @@ import { Box, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  FORGET_PASSWORD_ACTIONS_TYPE,
-} from "../../../../redux/actions-type";
+import { FORGET_PASSWORD_ACTIONS_TYPE } from "../../../../redux/actions-type";
 import {
   checkOTPAction,
   resendToEmailAction,
@@ -75,7 +73,6 @@ export const SendCode = () => {
     }
   };
 
-
   useEffect(() => {
     if (seconds > 0) {
       const countdownInterval = setInterval(() => {
@@ -93,7 +90,15 @@ export const SendCode = () => {
       <div className="login-right send">
         <div className="login-right-header">
           {/* <LoginLogo /> */}
-          <h1 className="logo-title">Esmanur</h1>
+          <h1 className="logo-title">
+            <span>E</span>
+            <span>s</span>
+            <span>m</span>
+            <span>a</span>
+            <span>n</span>
+            <span>u</span>
+            <span>r</span>
+          </h1>
           <h2>Mobil nömrənizə kod göndərdik</h2>
           <p>
             {hiddenEmail} nömrənizə göndərilən 6 rəqəmli doğrulama kodunu daxil
@@ -155,7 +160,11 @@ export const SendCode = () => {
           <span className={seconds === 0 ? "count-none" : " resend-count"}>
             0:{seconds}
           </span>
-          {seconds === 0 && <button className="send-again" onClick={resendNav}>Yenidən göndər</button>}
+          {seconds === 0 && (
+            <button className="send-again" onClick={resendNav}>
+              Yenidən göndər
+            </button>
+          )}
         </div>
       </div>
     </div>

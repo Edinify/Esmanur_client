@@ -12,7 +12,7 @@ export default function SubmitBtn({
   formik,
   funcType,
   foodRationModalData,
-  setDeleteModal,
+  setShowDeleteModal,
 }) {
   const dispatch = useDispatch();
   const { foodRationModalLoading } = useSelector(
@@ -78,11 +78,11 @@ export default function SubmitBtn({
           </button>
 
           <div className="delete-income-modal-btn">
-            <DeleteIcon onClick={() => setDeleteModal(true)} />
+            <DeleteIcon onClick={() => setShowDeleteModal(true)} />
           </div>
           <button
             className="delete-income-modal-btn-mobile"
-            onClick={() => setDeleteModal(true)}
+            onClick={() => setShowDeleteModal(true)}
           >
             Sil
           </button>

@@ -181,6 +181,7 @@ export default function InputField({
           setShrink(!!e.target.value);
         }}
         onFocus={() => setShrink(true)}
+        autoComplete={inputName === 'password' ? 'current-password' : 'on'}
       />
 
       {(inputName === 'password' && studentsModalData?._id) ?

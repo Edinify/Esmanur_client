@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTeachersPaginationAction } from "../../redux/actions/teachersActions";
 import { TEACHERS_MODAL_ACTION_TYPE} from "../../redux/actions-type";
-import TeachersData from "./components/TeachersData/TeachersData";
+import TeachersData from "./components/TeachersData";
 import GlobalHead from "../../globalComponents/GlobalHead/GlobalHead";
 
 const TeachersPage = () => {

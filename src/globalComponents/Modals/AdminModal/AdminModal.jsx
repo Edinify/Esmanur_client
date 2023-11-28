@@ -3,23 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import moment from "moment";
 import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
-import DeleteAdminModal from "../../FuncComponent/components/DeleteAdminModal/DeleteAdminModal";
 import { Box } from "@mui/material";
-import { setLoadingAdminAction } from "../../../redux/actions/adminsActions";
+import {
+  deleteAdminAction,
+  setLoadingAdminAction,
+} from "../../../redux/actions/adminsActions";
 import { ADMINS_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
 import { ValidationSchema } from "./components/ValidationSchema/ValidationSchema";
 import Status from "./components/Buttons/Status";
 import SubmitBtn from "./components/Buttons/SubmitBtn";
 import InputField from "./components/Inputs/InputField";
 import Category from "./components/InputDropdowns/Category";
+import DeleteItemModal from "../DeleteItemModal/DeleteItemModal";
 
 const AdminModal = () => {
   const dispatch = useDispatch();
-  const { branchesData, loading } = useSelector((state) => state.branchesData);
+  const { branchesData } = useSelector((state) => state.branchesData);
   const { adminsModalData } = useSelector((state) => state.adminsModal);
-  const [classIcon, setClassIcon] = useState(false);
   const inputNameArr1 = ["fullName", "email", "password"];
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
 
@@ -42,9 +44,6 @@ const AdminModal = () => {
     [formik]
   );
 
-  const handleDeleteModal = () => {
-    setDeleteModal(!deleteModal);
-  };
   const categoryDropdown = () => {
     setCategoryOpen(!categoryOpen);
   };
@@ -60,6 +59,14 @@ const AdminModal = () => {
     setCategoryOpen(false);
     setSelectedCategory(item);
   };
+
+  const deleteItem = () => {
+    dispatch(deleteAdminAction(adminsModalData._id));
+    dispatch({
+      type: ADMINS_MODAL_ACTION_TYPE.GET_ADMINS_MODAL,
+      payload: { data: {}, openModal: false },
+    });
+  };
   const closeModal = () => {
     dispatch({
       type: ADMINS_MODAL_ACTION_TYPE.GET_ADMINS_MODAL,
@@ -70,17 +77,15 @@ const AdminModal = () => {
   useEffect(() => {
     dispatch(setLoadingAdminAction(false));
   }, [dispatch]);
-
-
   useEffect(() => {
     if (adminsModalData?._id && branchesData.length > 0) {
       if (adminsModalData.branch) {
-        setSelectedCategory(branchesData.find((item) => item._id === adminsModalData.branch));
+        setSelectedCategory(
+          branchesData.find((item) => item._id === adminsModalData.branch)
+        );
       }
     }
   }, []);
-
-  // console.log(adminsModalData);
 
   return (
     <div className="create-update-modal-con admin-modal">
@@ -126,7 +131,7 @@ const AdminModal = () => {
             adminsModalData={adminsModalData}
             funcType="update"
             closeModal={closeModal}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         ) : (
           <SubmitBtn
@@ -134,7 +139,7 @@ const AdminModal = () => {
             adminsModalData={adminsModalData}
             funcType="create"
             closeModal={closeModal}
-            setDeleteModal={setDeleteModal}
+            setShowDeleteModal={setShowDeleteModal}
           />
         )}
 
@@ -143,11 +148,10 @@ const AdminModal = () => {
             Qoşuldu: {moment(adminsModalData.createdAt).format("YYYY.MM.DD")}
           </div>
         )}
-        {deleteModal && (
-          <DeleteAdminModal
-            type="admin"
-            data={adminsModalData}
-            deleteMod={handleDeleteModal}
+        {showDeleteModal && (
+          <DeleteItemModal
+            setShowDeleteModal={setShowDeleteModal}
+            deleteItem={deleteItem}
           />
         )}
       </div>

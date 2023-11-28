@@ -12,7 +12,7 @@ const SubmitBtn = ({
   formik,
   adminsModalData,
   funcType,
-  setDeleteModal,
+  setShowDeleteModal,
 }) => {
   const dispatch = useDispatch();
   const { adminsModalLoading } = useSelector((state) => state.adminsModal);
@@ -78,11 +78,11 @@ const SubmitBtn = ({
             )}
           </button>
           <div className="delete-income-modal-btn">
-            <DeleteIcon onClick={() => setDeleteModal(true)} />
+            <DeleteIcon onClick={() => setShowDeleteModal(true)} />
           </div>
           <button
             className="delete-income-modal-btn-mobile"
-            onClick={() => setDeleteModal(true)}
+            onClick={() => setShowDeleteModal(true)}
           >
             Sil
           </button>

@@ -28,6 +28,7 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
     "/finance/expenses",
     "/finance/food-ration",
     "/finance/uniforms",
+    "/finance/student-payments",
   ];
 
   const isFinanceRoute = (route) => {
@@ -36,13 +37,13 @@ const SidebarSuperAdmin = ({ closeSidebar }) => {
 
   return (
     <ul className="sidebar-nav-list">
-      {/* <li>
+      <li>
         <NavLink to="/students" onClick={closeSidebar}>
           <StudentsIcon />
           Tələbələr
         </NavLink>
       </li>
-      <li>
+      {/* <li>
         <NavLink to="/teachers" onClick={closeSidebar}>
           <TeachersIcon />
           Müəllimlər

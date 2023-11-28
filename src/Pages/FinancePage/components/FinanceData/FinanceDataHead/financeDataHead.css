@@ -1,6 +1,6 @@
 .finance-page .finance-data-head > .top {
   background: var(--neutrals-200, #ececec);
-  padding: 16px 16px 0 16px;
+  padding: 16px 0 0 16px;
   width: 100%;
   display: flex;
 }
@@ -61,7 +61,7 @@
 }
 @media screen and (max-width: 640px) {
   .finance-page .finance-data-head > .top {
-    padding: 16px 12px 0 12px;
+    padding: 16px 0 0 12px;
   }
   .finance-page .finance-data-head > .bottom {
     padding: 24px 12px;

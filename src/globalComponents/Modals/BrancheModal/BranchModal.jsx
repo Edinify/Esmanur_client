@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { ReactComponent as CloseBtn } from "../../../assets/icons/Icon.svg";
 import { Box } from "@mui/material";
 import { BRANCHES_MODAL_ACTION_TYPE } from "../../../redux/actions-type";
-import { useFormik } from "formik";
-import { ValidationSchema } from "./components/ValidationSchema";
 import SubmitBtn from "./components/SubmitBtn";
 import InputField from "./components/InputField";
 
 export const BranchModal = () => {
   const dispatch = useDispatch();
-  const { branchesModalData, branchesOpenModal } = useSelector((state) => state.branchesModal);
+  const { branchesModalData } = useSelector((state) => state.branchesModal);
 
   const closeModal = () => {
     dispatch({

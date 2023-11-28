@@ -6,7 +6,7 @@ import { Pagination } from "antd";
 import Loading from "../../../../../globalComponents/Loading/Loading";
 import { getUniformsPaginationAction } from "../../../../../redux/actions/uniformsAction";
 
-const UniformsData = ({  getPageNumber,  page }) => {
+const UniformsData = ({  getPageNumber}) => {
   const dispatch = useDispatch();
   const uniformsData = useSelector((state) => state?.uniformsData.uniformsData);
   const { totalPages, loading, lastPage: uniformsPageNum } = useSelector((state) => state.uniformsData);
@@ -40,7 +40,6 @@ const UniformsData = ({  getPageNumber,  page }) => {
                   data={expense}
                   mode="desktop"
                   cellNumber={i + 1 + (uniformsPageNum - 1) * 10}
-                  page={page}
                 />
               ))}
             </tbody>
@@ -53,7 +52,6 @@ const UniformsData = ({  getPageNumber,  page }) => {
               data={expense}
               mode="tablet"
               cellNumber={i + 1 + (uniformsPageNum - 1) * 10}
-              page={page}
             />
           ))}
           </div>

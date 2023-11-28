@@ -21,7 +21,6 @@ export const Login = () => {
     password: "",
   });
 
-
   // formik
   const formik = useFormik({
     initialValues: {
@@ -60,7 +59,6 @@ export const Login = () => {
     }
   };
 
-
   return (
     <div className="login">
       <>
@@ -70,7 +68,15 @@ export const Login = () => {
       <div className="login-right">
         <div className="login-right-header">
           {/* <LoginLogo /> */}
-          <h1 className="logo-title">Esmanur</h1>
+          <h1 className="logo-title">
+            <span>E</span>
+            <span>s</span>
+            <span>m</span>
+            <span>a</span>
+            <span>n</span>
+            <span>u</span>
+            <span>r</span>
+          </h1>
           <h2>Daxil olun</h2>
         </div>
 
